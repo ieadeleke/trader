@@ -6,7 +6,7 @@ import Image from "next/image";
 interface DisplayPropsInterface {
   children: React.ReactNode;
   authControl?: boolean;
-  authControlFunction?: (state: any) => void
+  authControlFunction?: (state: boolean) => void
 }
 
 const DisplayLayout = (props: DisplayPropsInterface) => {

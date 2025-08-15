@@ -22,7 +22,7 @@ export default function CookiePolicy() {
 
           <p className="text-sm leading-loose mb-3">
             This Cookie Policy explains how ForTrader uses cookies and similar
-            technologies on our platform ("Platform"). By using ForTrader, you
+            technologies on our platform (&apos;Platform&apos;). By using ForTrader, you
             consent to the use of cookies in accordance with this policy.
           </p>
 

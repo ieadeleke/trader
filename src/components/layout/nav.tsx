@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 interface NavInterface {
   authControl?: boolean;
-  authControlFunction?: (state: any) => void;
+  authControlFunction?: (state: boolean) => void;
 }
 
 const Navigation = (props: NavInterface) => {

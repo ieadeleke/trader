@@ -21,8 +21,8 @@ export default function TermsOfUse() {
           </p>
 
           <p className="text-sm leading-loose mb-3">
-            These Terms of Use ("Terms") govern your access to and use of the
-            ForTrader platform ("Platform"). By using ForTrader, you agree to be
+            These Terms of Use (&apos;Terms&apos;) govern your access to and use of the
+            ForTrader platform (&apos;Platform&apos;). By using ForTrader, you agree to be
             bound by these Terms. If you do not agree, please discontinue use of
             the Platform.
           </p>
