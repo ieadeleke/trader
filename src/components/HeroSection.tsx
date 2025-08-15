@@ -12,14 +12,14 @@ interface ComponentInterface {
 export default function HeroSection(props: ComponentInterface) {
   return (
     <main>
-      <section className="px-20" id="home">
+      <section className="px-5 md:px-20 pt-32 md:pt-44" id="home">
         <div className="mb-6">
           <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-3">
-            <h4 className="uppercase font-bold text-primary text-sm font-ibm">
+            <h4 className="uppercase font-bold text-primary text-xs md:text-sm font-ibm">
               Trade Now
             </h4>
           </div>
-          <h3 className="text-6xl text-center font-ubuntu font-bold leading-[1.4] mb-2">
+          <h3 className="text-4xl md:text-6xl text-center font-ubuntu font-bold leading-[1.4] mb-2">
             The Ultimate Forex Trading
           </h3>
           <div className="bg-[#34251F] border border-solid border-primary py-1 px-8 w-max mx-auto rounded- mb-4 relative">
@@ -27,11 +27,11 @@ export default function HeroSection(props: ComponentInterface) {
             <div className="size-[14px] bg-white absolute -top-[6px] -right-[6px] border border-solid border-primary"></div>
             <div className="size-[14px] bg-white absolute -bottom-[6px] -left-[6px] border border-solid border-primary"></div>
             <div className="size-[14px] bg-white absolute -bottom-[6px] -right-[6px] border border-solid border-primary"></div>
-            <h4 className="text-5xl text-center font-ubuntu font-bold leading-[1.4] text-primary">
+            <h4 className="text-3xl md:text-5xl text-center font-ubuntu font-bold leading-[1.4] text-primary">
               Adventure
             </h4>
           </div>
-          <p className="text-white leading-loose text-lg text-center mb-6 block">
+          <p className="text-white leading-loose text-base md:text-lg text-center mb-6 block">
             We&apos;re well-capitalized and with enough liquidity to navigate
             through bad times.
           </p>
@@ -58,7 +58,7 @@ export default function HeroSection(props: ComponentInterface) {
           />
         </div>
       </section>
-      <div className="px-44 mt-28">
+      <div className="hidden md:block px-44 mt-28">
         <Image
           src={Companies}
           alt="list of companies"

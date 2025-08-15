@@ -36,18 +36,18 @@ export default function Numbers(props: ComponentInterface) {
     // fetchFourthData();
   }, []);
   return (
-    <section className="px-32 mt-28">
-      <div className="grid grid-cols-2 items-center gap-36 px-20 flow-bg py-20 rounded-[10px] relative">
+    <section className="px-5 md:px-32 mt-28">
+      <div className="flex flex-col md:grid grid-cols-2 md:items-center gap-16 md:gap-36 px-5 md:px-20 flow-bg py-10 md:py-20 rounded-[10px] relative overflow-hidden">
         <div>
           <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max rounded-full mb-4">
             <h4 className="uppercase font-bold text-primary text-xs font-ibm">
               Experience
             </h4>
           </div>
-          <h3 className="text-4xl mb-3 font-ubuntu font-bold w-[80%] leading-[1.4]">
+          <h3 className="text-3xl md:text-4xl mb-3 font-ubuntu font-bold w-[80%] leading-[1.4]">
             Your trades in the right place
           </h3>
-          <p className="text-white font-ibm opacity-80 text-lg leading-relaxed w-[90%] mb-7">
+          <p className="text-white font-ibm opacity-80 text-base md:text-lg leading-relaxed md:w-[90%] mb-7">
             We use cookies to understand how you use our website and to give you
             the best possible
           </p>
@@ -59,30 +59,30 @@ export default function Numbers(props: ComponentInterface) {
           </button>
         </div>
         <div>
-          <div className="grid grid-cols-2 justify-between gap-y-20">
-            <div className="border-l-2 border-solid border-primary pl-4 py-2">
-              <h2 className="text-2xl font-medium text-white mb-2">
+          <div className="grid grid-cols-2 justify-between gap-10 md:gap-y-20">
+            <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
+              <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
                 1 milion+
               </h2>
-              <p className="font-ibm text-white">XTB Group Clients</p>
+              <p className="text-sm md:text-base font-ibm text-white">XTB Group Clients</p>
             </div>
-            <div className="border-l-2 border-solid border-primary pl-4 py-2">
-              <h2 className="text-2xl font-medium text-white mb-2">
+            <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
+              <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
                 1 milion+
               </h2>
-              <p className="font-ibm text-white">XTB Group Clients</p>
+              <p className="text-sm md:text-base font-ibm text-white">XTB Group Clients</p>
             </div>
-            <div className="border-l-2 border-solid border-primary pl-4 py-2">
-              <h2 className="text-2xl font-medium text-white mb-2">
+            <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
+              <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
                 1 milion+
               </h2>
-              <p className="font-ibm text-white">XTB Group Clients</p>
+              <p className="text-sm md:text-base font-ibm text-white">XTB Group Clients</p>
             </div>
-            <div className="border-l-2 border-solid border-primary pl-4 py-2">
-              <h2 className="text-2xl font-medium text-white mb-2">
+            <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
+              <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
                 1 milion+
               </h2>
-              <p className="font-ibm text-white">XTB Group Clients</p>
+              <p className="text-sm md:text-base font-ibm text-white">XTB Group Clients</p>
             </div>
           </div>
         </div>

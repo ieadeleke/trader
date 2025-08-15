@@ -4,7 +4,7 @@ import ChartImg from "@/assets/chart.png";
 
 export default function TradingPlatforms() {
   return (
-    <section className="px-20 mt-28">
+    <section className="hidden md:block px-20 mt-28">
       <div className="mb-6">
         <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-4">
           <h4 className="uppercase font-bold text-primary text-xs font-ibm">

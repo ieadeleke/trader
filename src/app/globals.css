@@ -143,3 +143,26 @@ html {
 .ant-modal-mask {
   background-color: rgba(255,255,255,0.45) !important;
 }
+
+
+.ant-drawer-body {
+  background: var(--background) !important;
+  padding: 0px !important;
+  font-family: var(--font-ibm-plex-sans), sans-serif !important;
+}
+
+.ant-drawer-content {
+  width: 100% !important;
+}
+
+.ant-drawer-content-wrapper {
+  width: 100% !important;
+}
+
+.ant-drawer-header {
+  display: none !important;
+}
+
+.ant-drawer-body a {
+  color: #fff !important;
+}
