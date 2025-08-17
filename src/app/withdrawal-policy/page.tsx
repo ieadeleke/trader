@@ -16,9 +16,9 @@ export default function WithdrawalPolicy() {
           <h1 className="text-xl font-semibold mb-4">
             ForTrader Withdrawal Policy
           </h1>
-          <p className="text-sm leading-loose mb-3">
+          {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
-          </p>
+          </p> */}
 
           <p className="text-sm leading-loose mb-3">
             This Withdrawal Policy outlines the terms and conditions under which

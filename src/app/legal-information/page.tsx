@@ -18,9 +18,9 @@ export default function TermsAndConditions() {
           <h1 className="text-xl font-semibold mb-4">
             ForTrader Terms and Conditions
           </h1>
-          <p className="text-sm leading-loose mb-3">
+          {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
-          </p>
+          </p> */}
 
           <p className="text-sm leading-loose mb-3">
             Welcome to ForTrader. These Terms and Conditions (“Terms”) govern
@@ -169,14 +169,14 @@ export default function TermsAndConditions() {
             </li>
           </ul>
 
-          <hr className="my-6" />
+          {/* <hr className="my-6" />
 
           <h2 className="text-base font-semibold mb-3">9. Governing Law</h2>
           <p className="text-sm leading-loose mb-3">
             These Terms are governed by and construed under the laws of Ukraine.
             Any disputes arising shall be resolved exclusively in the courts of
             Ukraine.
-          </p>
+          </p> */}
         </section>
       </div>
     </DisplayLayout>

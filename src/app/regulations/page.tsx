@@ -18,9 +18,9 @@ export default function Regulations() {
           <h1 className="text-xl font-semibold mb-4">
             ForTrader Regulations & Compliance
           </h1>
-          <p className="text-sm leading-loose mb-3">
+          {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
-          </p>
+          </p> */}
 
           <p className="text-sm leading-loose mb-3">
             ForTrader is committed to operating transparently and in compliance
@@ -131,14 +131,14 @@ export default function Regulations() {
             </li>
           </ul>
 
-          <hr className="my-6" />
+          {/* <hr className="my-6" />
 
           <h2 className="text-base font-semibold mb-3">7. Governing Law</h2>
           <p className="text-sm leading-loose mb-3">
             These regulations are governed by the laws of Ukraine.
             Any disputes arising from use of the platform shall be resolved in
             the courts of Ukraine.
-          </p>
+          </p> */}
         </section>
       </div>
     </DisplayLayout>

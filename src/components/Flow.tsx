@@ -6,7 +6,7 @@ import RowImg from "@/assets/row.png";
 export default function Flow() {
   return (
     <section id="aboutus">
-      <div className="flex flex-col md:grid grid-cols-2 items-cente gap-10 px-5 md:px-28 mt-28">
+      <div className="flex flex-col md:grid grid-cols-2 items-cente gap-10 px-5 md:px-28 mt-20 md:mt-28">
         <div className="hidden md:block">
           <Image
             src={FlowImg}

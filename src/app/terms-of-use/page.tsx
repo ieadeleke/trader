@@ -16,9 +16,9 @@ export default function TermsOfUse() {
           <h1 className="text-xl font-semibold mb-4">
             ForTrader Terms of Use
           </h1>
-          <p className="text-sm leading-loose mb-3">
+          {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
-          </p>
+          </p> */}
 
           <p className="text-sm leading-loose mb-3">
             These Terms of Use (&apos;Terms&apos;) govern your access to and use of the

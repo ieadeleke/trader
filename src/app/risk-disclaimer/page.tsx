@@ -18,9 +18,9 @@ export default function RiskDisclaimer() {
           <h1 className="text-xl font-semibold mb-4">
             ForTrader Risk Disclaimer
           </h1>
-          <p className="text-sm leading-loose mb-3">
+          {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
-          </p>
+          </p> */}
 
           <p className="text-sm leading-loose mb-3">
             Trading foreign currencies, cryptocurrencies, and other digital

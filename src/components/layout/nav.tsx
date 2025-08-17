@@ -73,11 +73,11 @@ const Navigation = (props: NavInterface) => {
               How It Works
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="#testimonials" className="text-sm text-white">
               Testimonials
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
       <div className="hidden md:block">

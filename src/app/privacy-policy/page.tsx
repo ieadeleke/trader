@@ -18,9 +18,9 @@ export default function PrivacyPolicy() {
           <h1 className="text-xl font-semibold mb-4">
             ForTrader Privacy Policy
           </h1>
-          <p className="text-sm leading-loose mb-3">
+          {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
-          </p>
+          </p> */}
 
           <p className="text-sm leading-loose mb-3">
             At ForTrader, we value your privacy and are committed to protecting

@@ -18,9 +18,9 @@ export default function AmlKycPolicy() {
           <h1 className="text-xl font-semibold mb-4">
             ForTrader AML & KYC Policy
           </h1>
-          <p className="text-sm leading-loose mb-3">
+          {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
-          </p>
+          </p> */}
 
           <p className="text-sm leading-loose mb-3">
             This Anti-Money Laundering (AML) and Know Your Customer (KYC) Policy

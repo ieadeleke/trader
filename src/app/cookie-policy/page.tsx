@@ -16,9 +16,9 @@ export default function CookiePolicy() {
           <h1 className="text-xl font-semibold mb-4">
             ForTrader Cookie Policy
           </h1>
-          <p className="text-sm leading-loose mb-3">
+          {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
-          </p>
+          </p> */}
 
           <p className="text-sm leading-loose mb-3">
             This Cookie Policy explains how ForTrader uses cookies and similar
