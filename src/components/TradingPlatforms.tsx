@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import ChartImg from "@/assets/chart.png";
+import { CryptoCandleChart } from "./CandleStickData";
 
 export default function TradingPlatforms() {
   return (
@@ -16,14 +17,17 @@ export default function TradingPlatforms() {
         </h3>
       </div>
       <div>
-        <Image
+        <div className="w-max mx-auto">
+          <CryptoCandleChart />
+        </div>
+        {/* <Image
           src={ChartImg}
           alt="trading chart"
           quality={100}
           width={1000}
           height={1000}
           className="w-full h-full"
-        />
+        /> */}
       </div>
     </section>
   );

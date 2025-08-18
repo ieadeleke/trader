@@ -10,11 +10,11 @@ interface ComponentInterface {
 
 export default function Numbers(props: ComponentInterface) {
   useEffect(() => {
-    // const fetchData = async() => {
-    //   const apiData = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,stellar&vs_currencies=usd&include_market_cap=true&include_24hr_change=true')
-    //   const data = await apiData.json();
-    //   console.log(data);
-    // }
+    const fetchData = async() => {
+      const apiData = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,stellar&vs_currencies=usd&include_market_cap=true&include_24hr_change=true&aux=ath,atl,high24h,low24h,num_market_pairs,cmc_rank,date_added,max_supply,circulating_supply,total_supply,volume_7d,volume_30d,self_reported_circulating_supply,self_reported_market_cap')
+      const data = await apiData.json();
+      console.log(data);
+    }
     // const fetchSecData = async() => {
     //   const apiData = await fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC,ETH')
     //   const data = await apiData.json();
@@ -25,15 +25,15 @@ export default function Numbers(props: ComponentInterface) {
     //   const data = await apiData.json();
     //   console.log(data);
     // }
-    // const fetchFourthData = async() => {
-    //   const apiData = await fetch('https://api.kraken.com/0/public/Ticker?pair=BTCUSD')
-    //   const data = await apiData.json();
-    //   console.log(data);
-    // }
-    // fetchData();
+    const fetchFourthData = async() => {
+      const apiData = await fetch('https://api.coinmarketcap.com/data-api/v3/cryptocurrency/listing?start=1&limit=100&sortBy=rank&sortType=desc&convert=USD,BTC,ETH&cryptoType=all&tagType=all&audited=false&aux=ath,atl,high24h,low24h,num_market_pairs,cmc_rank,date_added,max_supply,circulating_supply,total_supply,volume_7d,volume_30d,self_reported_circulating_supply,self_reported_market_cap')
+      const data = await apiData.json();
+      console.log(data);
+    }
+    fetchData();
     // fetchSecData();
     // fetchThirdData();
-    // fetchFourthData();
+    fetchFourthData();
   }, []);
   return (
     <section className="px-5 md:px-32 mt-28">

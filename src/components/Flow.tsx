@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import FlowImg from "@/assets/flow.png";
 import RowImg from "@/assets/row.png";
+import CryptoDashboard from "./CryptoDashboard";
 
 export default function Flow() {
   return (
@@ -16,7 +17,9 @@ export default function Flow() {
           />
         </div>
         <div>
-          <h3 className="text-2xl md:text-3xl mb-3 md:mb-5 font-ubuntu font-bold">Who We Are</h3>
+          <h3 className="text-2xl md:text-3xl mb-3 md:mb-5 font-ubuntu font-bold">
+            Who We Are
+          </h3>
           <p className="text-sm md:text-base leading-loose opacity-80 mb-4 md:mb-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
             quaerat magnam vitae, iste facere consequatur nam enim ex rem, odit
@@ -85,14 +88,15 @@ export default function Flow() {
         </div>
       </div>
       <div className="hidden md:block mt-28">
-        <Image
+        <CryptoDashboard />
+        {/* <Image
           src={RowImg}
           alt="All products"
           quality={100}
           width={1000}
           height={1000}
           className="w-full h-full"
-        />
+        /> */}
       </div>
     </section>
   );

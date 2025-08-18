@@ -15,12 +15,93 @@ import Zapper from "@/assets/companies/zapper.png";
 import Zerion from "@/assets/companies/zerion.png";
 
 import ScrollVelocity from "./animations/ScrollVelocity";
+import { useEffect, useState } from "react";
+import { Table } from "antd";
 
 interface ComponentInterface {
   authControl: (state: boolean) => void;
 }
 
+interface ChartInterface {
+  usd_market_cap: any;
+  usd: any;
+  usd_24h_change: any;
+}
+
 export default function HeroSection(props: ComponentInterface) {
+  const [chartData, setChartData] = useState<ChartInterface[]>([]);
+  const [dataSource, setDataSource] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchCoins = async () => {
+      const res = await fetch(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=7&page=1&sparkline=false&price_change_percentage=24h,7d"
+      );
+      const data = await res.json();
+
+      const formatted = data.map((coin: any) => ({
+        key: coin.id,
+        rank: coin.market_cap_rank,
+        name: coin.name,
+        symbol: coin.symbol,
+        image: coin.image,
+        price: `$${coin.current_price.toLocaleString()}`,
+        marketCap: `$${(coin.market_cap / 1e9).toFixed(2)}B`,
+        change24h: coin.price_change_percentage_24h,
+        change7d: coin.price_change_percentage_7d_in_currency,
+        volume: `$${(coin.total_volume / 1e9).toFixed(2)}B`,
+      }));
+
+      setDataSource(formatted);
+    };
+
+    fetchCoins();
+  }, []);
+
+  const columns = [
+    { title: "Rank", dataIndex: "rank", key: "rank" },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text: string, record: any) => (
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <img
+            src={record.image}
+            alt={record.name}
+            style={{ width: 24, height: 24 }}
+          />
+          <span>
+            {record.name} ({record.symbol.toUpperCase()})
+          </span>
+        </div>
+      ),
+    },
+    { title: "Price", dataIndex: "price", key: "price" },
+    { title: "Market Cap", dataIndex: "marketCap", key: "marketCap" },
+    {
+      title: "24h %",
+      dataIndex: "change24h",
+      key: "change24h",
+      render: (value: number) => (
+        <span style={{ color: value >= 0 ? "green" : "red" }}>
+          {value >= 0 ? `+${value.toFixed(2)}%` : `${value.toFixed(2)}%`}
+        </span>
+      ),
+    },
+    {
+      title: "7d %",
+      dataIndex: "change7d",
+      key: "change7d",
+      render: (value: number) => (
+        <span style={{ color: value >= 0 ? "green" : "red" }}>
+          {value >= 0 ? `+${value.toFixed(2)}%` : `${value.toFixed(2)}%`}
+        </span>
+      ),
+    },
+    { title: "24h Volume", dataIndex: "volume", key: "volume" },
+  ];
+
   return (
     <main>
       <section className="px-5 md:px-20 pt-32 md:pt-44" id="home">
@@ -59,19 +140,22 @@ export default function HeroSection(props: ComponentInterface) {
           </div>
         </div>
         <div>
-          <Image
+          <Table dataSource={dataSource} columns={columns} pagination={false} />
+          {/* <Image
             src={HeroImg}
             alt="trading chart"
             quality={100}
             width={1000}
             height={1000}
             className="w-full h-full"
-          />
+          /> */}
         </div>
       </section>
       <div className="hidde md:block px-0 md:px-20 mt-20 md:mt-28">
         <div className="bg-[#EDEDED] white [#090A07] pt-5 pb-6 md:rounded-lg">
-          <h5 className="text-base text-center text-black mb-6">Trusted by industry giants:</h5>
+          <h5 className="text-base text-center text-black mb-6">
+            Trusted by industry giants:
+          </h5>
           <ScrollVelocity
             texts={[
               <div className="flex gap-16 items-center">
