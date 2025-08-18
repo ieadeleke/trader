@@ -15,6 +15,7 @@ const eslintConfig = [
     rules: {
       // turn off completely
       "@typescript-eslint/no-explicit-any": "off",
+      "react/jsx-key": "off",
 
       // or just warn instead of error
       // "@typescript-eslint/no-explicit-any": "warn",
