@@ -37,66 +37,10 @@ export default function Flow() {
           <button className="bg-primary text-sm py-4 px-6 md:px-10 rounded-[8px]">
             Reach out to us
           </button>
-          {/* <div className="flow-bg pt-6 pb-10 px-8 mb-7 rounded-[10px] gap-4 flex items-start">
-            <div>
-              <div className="size-[36px] rounded-[10px] flow-bg flex items-center justify-center">
-                <h4 className="text-sm md:text-base font-bold">1</h4>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-xl mb-2 font-medium font-ubuntu">
-                Sign up, It&apos;s Free!
-              </h3>
-              <p className="text-lg leading-relaxed text-white opacity-80 max-w-[508px]">
-                Our team will set up your account and help you build job to
-                easy-to-use web dashboard.
-              </p>
-            </div>
-          </div>
-          <div className="flow-bg pt-6 pb-10 px-8 mb-7 rounded-[10px] gap-4 flex items-start">
-            <div>
-              <div className="size-[36px] rounded-[10px] flow-bg flex items-center justify-center">
-                <h4 className="text-sm md:text-base font-bold">2</h4>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-xl mb-2 font-medium font-ubuntu">
-                Find best Deals and Invest
-              </h3>
-              <p className="text-lg leading-relaxed text-white opacity-80 max-w-[508px]">
-                Create and Trade anywhere from 1-100% openings with just a few
-                clicks. customize your own.
-              </p>
-            </div>
-          </div>
-          <div className="flow-bg pt-6 pb-10 px-8 rounded-[10px] gap-4 flex items-start">
-            <div>
-              <div className="size-[36px] rounded-[10px] flow-bg flex items-center justify-center">
-                <h4 className="text-sm md:text-base font-bold">3</h4>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-xl mb-2 font-medium font-ubuntu">
-                Get your profit back
-              </h3>
-              <p className="text-lg leading-relaxed text-white opacity-80 max-w-[508px]">
-                View market, reviews, and rosters before forex arrive on the
-                site, and post reviews and pay, effortlessly.
-              </p>
-            </div>
-          </div> */}
         </div>
       </div>
       <div className="hidden md:block mt-28">
         <CryptoDashboard />
-        {/* <Image
-          src={RowImg}
-          alt="All products"
-          quality={100}
-          width={1000}
-          height={1000}
-          className="w-full h-full"
-        /> */}
       </div>
     </section>
   );

@@ -288,7 +288,7 @@ const CryptoDashboard: React.FC = () => {
     <>
       <ScrollVelocity
         texts={[
-          <div className="flex gap-4 items-center">
+          <div key="crypto-row" className="flex gap-4 items-center">
             {paginatedData.map((crypto, index) => (
               <CryptoCard crypto={crypto} key={index} />
             ))}

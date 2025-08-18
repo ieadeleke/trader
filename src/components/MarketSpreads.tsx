@@ -51,7 +51,7 @@ export default function MarketStats() {
             Trade Now
           </h4>
         </div>
-        <h3 className="text-4xl text-center font-ubuntu font-bold leading-[1.4]">
+        <h3 className="text-3xl md:text-4xl text-center font-ubuntu font-bold leading-[1.4]">
           Market Spreads and Swaps
         </h3>
       </div>
