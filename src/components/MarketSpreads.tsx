@@ -44,7 +44,7 @@ export default function MarketStats() {
   const position = ((price - low) / (high - low)) * 100;
 
   return (
-    <div className="px-20 mt-24">
+    <div className="px-5 md:px-20 mt-24">
       <div className="mb-6">
         <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-4">
           <h4 className="uppercase font-bold text-primary text-xs font-ibm">
@@ -57,8 +57,8 @@ export default function MarketStats() {
       </div>
       <div className="bg-black w-full text-white p-6 rounded-xl mx-auto">
         {/* Top section */}
-        <div className="grid grid-cols-2 mb-24">
-          <div>
+        <div className="flex flex-col md:grid grid-cols-2 mb-10 md:mb-24">
+          <div className="mb-10 md:0">
             <h4 className="text-xl mb-10">Market Stats</h4>
             <div className="flex items-center gap-4">
               <img
@@ -81,7 +81,7 @@ export default function MarketStats() {
           </div>
           <div>
             {/* Price */}
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col-reverse md:flex-row justify-between gap-5 md:gap-0 md:items-center">
               <div className="mt-4 text-4xl mb-8 font-bold">
                 ${price.toLocaleString()}
                 <span
@@ -94,7 +94,7 @@ export default function MarketStats() {
                     : `${percentage.toFixed(2)}%`}
                 </span>
               </div>
-              <p className="text-sm opacity-30">Bitcoin Price (USD)</p>
+              <p className="text-sm opacity-30 hidded">Bitcoin Price (USD)</p>
             </div>
 
             {/* High / Low Bar */}
@@ -117,7 +117,7 @@ export default function MarketStats() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+        <div className="flex flex-col md:grid-cols-4 gap-4 mt-6">
           <div className="bg-[#080808] p-4 px-6 rounded-xl">
             <p className="text-white mb-5 text-sm opacity-60">Market Cap</p>
             <p className="text-xl font-semibold">

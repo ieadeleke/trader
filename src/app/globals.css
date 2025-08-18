@@ -200,26 +200,27 @@ html {
 
 .ant-table-thead,
 .ant-table-thead tr {
-  border-radius: 500px !important;
+  border-radius: 0px !important;
   background: unset !important;
 }
 
 .table-layout {
-  border-radius: 500px !important;
+  border-radius: 0px !important;
 }
 
 .ant-table-content {
-  border-radius: 500px !important;
+  border-radius: 0px !important;
   background: unset !important;
 
 }
 
 .ant-table-container {
-  border-radius: 500px !important;
+  border-radius: 0px !important;
 }
 .ant-table {
   background: unset !important;
-  border-radius: 600px !important;
+  border-radius: 0px !important;
+  overflow: hidden !important;
 }
 
 /* ant-table-wrapper css-dev-only-do-not-override-1vjf2v5 */

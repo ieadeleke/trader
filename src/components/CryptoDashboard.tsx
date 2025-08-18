@@ -177,9 +177,7 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick }) => {
 
   return (
     <div className="w-full border border-solid border-[#353535] bg-[#232323] py-2 px-3 rounded-[6px]">
-      <div
-        className="flex gap-5 items-center"
-      >
+      <div className="flex gap-5 items-center">
         <div className="flex gap-2 items-center">
           <img
             src={crypto.image}
@@ -190,9 +188,7 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick }) => {
             <h4 className="text-white text-sm opacity-80">{crypto.name}</h4>
           </div>
           <div className="bg-[#080808] rounded-[4px] py-1 px-2">
-          <p className="text-[#2B7FFF] text-[10px]">
-            {crypto.symbol}
-          </p>
+            <p className="text-[#2B7FFF] text-[10px]">{crypto.symbol}</p>
           </div>
         </div>
         <div>
@@ -293,8 +289,8 @@ const CryptoDashboard: React.FC = () => {
       <ScrollVelocity
         texts={[
           <div className="flex gap-4 items-center">
-            {paginatedData.map((crypto) => (
-              <CryptoCard crypto={crypto} />
+            {paginatedData.map((crypto, index) => (
+              <CryptoCard crypto={crypto} key={index} />
             ))}
           </div>,
         ]}

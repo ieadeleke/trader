@@ -39,8 +39,8 @@ export default function HeroSection(props: ComponentInterface) {
       );
       const data = await res.json();
 
-      const formatted = data.map((coin: any) => ({
-        key: coin.id,
+      const formatted = data.map((coin: any, index: number) => ({
+        key: index,
         rank: coin.market_cap_rank,
         name: coin.name,
         symbol: coin.symbol,
