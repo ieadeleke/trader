@@ -30,10 +30,10 @@ export default function Numbers(props: ComponentInterface) {
       const data = await apiData.json();
       console.log(data);
     }
-    fetchData();
+    // fetchData();
     // fetchSecData();
     // fetchThirdData();
-    fetchFourthData();
+    // fetchFourthData();
   }, []);
   return (
     <section className="px-5 md:px-32 mt-28">
@@ -44,8 +44,8 @@ export default function Numbers(props: ComponentInterface) {
               Experience
             </h4>
           </div>
-          <h3 className="text-3xl md:text-4xl mb-3 font-ubuntu font-bold w-[80%] leading-[1.4]">
-            Your trades in the right place
+          <h3 className="text-3xl md:text-4xl mb-3 font-ubuntu font-bold w-[95%] leading-[1.4]">
+            Join Thousands Earning $50 million daily
           </h3>
           <p className="text-white font-ibm opacity-80 text-base md:text-lg leading-relaxed md:w-[90%] mb-7">
             We use cookies to understand how you use our website and to give you
@@ -59,30 +59,31 @@ export default function Numbers(props: ComponentInterface) {
           </button>
         </div>
         <div>
+          <p className="text-sm text-white mb-6">Start Earning:</p>
           <div className="grid grid-cols-2 justify-between gap-10 md:gap-y-20">
             <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
               <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
-                1 milion+
+                2,000+
               </h2>
-              <p className="text-sm md:text-base font-ibm text-white">XTB Group Clients</p>
+              <p className="text-sm md:text-base font-ibm text-white">dollars daily</p>
             </div>
             <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
               <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
-                1 milion+
+                10,000+
               </h2>
-              <p className="text-sm md:text-base font-ibm text-white">XTB Group Clients</p>
+              <p className="text-sm md:text-base font-ibm text-white">dollars daily</p>
             </div>
             <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
               <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
-                1 milion+
+                25,000+
               </h2>
-              <p className="text-sm md:text-base font-ibm text-white">XTB Group Clients</p>
+              <p className="text-sm md:text-base font-ibm text-white">dollars daily</p>
             </div>
             <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
               <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
-                1 milion+
+                50,000+
               </h2>
-              <p className="text-sm md:text-base font-ibm text-white">XTB Group Clients</p>
+              <p className="text-sm md:text-base font-ibm text-white">dollars daily</p>
             </div>
           </div>
         </div>

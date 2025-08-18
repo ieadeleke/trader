@@ -17,6 +17,7 @@ import Zerion from "@/assets/companies/zerion.png";
 import ScrollVelocity from "./animations/ScrollVelocity";
 import { useEffect, useState } from "react";
 import { Table } from "antd";
+import Link from "next/link";
 
 interface ComponentInterface {
   authControl: (state: boolean) => void;
@@ -132,11 +133,11 @@ export default function HeroSection(props: ComponentInterface) {
               onClick={() => props.authControl(true)}
               className="rounded-lg text-white text-sm py-3 px-8 bg-primary border border-solid border-primary cursor-pointer"
             >
-              Create Account
+              Start Earning
             </button>
-            <button className="rounded-lg text-white text-sm py-3 px-10 bg-transparent border border-solid border-white">
-              View Market
-            </button>
+            <Link href="/#markets" className="rounded-lg text-white text-sm py-3 px-10 bg-transparent border border-solid border-white">
+              View Markets
+            </Link>
           </div>
         </div>
         <div>

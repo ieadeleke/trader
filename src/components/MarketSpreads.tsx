@@ -119,7 +119,7 @@ export default function MarketStats() {
         </div>
 
         {/* Stats Grid */}
-        <div className="flex flex-col md:grid-cols-4 gap-4 mt-6">
+        <div className="flex flex-col md:grid grid-cols-4 gap-4 mt-6">
           <div className="bg-[#080808] p-4 px-6 rounded-xl">
             <p className="text-white mb-5 text-sm opacity-60">Market Cap</p>
             <p className="text-xl font-semibold">

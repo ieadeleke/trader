@@ -3,6 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Flex, Radio } from "antd";
 
 const SignUpForm = () => {
   const { control } = useForm();
@@ -20,7 +21,9 @@ const SignUpForm = () => {
         </div>
         <div className="grid grid-cols-2 mb-4 gap-3">
           <div className="form-group">
-            <Label className="mb-1 font-ibm font-normal text-white opacity-80">First name</Label>
+            <Label className="mb-1 font-ibm font-normal text-white opacity-80">
+              First name
+            </Label>
             <Controller
               control={control}
               defaultValue=""
@@ -31,7 +34,9 @@ const SignUpForm = () => {
             />
           </div>
           <div className="form-group">
-            <Label className="mb-1 font-ibm font-normal text-white opacity-80">Last name</Label>
+            <Label className="mb-1 font-ibm font-normal text-white opacity-80">
+              Last name
+            </Label>
             <Controller
               control={control}
               defaultValue=""
@@ -43,7 +48,9 @@ const SignUpForm = () => {
           </div>
         </div>
         <div className="form-group mb-4">
-          <Label className="mb-1 font-ibm font-normal text-white opacity-80">Email address</Label>
+          <Label className="mb-1 font-ibm font-normal text-white opacity-80">
+            Email address
+          </Label>
           <Controller
             control={control}
             defaultValue=""
@@ -53,12 +60,39 @@ const SignUpForm = () => {
             )}
           />
         </div>
+        <div className="form-group mb-4">
+          <Label className="mb-1 font-ibm font-normal text-white opacity-80">
+            Ready to start earning?
+          </Label>
+          <Flex vertical gap="middle">
+            <Radio.Group defaultValue="a" className="py-20 w-full" size="large" buttonStyle="solid">
+              <Radio.Button value="a">Yes</Radio.Button>
+              <Radio.Button value="b">No</Radio.Button>
+              <Radio.Button value="c">I want to know more</Radio.Button>
+            </Radio.Group>
+          </Flex>
+        </div>
         <div className="form-group mb-8">
-          <Label className="mb-1 font-ibm font-normal text-white opacity-80">Phone number</Label>
+          <Label className="mb-1 font-ibm font-normal text-white opacity-80">
+            Phone number
+          </Label>
           <Controller
             control={control}
             defaultValue=""
             name="phoneNumber"
+            render={({ field }) => (
+              <Input type="tel" {...field} className="py-7" />
+            )}
+          />
+        </div>
+        <div className="form-group mb-8">
+          <Label className="mb-1 font-ibm font-normal text-white opacity-80">
+            Repeat Phone number
+          </Label>
+          <Controller
+            control={control}
+            defaultValue=""
+            name="phoneNumber2"
             render={({ field }) => (
               <Input type="tel" {...field} className="py-7" />
             )}
