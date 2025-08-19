@@ -10,14 +10,12 @@ import {
   Alert,
   Typography,
   Pagination,
-  Button,
   Card,
   Statistic,
   Tag,
 } from "antd";
 import {
   SearchOutlined,
-  ReloadOutlined,
   DollarOutlined,
   TrophyOutlined,
   BarChartOutlined,
@@ -26,7 +24,7 @@ import {
   ArrowDownOutlined,
 } from "@ant-design/icons";
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const { Title, Text } = Typography;
 const { Option } = Select;
 
@@ -128,7 +126,7 @@ class CoinGeckoAPI {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      let trendingData = await response.json;
+      // let trendingData = await response.json;
       return await response.json();
     } catch (error) {
       console.error("Error fetching trending coins:", error);

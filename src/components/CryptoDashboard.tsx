@@ -15,21 +15,8 @@ import {
   Statistic,
   Tag,
 } from "antd";
-import {
-  SearchOutlined,
-  ReloadOutlined,
-  DollarOutlined,
-  TrophyOutlined,
-  BarChartOutlined,
-  GlobalOutlined,
-  ArrowUpOutlined,
-  ArrowDownOutlined,
-} from "@ant-design/icons";
 import ScrollVelocity from "./animations/ScrollVelocity";
 
-const { Header, Content } = Layout;
-const { Title, Text } = Typography;
-const { Option } = Select;
 
 // Types
 interface CryptoData {
