@@ -9,16 +9,16 @@ import SignUpForm from "../auth/SignUp";
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-
-
+import ContactForm from "../auth/ContactForm";
 
 interface NavInterface {
   authControl?: boolean;
+  contactControl?: boolean;
   authControlFunction?: (state: boolean) => void;
+  contactControlFunction?: (state: boolean) => void;
 }
 
 const Navigation = (props: NavInterface) => {
-  
   const [openMenu, setOpenMenu] = useState(false);
   const [displaySignUpModal, setDisplaySignUpModal] = useState<boolean>(false);
   const toggleModalDisplay = () => {
@@ -32,6 +32,21 @@ const Navigation = (props: NavInterface) => {
   const displayAuthModalDisplay = () => setDisplaySignUpModal(true);
   const hideAuthModalDisplay = () => setDisplaySignUpModal(false);
 
+  // contact us form
+  const [openContactUsMenu, setOpenContactUsMenu] = useState(false);
+  const [displayContactUsModal, setDisplayContactUsModal] =
+    useState<boolean>(false);
+  const toggleContactModalDisplay = () => {
+    if (props.contactControlFunction)
+      props?.contactControlFunction(!displayContactUsModal);
+    setDisplayContactUsModal(!displayContactUsModal);
+  };
+
+  const toggleContactDrawer = () => setDisplayContactUsModal(!displayContactUsModal);
+
+  const displayContactModalDisplay = () => setDisplayContactUsModal(true);
+  const hideContactModalDisplay = () => setDisplayContactUsModal(false);
+
   useEffect(() => {
     if (props.authControl) {
       displayAuthModalDisplay();
@@ -39,6 +54,14 @@ const Navigation = (props: NavInterface) => {
       hideAuthModalDisplay();
     }
   }, [props.authControl]);
+
+  useEffect(() => {
+    if (props.contactControl) {
+      displayContactModalDisplay();
+    } else {
+      hideContactModalDisplay();
+    }
+  }, [props.contactControl]);
 
   return (
     <nav className="flex py-6 md:py-7 px-5 md:px-20 w-full justify-between items-center fixed z-50 top-0 bg-[#0A0A0A] md:bg-transparent">
@@ -84,9 +107,12 @@ const Navigation = (props: NavInterface) => {
       <div className="hidden md:block">
         <ul className="flex items-center gap-10">
           <li>
-            <Link href="" className="text-sm text-white">
+            <button
+              onClick={toggleContactModalDisplay}
+              className="bg-transparent text-sm text-white cursor-pointer"
+            >
               Contact Us
-            </Link>
+            </button>
           </li>
           <button
             className="bg-primary text-sm text-white py-3 px-6 rounded-lg cursor-pointer"
@@ -96,15 +122,26 @@ const Navigation = (props: NavInterface) => {
           </button>
         </ul>
       </div>
-        <div className="block md:hidden">
-          <HiOutlineMenuAlt3 className="text-3xl text-white" onClick={toggleDrawer} />
-        </div>
+      <div className="block md:hidden">
+        <HiOutlineMenuAlt3
+          className="text-3xl text-white"
+          onClick={toggleDrawer}
+        />
+      </div>
       <Modal
         open={displaySignUpModal}
         onCancel={toggleModalDisplay}
         footer={null}
       >
         <SignUpForm />
+      </Modal>
+      <Modal
+        open={displayContactUsModal}
+        onCancel={toggleContactDrawer}
+        footer={null}
+        className="contactModal"
+      >
+        <ContactForm />
       </Modal>
       <Drawer open={openMenu} onClose={toggleDrawer} footer={null}>
         <div className="flex flex-col relative h-full">
@@ -124,27 +161,47 @@ const Navigation = (props: NavInterface) => {
           </div>
           <ul className="h-full flex justify-center text-center flex-col gap-6">
             <li className="pb-4 text-black">
-              <Link href="/" className="text-white text-2xl font-medium p-4 w-full" onClick={toggleDrawer}>
+              <Link
+                href="/"
+                className="text-white text-2xl font-medium p-4 w-full"
+                onClick={toggleDrawer}
+              >
                 Home
               </Link>
             </li>
             <li className="pb-4 text-black">
-              <Link href="/#aboutus" className="text-white text-2xl font-medium p-4 w-full" onClick={toggleDrawer}>
+              <Link
+                href="/#aboutus"
+                className="text-white text-2xl font-medium p-4 w-full"
+                onClick={toggleDrawer}
+              >
                 About Us
               </Link>
             </li>
             <li className="pb-4 text-black">
-              <Link href="/#services" className="text-white text-2xl font-medium p-4 w-full" onClick={toggleDrawer}>
+              <Link
+                href="/#services"
+                className="text-white text-2xl font-medium p-4 w-full"
+                onClick={toggleDrawer}
+              >
                 Services
               </Link>
             </li>
             <li className="pb-4 text-black">
-              <Link href="/#howitworks" className="text-white text-2xl font-medium p-4 w-full" onClick={toggleDrawer}>
+              <Link
+                href="/#howitworks"
+                className="text-white text-2xl font-medium p-4 w-full"
+                onClick={toggleDrawer}
+              >
                 How It Works
               </Link>
             </li>
             <li className="pb-4 text-black">
-              <Link href="/#testimonials" className="text-white text-2xl font-medium p-4 w-full" onClick={toggleDrawer}>
+              <Link
+                href="/#testimonials"
+                className="text-white text-2xl font-medium p-4 w-full"
+                onClick={toggleDrawer}
+              >
                 Testimonials
               </Link>
             </li>

@@ -246,7 +246,7 @@ button[data-slot="popover-trigger"] {
   height: 3.7rem !important;
   width: 100% !important;
 }
-/* .ant-radio-group {
-  display: flex !important;
-} */
-/* ant-table-wrapper css-dev-only-do-not-override-1vjf2v5 */
+
+.ant-modal.contactModal {
+  width: 1200px !important;
+}
