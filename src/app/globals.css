@@ -223,4 +223,30 @@ html {
   overflow: hidden !important;
 }
 
+.ant-radio-button-wrapper {
+  background: transparent !important;
+  height: 80px !important;
+  /* width: 100% !important; */
+  flex: 1 !important;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.ant-radio-button-wrapper.ant-radio-button-wrapper-checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+[data-radix-popper-content-wrapper] {
+  z-index: 100000 !important;
+}
+
+button[data-slot="popover-trigger"] {
+  height: 3.7rem !important;
+  width: 100% !important;
+}
+/* .ant-radio-group {
+  display: flex !important;
+} */
 /* ant-table-wrapper css-dev-only-do-not-override-1vjf2v5 */

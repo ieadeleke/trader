@@ -1,12 +1,26 @@
+'use client';
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Flex, Radio } from "antd";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+ 
+import { cn } from "@/lib/utils"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { useState } from "react";
 
 const SignUpForm = () => {
   const { control } = useForm();
+  const [date, setDate] = useState<Date>();
   return (
     <div>
       <form action="">
@@ -29,7 +43,11 @@ const SignUpForm = () => {
               defaultValue=""
               name="firstName"
               render={({ field }) => (
-                <Input type="text" {...field} className="py-7" />
+                <Input
+                  type="text"
+                  {...field}
+                  className="py-7 text-white opacity-80 text-sm h-[3.7rem]"
+                />
               )}
             />
           </div>
@@ -42,7 +60,11 @@ const SignUpForm = () => {
               defaultValue=""
               name="lastName"
               render={({ field }) => (
-                <Input type="text" {...field} className="py-7" />
+                <Input
+                  type="text"
+                  {...field}
+                  className="py-7 text-white opacity-80 text-sm h-[3.7rem]"
+                />
               )}
             />
           </div>
@@ -56,23 +78,46 @@ const SignUpForm = () => {
             defaultValue=""
             name="emailAddress"
             render={({ field }) => (
-              <Input type="email" {...field} className="py-7" />
+              <Input
+                type="email"
+                {...field}
+                className="py-7 text-white opacity-80 text-sm h-[3.7rem]"
+              />
             )}
           />
         </div>
         <div className="form-group mb-4">
-          <Label className="mb-1 font-ibm font-normal text-white opacity-80">
+          <Label className="mb-4 font-ibm font-normal text-white opacity-80">
             Ready to start earning?
           </Label>
-          <Flex vertical gap="middle">
-            <Radio.Group defaultValue="a" className="py-20 w-full" size="large" buttonStyle="solid">
-              <Radio.Button value="a">Yes</Radio.Button>
-              <Radio.Button value="b">No</Radio.Button>
-              <Radio.Button value="c">I want to know more</Radio.Button>
-            </Radio.Group>
-          </Flex>
+          <RadioGroup defaultValue="yes" className="flex gap-4 flex-wrap">
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="yes" id="yes" />
+              <Label htmlFor="yes" className="text-white text-sm opacity-80">
+                Yes
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="no" id="no" />
+              <Label htmlFor="no" className="text-white text-sm opacity-80">
+                No
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem
+                value="i want to know more"
+                id="i want to know more"
+              />
+              <Label
+                htmlFor="i want to know more"
+                className="text-white text-sm opacity-80"
+              >
+                I want to know more
+              </Label>
+            </div>
+          </RadioGroup>
         </div>
-        <div className="form-group mb-8">
+        <div className="form-group mb-4">
           <Label className="mb-1 font-ibm font-normal text-white opacity-80">
             Phone number
           </Label>
@@ -81,22 +126,63 @@ const SignUpForm = () => {
             defaultValue=""
             name="phoneNumber"
             render={({ field }) => (
-              <Input type="tel" {...field} className="py-7" />
+              <Input
+                type="tel"
+                {...field}
+                className="py-7 text-white opacity-80 text-sm h-[3.7rem]"
+              />
             )}
           />
         </div>
-        <div className="form-group mb-8">
-          <Label className="mb-1 font-ibm font-normal text-white opacity-80">
-            Repeat Phone number
-          </Label>
-          <Controller
-            control={control}
-            defaultValue=""
-            name="phoneNumber2"
-            render={({ field }) => (
-              <Input type="tel" {...field} className="py-7" />
-            )}
-          />
+        <div className="grid grid-cols-2 gap-3">
+          <div className="form-group flex-1 mb-8">
+            <Label className="mb-1 font-ibm font-normal text-white opacity-80">
+              Date of Birth
+            </Label>
+            <Controller
+              control={control}
+              defaultValue=""
+              name="phoneNumber2"
+              render={({ field }) => (
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      data-empty={!date}
+                      className="data-[empty=true]:text-muted-foreground justify-start text-left font-normal text-white text-sm opacity-80"
+                    >
+                      <CalendarIcon />
+                      {date ? format(date, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0">
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                    />
+                  </PopoverContent>
+                </Popover>
+              )}
+            />
+          </div>
+          <div className="form-group flex-1 mb-8">
+            <Label className="mb-1 font-ibm font-normal text-white opacity-80">
+              Occupation
+            </Label>
+            <Controller
+              control={control}
+              defaultValue=""
+              name="occupation"
+              render={({ field }) => (
+                <Input
+                  type="tel"
+                  {...field}
+                  className="py-7 text-white opacity-80 text-sm h-[3.7rem]"
+                />
+              )}
+            />
+          </div>
         </div>
         <Button className="w-full py-7 text-sm bg-primary text-white mb-3">
           Click here to Signup

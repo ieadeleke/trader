@@ -62,9 +62,8 @@ export default function Testimonials() {
                   18th April, 2025
                 </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit.
-                  Curaitur in euismod odio gravida gravida. Discovery of the
-                  text&apos;s origin is attributed
+                  Moneday has completely changed the way I trade online.
+                  Withdrawals are fast, reliable, and stress-free every day.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -72,7 +71,7 @@ export default function Testimonials() {
                 <div className="size-12 rounded-full bg-gray-500"></div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
-                    Cathy Blaze
+                    Sarah Johnson
                   </h4>
                 </div>
               </div>
@@ -83,12 +82,11 @@ export default function Testimonials() {
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-sm text-primary uppercase font-medium mb-2">
-                  18th April, 2025
+                  7th November, 2024
                 </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit.
-                  Curaitur in euismod odio gravida gravida. Discovery of the
-                  text&apos;s origin is attributed
+                  I finally get to enjoy my profits without long waiting times.
+                  Trading feels simple, transparent, and rewarding with them.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -96,7 +94,7 @@ export default function Testimonials() {
                 <div className="size-12 rounded-full bg-gray-500"></div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
-                    Cathy Blaze
+                    Michael Adeyemi
                   </h4>
                 </div>
               </div>
@@ -107,12 +105,11 @@ export default function Testimonials() {
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-sm text-primary uppercase font-medium mb-2">
-                  18th April, 2025
+                  23rd February, 2023
                 </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit.
-                  Curaitur in euismod odio gravida gravida. Discovery of the
-                  text&apos;s origin is attributed
+                  The platform is easy to use and works smoothly on my phone.
+                  Daily earnings give me confidence and steady financial flow.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -120,22 +117,22 @@ export default function Testimonials() {
                 <div className="size-12 rounded-full bg-gray-500"></div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
-                    Cathy Blaze
+                    Priya Patel
                   </h4>
                 </div>
               </div>
             </div>
           </SwiperSlide>
+
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-sm text-primary uppercase font-medium mb-2">
-                  18th April, 2025
+                  12th September, 2025
                 </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit.
-                  Curaitur in euismod odio gravida gravida. Discovery of the
-                  text&apos;s origin is attributed
+                  Security and trust were my biggest concerns before joining.
+                  Now I trade daily knowing my money is always well-protected.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -143,22 +140,23 @@ export default function Testimonials() {
                 <div className="size-12 rounded-full bg-gray-500"></div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
-                    Cathy Blaze
+                    Daniel Carter
                   </h4>
                 </div>
               </div>
             </div>
           </SwiperSlide>
+
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-sm text-primary uppercase font-medium mb-2">
-                  18th April, 2025
+                  5th June, 2024
                 </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit.
-                  Curaitur in euismod odio gravida gravida. Discovery of the
-                  text&apos;s origin is attributed
+                  As an entrepreneur, consistent income makes all the
+                  difference. Moneday delivers daily profits that keep my plans
+                  moving fast.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -166,31 +164,30 @@ export default function Testimonials() {
                 <div className="size-12 rounded-full bg-gray-500"></div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
-                    Cathy Blaze
+                    Aisha Mohammed
                   </h4>
                 </div>
               </div>
             </div>
           </SwiperSlide>
+
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-sm text-primary uppercase font-medium mb-2">
-                  18th April, 2025
+                  30th January, 2023
                 </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit.
-                  Curaitur in euismod odio gravida gravida. Discovery of the
-                  text&apos;s origin is attributed
+                  I love how automation takes away the stress of market timing.
+                  Trading smarter each day has brought me closer to financial
+                  freedom.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
               <div className="px-4 md:px-8 pt-4 pb-6 flex gap-4 items-center">
                 <div className="size-12 rounded-full bg-gray-500"></div>
                 <div>
-                  <h4 className="text-sm font-medium text-white">
-                    Cathy Blaze
-                  </h4>
+                  <h4 className="text-sm font-medium text-white">David Kim</h4>
                 </div>
               </div>
             </div>

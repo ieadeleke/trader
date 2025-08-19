@@ -11,6 +11,11 @@ import { useState } from "react";
 import { TiTimes } from "react-icons/ti";
 import { FaCheck } from "react-icons/fa6";
 
+import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import { HiMiniDocumentText } from "react-icons/hi2";
+import { MdSettings } from "react-icons/md";
+import { PiFoldersFill } from "react-icons/pi";
+
 interface ComponentInterface {
   authControl: (state: boolean) => void;
 }
@@ -38,11 +43,10 @@ export default function WhatIsTrading(props: ComponentInterface) {
             } py-6 border-r-[2px] border-solid border-black rounded-tl-[10px] cursor-pointer`}
           >
             <div>
-              <Image
-                src={DollarImg}
-                alt="how it works"
-                quality={100}
-                className="size-[30px] mx-auto mb-2"
+              <HiOutlineCurrencyDollar
+                className={`${
+                  currentView === 0 ? "text-primary" : "text-white"
+                } text-3xl mx-auto mb-3`}
               />
             </div>
             <h4
@@ -60,11 +64,10 @@ export default function WhatIsTrading(props: ComponentInterface) {
             } py-6 border-r-[2px] border-solid border-black cursor-pointer`}
           >
             <div>
-              <Image
-                src={WhatIsImg}
-                alt="how it works"
-                quality={100}
-                className="size-[30px] mx-auto mb-2"
+              <HiMiniDocumentText
+                className={`${
+                  currentView === 1 ? "text-primary" : "text-white"
+                } text-3xl mx-auto mb-3`}
               />
             </div>
             <h4
@@ -82,11 +85,10 @@ export default function WhatIsTrading(props: ComponentInterface) {
             } py-6 border-r-[2px] border-solid border-black cursor-pointer`}
           >
             <div>
-              <Image
-                src={OverviewImg}
-                alt="how it works"
-                quality={100}
-                className="size-[30px] mx-auto mb-2"
+              <MdSettings
+                className={`${
+                  currentView === 2 ? "text-primary" : "text-white"
+                } text-3xl mx-auto mb-3`}
               />
             </div>
             <h4
@@ -104,11 +106,10 @@ export default function WhatIsTrading(props: ComponentInterface) {
             } py-6 rounded-tr-[10px] cursor-pointer`}
           >
             <div>
-              <Image
-                src={ComparisonImg}
-                alt="how it works"
-                quality={100}
-                className="size-[30px] mx-auto mb-2"
+              <PiFoldersFill
+                className={`${
+                  currentView === 3 ? "text-primary" : "text-white"
+                } text-3xl mx-auto mb-3`}
               />
             </div>
             <h4
