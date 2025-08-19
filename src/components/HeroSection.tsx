@@ -113,7 +113,7 @@ export default function HeroSection(props: ComponentInterface) {
             </h4>
           </div>
           <h3 className="text-4xl md:text-6xl text-center font-ubuntu font-bold leading-[1.4] mb-2">
-            The Ultimate Forex Trading
+            Your Ultimate Daily Earner
           </h3>
           <div className="bg-[#34251F] border border-solid border-primary py-1 px-8 w-max mx-auto rounded- mb-4 relative">
             <div className="size-[14px] bg-white absolute -top-[6px] -left-[6px] border border-solid border-primary"></div>
@@ -121,13 +121,19 @@ export default function HeroSection(props: ComponentInterface) {
             <div className="size-[14px] bg-white absolute -bottom-[6px] -left-[6px] border border-solid border-primary"></div>
             <div className="size-[14px] bg-white absolute -bottom-[6px] -right-[6px] border border-solid border-primary"></div>
             <h4 className="text-3xl md:text-5xl text-center font-ubuntu font-bold leading-[1.4] text-primary">
-              Adventure
+              Platform
             </h4>
           </div>
-          <p className="text-white leading-loose text-base md:text-lg text-center mb-6 block">
-            We&apos;re well-capitalized and with enough liquidity to navigate
-            through bad times.
+          <p className="text-white leading-loose text-base md:text-lg text-center mb-4 block md:w-[55%] mx-auto">
+            Turn everyday into a payday. With Moneday automation, your trading profits are delivered daily so you never have to wait.
           </p>
+          <ul className="flex gap-4 justify-center mb-7">
+            <li className="text-sm leading-loose opacity-50">Transparent</li>
+            <li className="text-sm leading-loose opacity-50">|</li>
+            <li className="text-sm leading-loose opacity-50">Secure</li>
+            <li className="text-sm leading-loose opacity-50">|</li>
+            <li className="text-sm leading-loose opacity-50">Globally Trusted</li>
+          </ul>
           <div className="flex items-center justify-center gap-3 mb-10">
             <button
               onClick={() => props.authControl(true)}

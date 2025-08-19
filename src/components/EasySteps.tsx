@@ -26,48 +26,54 @@ export default function EasySteps() {
               <div className="gap-4 flex items-start">
                 <div>
                   <div className="size-[26px] md:size-[36px] rounded-[4px] md:rounded-[10px] bg-white flex items-center justify-center">
-                    <h4 className="text-sm md:text-base font-bold text-black">1</h4>
+                    <h4 className="text-sm md:text-base font-bold text-black">
+                      1
+                    </h4>
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg md:text-xl mb-1 font-medium font-ubuntu">
-                    Sign up, It&apos;s Free!
+                    Sign up and Deposit
                   </h3>
-                  <p className="text-sm md:text-base leading-loose md:leading-loose text-white max-w-[508px]">
-                    Our team will set up your account and help you build job to
-                    easy-to-use web dashboard.
+                  <p className="text-sm md:text-base leading-loose md:leading-relaxed text-white max-w-[508px]">
+                    Create your free Moneday account, complete verification, and
+                    fund your wallet with a secure deposit.
                   </p>
                 </div>
               </div>
               <div className="gap-4 flex items-start">
                 <div>
                   <div className="size-[26px] md:size-[36px] rounded-[4px] md:rounded-[10px] bg-white flex items-center justify-center">
-                    <h4 className="text-sm md:text-base font-bold text-black">2</h4>
+                    <h4 className="text-sm md:text-base font-bold text-black">
+                      2
+                    </h4>
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg md:text-xl mb-1 font-medium font-ubuntu">
-                    Find best Deals and Invest
+                    Automated Trading Starts
                   </h3>
-                  <p className="text-sm md:text-base leading-loose md:leading-loose text-white max-w-[508px]">
-                    Create and Trade anywhere from 1-100% openings with just a
-                    few clicks. customize your own.
+                  <p className="text-sm md:text-base leading-loose md:leading-relaxed text-white max-w-[508px]">
+                    Our smart algorithms trade the forex and crypto markets on
+                    your behalf — 24/7 — scanning for profitable opportunities.
                   </p>
                 </div>
               </div>
               <div className="gap-4 flex items-start">
                 <div>
                   <div className="size-[26px] md:size-[36px] rounded-[4px] md:rounded-[10px] bg-white flex items-center justify-center">
-                    <h4 className="text-sm md:text-base font-bold text-black">3</h4>
+                    <h4 className="text-sm md:text-base font-bold text-black">
+                      3
+                    </h4>
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg md:text-xl mb-1 font-medium font-ubuntu">
-                    Get your profit back
+                    Earn Daily & Withdraw Anytime
                   </h3>
-                  <p className="text-sm md:text-base leading-loose md:leading-loose text-white max-w-[508px]">
-                    View market, reviews, and rosters before forex arrive on the
-                    site, and post reviews and pay, effortlessly.
+                  <p className="text-sm md:text-base leading-loose md:leading-relaxed text-white max-w-[508px]">
+                    Profits are added to your account every single day. Withdraw
+                    instantly or let your balance grow — the choice is yours.
                   </p>
                 </div>
               </div>

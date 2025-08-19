@@ -1,6 +1,7 @@
 "use client";
 
 import LogoImg from "@/assets/logo.png";
+import LogoNewImg from "@/assets/logo-new.jpeg";
 import { Drawer, Modal } from "antd";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,10 +45,10 @@ const Navigation = (props: NavInterface) => {
       <div className="">
         <Link href="/">
           <Image
-            src={LogoImg}
+            src={LogoNewImg}
             alt="logo"
             quality={100}
-            className="w-[130px] h-auto max-w-[630px] mx-auto"
+            className="w-[120px] md:w-[150px] h-auto max-w-[630px] mx-auto rounded-lg"
           />
         </Link>
       </div>

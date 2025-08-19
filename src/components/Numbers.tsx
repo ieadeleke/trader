@@ -10,11 +10,13 @@ interface ComponentInterface {
 
 export default function Numbers(props: ComponentInterface) {
   useEffect(() => {
-    const fetchData = async() => {
-      const apiData = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,stellar&vs_currencies=usd&include_market_cap=true&include_24hr_change=true&aux=ath,atl,high24h,low24h,num_market_pairs,cmc_rank,date_added,max_supply,circulating_supply,total_supply,volume_7d,volume_30d,self_reported_circulating_supply,self_reported_market_cap')
+    const fetchData = async () => {
+      const apiData = await fetch(
+        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,stellar&vs_currencies=usd&include_market_cap=true&include_24hr_change=true&aux=ath,atl,high24h,low24h,num_market_pairs,cmc_rank,date_added,max_supply,circulating_supply,total_supply,volume_7d,volume_30d,self_reported_circulating_supply,self_reported_market_cap"
+      );
       const data = await apiData.json();
       console.log(data);
-    }
+    };
     // const fetchSecData = async() => {
     //   const apiData = await fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC,ETH')
     //   const data = await apiData.json();
@@ -25,11 +27,13 @@ export default function Numbers(props: ComponentInterface) {
     //   const data = await apiData.json();
     //   console.log(data);
     // }
-    const fetchFourthData = async() => {
-      const apiData = await fetch('https://api.coinmarketcap.com/data-api/v3/cryptocurrency/listing?start=1&limit=100&sortBy=rank&sortType=desc&convert=USD,BTC,ETH&cryptoType=all&tagType=all&audited=false&aux=ath,atl,high24h,low24h,num_market_pairs,cmc_rank,date_added,max_supply,circulating_supply,total_supply,volume_7d,volume_30d,self_reported_circulating_supply,self_reported_market_cap')
+    const fetchFourthData = async () => {
+      const apiData = await fetch(
+        "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/listing?start=1&limit=100&sortBy=rank&sortType=desc&convert=USD,BTC,ETH&cryptoType=all&tagType=all&audited=false&aux=ath,atl,high24h,low24h,num_market_pairs,cmc_rank,date_added,max_supply,circulating_supply,total_supply,volume_7d,volume_30d,self_reported_circulating_supply,self_reported_market_cap"
+      );
       const data = await apiData.json();
       console.log(data);
-    }
+    };
     // fetchData();
     // fetchSecData();
     // fetchThirdData();
@@ -47,9 +51,10 @@ export default function Numbers(props: ComponentInterface) {
           <h3 className="text-3xl md:text-4xl mb-3 font-ubuntu font-bold w-[95%] leading-[1.4]">
             Join Thousands Earning $50 million daily
           </h3>
-          <p className="text-white font-ibm opacity-80 text-base md:text-lg leading-relaxed md:w-[90%] mb-7">
-            We use cookies to understand how you use our website and to give you
-            the best possible
+          <p className="text-white font-ibm opacity-80 text-base md:text-base leading-relaxed md:w-[90%] mb-7">
+            Be part of the Moneday community where traders turn the markets into
+            real income — join thousands already sharing in over $50,000,000
+            earned daily.
           </p>
           <button
             onClick={() => props.authControl(true)}
@@ -65,25 +70,33 @@ export default function Numbers(props: ComponentInterface) {
               <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
                 2,000+
               </h2>
-              <p className="text-sm md:text-base font-ibm text-white">dollars daily</p>
+              <p className="text-sm md:text-base font-ibm text-white">
+                dollars daily
+              </p>
             </div>
             <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
               <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
                 10,000+
               </h2>
-              <p className="text-sm md:text-base font-ibm text-white">dollars daily</p>
+              <p className="text-sm md:text-base font-ibm text-white">
+                dollars daily
+              </p>
             </div>
             <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
               <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
                 25,000+
               </h2>
-              <p className="text-sm md:text-base font-ibm text-white">dollars daily</p>
+              <p className="text-sm md:text-base font-ibm text-white">
+                dollars daily
+              </p>
             </div>
             <div className="border-l-2 border-solid border-primary pl-2 md:pl-4 py-2">
               <h2 className="text-xl md:text-2xl font-medium text-white mb-2">
                 50,000+
               </h2>
-              <p className="text-sm md:text-base font-ibm text-white">dollars daily</p>
+              <p className="text-sm md:text-base font-ibm text-white">
+                dollars daily
+              </p>
             </div>
           </div>
         </div>
