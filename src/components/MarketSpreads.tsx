@@ -103,7 +103,7 @@ export default function MarketStats() {
                   AI-powered platform combines deep data analytics with
                   personalized financial goal-setting to help clients design
                   actionable plans tailored to their income, lifestyle, and
-                  aspirations. Whether you're planning for retirement,
+                  aspirations. Whether you&apos;re planning for retirement,
                   education, a major purchase, or early financial freedom,
                   Moneday helps you forecast future needs and align your
                   investment and saving strategies accordingly. Our approach
@@ -127,7 +127,7 @@ export default function MarketStats() {
                 <p className="text-sm text-white opacity-80 leading-loose">
                   Moneday offers intelligent, dynamic portfolio management that
                   adapts to market movements and personal preferences. Whether
-                  you're a conservative investor focusing on capital
+                  you&apos;re a conservative investor focusing on capital
                   preservation or an aggressive trader seeking high returns, our
                   AI-driven system constructs and manages portfolios that
                   balance risk, diversification, and performance. Our platform
