@@ -10,8 +10,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-import { Rate } from "antd";
-
 export default function Testimonials() {
   const responsiveness = {
     0: {
@@ -49,22 +47,23 @@ export default function Testimonials() {
       <div>
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
+          // spaceBetween={20}
+          // navigation
           breakpoints={responsiveness}
+          // pagination={{ clickable: true }}
+          // scrollbar={{ draggable: true }}
+          // onSlideChange={() => console.log("Slide changed")}
+          // onSwiper={(swiper) => console.log(swiper)}
         >
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between mb-3">
-                  <h4 className="text-sm text-primary uppercase font-medium">
-                    10th April, 2025
-                  </h4>
-                  <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
-                  </div>
-                </div>
+                <h4 className="text-sm text-primary uppercase font-medium mb-2">
+                  18th April, 2025
+                </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;Moneday has completely changed the way I trade online.
-                  Withdrawals are fast, reliable, and stress-free every day.&rdquo;
+                  Moneday has completely changed the way I trade online.
+                  Withdrawals are fast, reliable, and stress-free every day.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -82,17 +81,12 @@ export default function Testimonials() {
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between mb-3">
-                  <h4 className="text-sm text-primary uppercase font-medium">
-                    5th June, 2024
-                  </h4>
-                  <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
-                  </div>
-                </div>
+                <h4 className="text-sm text-primary uppercase font-medium mb-2">
+                  7th November, 2024
+                </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;I finally get to enjoy my profits without long waiting times.
-                  Trading feels simple, transparent, and rewarding with them.&rdquo;
+                  I finally get to enjoy my profits without long waiting times.
+                  Trading feels simple, transparent, and rewarding with them.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -110,17 +104,12 @@ export default function Testimonials() {
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between mb-3">
-                  <h4 className="text-sm text-primary uppercase font-medium">
-                    23rd February, 2024
-                  </h4>
-                  <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
-                  </div>
-                </div>
+                <h4 className="text-sm text-primary uppercase font-medium mb-2">
+                  23rd February, 2023
+                </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;The platform is easy to use and works smoothly on my phone.
-                  Daily earnings give me confidence and steady financial flow.&rdquo;
+                  The platform is easy to use and works smoothly on my phone.
+                  Daily earnings give me confidence and steady financial flow.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -138,17 +127,12 @@ export default function Testimonials() {
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between mb-3">
-                  <h4 className="text-sm text-primary uppercase font-medium">
-                    12th January, 2025
-                  </h4>
-                  <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
-                  </div>
-                </div>
+                <h4 className="text-sm text-primary uppercase font-medium mb-2">
+                  12th September, 2025
+                </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;Security and trust were my biggest concerns before joining.
-                  Now I trade daily knowing my money is always well-protected.&rdquo;
+                  Security and trust were my biggest concerns before joining.
+                  Now I trade daily knowing my money is always well-protected.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -166,18 +150,13 @@ export default function Testimonials() {
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between mb-3">
-                  <h4 className="text-sm text-primary uppercase font-medium">
-                    5th June, 2024
-                  </h4>
-                  <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
-                  </div>
-                </div>
+                <h4 className="text-sm text-primary uppercase font-medium mb-2">
+                  5th June, 2024
+                </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;As an entrepreneur, consistent income makes all the
+                  As an entrepreneur, consistent income makes all the
                   difference. Moneday delivers daily profits that keep my plans
-                  moving fast.&rdquo;
+                  moving fast.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -195,18 +174,13 @@ export default function Testimonials() {
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between mb-3">
-                  <h4 className="text-sm text-primary uppercase font-medium">
-                    5th June, 2024
-                  </h4>
-                  <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
-                  </div>
-                </div>
+                <h4 className="text-sm text-primary uppercase font-medium mb-2">
+                  30th January, 2023
+                </h4>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;I love how automation takes away the stress of market timing.
+                  I love how automation takes away the stress of market timing.
                   Trading smarter each day has brought me closer to financial
-                  freedom.&rdquo;
+                  freedom.
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>

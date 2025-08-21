@@ -49,7 +49,7 @@ export default function Numbers(props: ComponentInterface) {
             </h4>
           </div>
           <h3 className="text-3xl md:text-4xl mb-3 font-ubuntu font-bold w-[95%] leading-[1.4]">
-            Join Thousands Earning Daily Profits
+            Join Thousands Earning $50 million daily
           </h3>
           <p className="text-white font-ibm opacity-80 text-base md:text-base leading-relaxed md:w-[90%] mb-7">
             Be part of the Moneday community where traders turn the markets into

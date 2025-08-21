@@ -30,8 +30,7 @@ interface MarketData {
   };
 }
 
-export default function MarketStats() {
-  const [data, setData] = useState<MarketData | null>(null);
+export default function PoweredByAI() {
   const responsiveness = {
     0: {
       slidesPerView: 1.1,
@@ -44,23 +43,15 @@ export default function MarketStats() {
     },
     1024: {
       // desktop and up
-      slidesPerView: 3,
+      slidesPerView: 4,
       spaceBetween: 30,
     },
     1440: {
       // large screens
-      slidesPerView: 3,
+      slidesPerView: 4,
       spaceBetween: 20,
     },
   };
-  useEffect(() => {
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
-      )
-      .then((res) => setData(res.data))
-      .catch((err) => console.error(err));
-  }, []);
 
   // if (!data) return <p className="text-white">Loading...</p>;
 
@@ -82,7 +73,7 @@ export default function MarketStats() {
           </h4>
         </div>
         <h3 className="text-3xl md:text-4xl text-center font-ubuntu font-bold leading-[1.4]">
-          Grow with Moneday
+          Powered by AI: Moneday Trading Solutions
         </h3>
       </div>
       <div>
@@ -94,26 +85,22 @@ export default function MarketStats() {
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
-                  Financial Planning
+                  AI-Driven Trading Signals Across All Financial Markets
                 </h4>
                 <p className="text-sm text-white opacity-80 leading-loose">
-                  At Moneday, financial planning is more than just a budgeting
-                  exercise — it&apos;s a strategic roadmap for wealth creation,
-                  risk management, and long-term financial security. Our
-                  AI-powered platform combines deep data analytics with
-                  personalized financial goal-setting to help clients design
-                  actionable plans tailored to their income, lifestyle, and
-                  aspirations. Whether you're planning for retirement,
-                  education, a major purchase, or early financial freedom,
-                  Moneday helps you forecast future needs and align your
-                  investment and saving strategies accordingly. Our approach
-                  covers income tracking, expense management, debt reduction,
-                  emergency fund allocation, insurance needs, and tax-efficient
-                  strategies — all customized in real time based on your
-                  evolving financial profile. What sets Moneday apart is the
-                  integration of AI with human oversight, ensuring that every
-                  financial plan is not only optimized for market realities but
-                  also aligned with your personal vision of success.
+                  At the heart of Moneday lies an advanced AI engine designed to
+                  analyze and generate daily trading signals across the full
+                  spectrum of global financial instruments. Whether clients are
+                  trading stocks, forex, cryptocurrencies, commodities, or more
+                  specialized markets like ETFs and bonds, the AI continuously
+                  scans price movements, technical patterns, economic
+                  indicators, and global sentiment to deliver high-probability
+                  trade opportunities. These insights aren&apos;t limited to a
+                  handful of popular assets — they extend across all tradable
+                  markets, including CFDs and less volatile instruments,
+                  ensuring that every client, regardless of their preferred
+                  asset class, receives actionable, data-backed signals each
+                  day.
                 </p>
               </div>
             </div>
@@ -122,29 +109,21 @@ export default function MarketStats() {
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
-                  Portfolio Management
+                  Automated & Semi-Automated Trading Execution
                 </h4>
                 <p className="text-sm text-white opacity-80 leading-loose">
-                  Moneday offers intelligent, dynamic portfolio management that
-                  adapts to market movements and personal preferences. Whether
-                  you're a conservative investor focusing on capital
-                  preservation or an aggressive trader seeking high returns, our
-                  AI-driven system constructs and manages portfolios that
-                  balance risk, diversification, and performance. Our platform
-                  supports a wide range of asset classes — including stocks,
-                  ETFs, bonds, commodities, forex, crypto, and CFDs — allowing
-                  clients to build highly diversified portfolios. Moneday&apos;s
-                  AI continuously monitors asset performance, market shifts, and
-                  macroeconomic trends to make adjustments in real time, aiming
-                  to maximize returns while minimizing downside risk. Clients
-                  can choose between fully automated portfolio strategies,
-                  co-managed models, or even hands-on control with AI-backed
-                  guidance. Transparency, liquidity, and performance tracking
-                  are central to our portfolio service, and every client has
-                  access to a live dashboard for real-time updates, risk
-                  analytics, and performance reports. This is portfolio
-                  management for the modern investor — intelligent, flexible,
-                  and aligned with daily earning goals.
+                  To simplify and streamline the trading experience, Moneday
+                  offers automated and semi-automated execution tools compatible
+                  with most major trading platforms and brokers. Clients can
+                  allow the AI to execute trades on their behalf or use signals
+                  manually while retaining full control. This automation covers
+                  all asset types — from equities and ETFs to commodities,
+                  bonds, and even niche derivatives — giving traders the power
+                  to operate across diversified portfolios without needing to
+                  monitor the markets 24/7. With dynamic capital allocation and
+                  real-time risk management baked in, the system intelligently
+                  adjusts trade exposure to suit market conditions and
+                  individual risk preferences.
                 </p>
               </div>
             </div>
@@ -153,31 +132,42 @@ export default function MarketStats() {
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
-                  Investment Advisory
+                  Smart Earnings Tracker & Performance Analytics
                 </h4>
                 <p className="text-sm text-white opacity-80 leading-loose">
-                  Moneday&apos;s Investment Advisory service combines the power of
-                  machine learning with the insight of experienced financial
-                  experts to deliver tailored investment guidance. Rather than
-                  offering generic advice, we analyze your unique financial
-                  goals, risk tolerance, time horizon, and market preferences to
-                  recommend the most suitable investment strategies. Our AI
-                  engine evaluates thousands of assets across global markets,
-                  identifying opportunities based on technical indicators,
-                  fundamental analysis, sentiment tracking, and historical
-                  performance. Whether you&apos;re looking to grow wealth steadily,
-                  capitalize on short-term trading opportunities, or hedge
-                  against inflation, our system can recommend diversified
-                  approaches across both traditional and alternative
-                  investments. What makes Moneday&apos;s advisory service stand out
-                  is its ability to adapt. As markets evolve or your financial
-                  situation changes, the platform updates your investment
-                  strategy in real time. You also have access to expert
-                  consultants who can provide additional context, answer
-                  questions, and help refine your approach. From beginner
-                  investors to seasoned professionals, Moneday delivers clear,
-                  actionable investment advice grounded in data, driven by AI,
-                  and overseen by trusted professionals.
+                  Daily earnings aren&apos;t just a goal — they&apos;re a
+                  measurable reality with Moneday. Every client has access to a
+                  personalized earnings dashboard that provides a clear picture
+                  of profits, trade history, risk exposure, and growth trends
+                  across all instruments they engage with. Whether trading
+                  volatile assets like crypto or more stable investments like
+                  government bonds or ETFs, clients can track performance in
+                  real time. The platform&apos;s AI goes a step further by
+                  offering predictive insights and optimization suggestions,
+                  helping traders make smarter decisions and scale their
+                  earnings consistently.
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flow-bg rounded-[12px]">
+              <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
+                <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
+                  Education, Community & Trader Support Hub
+                </h4>
+                <p className="text-sm text-white opacity-80 leading-loose">
+                  Understanding that success comes from both smart technology
+                  and informed users, Moneday offers a rich support ecosystem.
+                  Clients gain access to a vibrant community of global traders,
+                  daily market recaps powered by AI, and educational resources
+                  covering every financial instrument available on the platform.
+                  Whether someone is new to ETF trading, exploring bond
+                  strategies, or optimizing a multi-asset portfolio,
+                  there&apos;s always guidance available. Live sessions,
+                  tutorials, and strategic insights are tailored not just for
+                  learning — but for growing daily earnings with confidence and
+                  clarity.
                 </p>
               </div>
             </div>

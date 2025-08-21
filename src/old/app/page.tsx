@@ -6,7 +6,6 @@ import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
 import MarketSpread from "@/components/MarketSpreads";
 import Numbers from "@/components/Numbers";
-import PoweredByAI from "@/components/PoweredByAI";
 import Testimonials from "@/components/Testimonials";
 import WhatIsTrading from "@/components/Trading";
 import TradingPlatforms from "@/components/TradingPlatforms";
@@ -22,8 +21,7 @@ export default function Home() {
         <Flow />
         <MarketSpread />
         <TradingPlatforms />
-        <PoweredByAI />
-        {/* <WhatIsTrading authControl={setAuthControl} /> */}
+        <WhatIsTrading authControl={setAuthControl} />
         <HowItWorks />
         <EasySteps />
         <Numbers authControl={setAuthControl} />
