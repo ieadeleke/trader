@@ -1,16 +1,14 @@
 "use client";
-import Image from "next/image";
 
-import FlowImg from "@/assets/flow.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 import { Rate } from "antd";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Testimonials() {
   const responsiveness = {
@@ -43,13 +41,18 @@ export default function Testimonials() {
           </h4>
         </div>
         <h3 className="text-3xl md:text-4xl text-center md:mb-3 font-ubuntu font-semibold md:font-bold leading-[1.4]">
-          What Our Clients are Saying
+          What Our Earners are Saying
         </h3>
       </div>
-      <div>
+      <div className="relative">
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           breakpoints={responsiveness}
+          navigation={{
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
+          }}
+          loop={true}
         >
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
@@ -59,12 +62,17 @@ export default function Testimonials() {
                     10th April, 2025
                   </h4>
                   <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
+                    <Rate
+                      allowHalf
+                      defaultValue={5}
+                      style={{ color: "#E4753D" }}
+                    />
                   </div>
                 </div>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
                   &ldquo;Moneday has completely changed the way I trade online.
-                  Withdrawals are fast, reliable, and stress-free every day.&rdquo;
+                  Withdrawals are fast, reliable, and stress-free every
+                  day.&rdquo;
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -87,12 +95,17 @@ export default function Testimonials() {
                     5th June, 2024
                   </h4>
                   <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
+                    <Rate
+                      allowHalf
+                      defaultValue={5}
+                      style={{ color: "#E4753D" }}
+                    />
                   </div>
                 </div>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;I finally get to enjoy my profits without long waiting times.
-                  Trading feels simple, transparent, and rewarding with them.&rdquo;
+                  &ldquo;I finally get to enjoy my profits without long waiting
+                  times. Trading feels simple, transparent, and rewarding with
+                  them.&rdquo;
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -115,12 +128,17 @@ export default function Testimonials() {
                     23rd February, 2024
                   </h4>
                   <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
+                    <Rate
+                      allowHalf
+                      defaultValue={5}
+                      style={{ color: "#E4753D" }}
+                    />
                   </div>
                 </div>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;The platform is easy to use and works smoothly on my phone.
-                  Daily earnings give me confidence and steady financial flow.&rdquo;
+                  &ldquo;The platform is easy to use and works smoothly on my
+                  phone. Daily earnings give me confidence and steady financial
+                  flow.&rdquo;
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -143,12 +161,17 @@ export default function Testimonials() {
                     12th January, 2025
                   </h4>
                   <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
+                    <Rate
+                      allowHalf
+                      defaultValue={5}
+                      style={{ color: "#E4753D" }}
+                    />
                   </div>
                 </div>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;Security and trust were my biggest concerns before joining.
-                  Now I trade daily knowing my money is always well-protected.&rdquo;
+                  &ldquo;Security and trust were my biggest concerns before
+                  joining. Now I trade daily knowing my money is always
+                  well-protected.&rdquo;
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -171,7 +194,11 @@ export default function Testimonials() {
                     5th June, 2024
                   </h4>
                   <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
+                    <Rate
+                      allowHalf
+                      defaultValue={5}
+                      style={{ color: "#E4753D" }}
+                    />
                   </div>
                 </div>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
@@ -200,13 +227,17 @@ export default function Testimonials() {
                     5th June, 2024
                   </h4>
                   <div className="">
-                    <Rate allowHalf defaultValue={5} style={{color: '#E4753D'}} />
+                    <Rate
+                      allowHalf
+                      defaultValue={5}
+                      style={{ color: "#E4753D" }}
+                    />
                   </div>
                 </div>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;I love how automation takes away the stress of market timing.
-                  Trading smarter each day has brought me closer to financial
-                  freedom.&rdquo;
+                  &ldquo;I love how automation takes away the stress of market
+                  timing. Trading smarter each day has brought me closer to
+                  financial freedom.&rdquo;
                 </p>
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
@@ -219,6 +250,18 @@ export default function Testimonials() {
             </div>
           </SwiperSlide>
         </Swiper>
+        {/* Custom Navigation Arrows */}
+        <div className="swiper-button-prev-custom absolute top-1/2 left-3 z-10 -translate-y-1/2 cursor-pointer">
+          <div className="size-10 flex items-center justify-center rounded-full border bg-white border-white text-white hover:bg-white hover:text-black transition">
+            <ChevronLeft size={20} className="text-black" />
+          </div>
+        </div>
+
+        <div className="swiper-button-next-custom absolute top-1/2 right-3 z-10 -translate-y-1/2 cursor-pointer">
+          <div className="size-10 flex items-center justify-center rounded-full border bg-white border-white text-white hover:bg-white hover:text-black transition">
+            <ChevronRight size={20} className="text-black" />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import LogoImg from "@/assets/logo.png";
+import LogoImg from "@/assets/logo-new.png";
 
 const Footer = () => {
   return (
@@ -140,7 +140,7 @@ const Footer = () => {
         <div className="h-[1px] mb-10 md:mb-8 bg-white opacity-20"></div>
         <p className="text-sm text-white opacity-80">
           Copyright &copy; 2023 &mdash; 2025{" "}
-          <span className="text-primary"> ForTradar </span>
+          <span className="text-primary"> Moneday </span>
           All rights reserved
         </p>
       </div>

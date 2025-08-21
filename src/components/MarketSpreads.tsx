@@ -11,6 +11,29 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
+const ReadMore = ({
+  text,
+  maxLength = 380,
+}: {
+  text: string;
+  maxLength?: number;
+}) => {
+  const [expanded, setExpanded] = useState(false);
+
+  if (text.length <= maxLength) return <p>{text}</p>;
+
+  return (
+    <p className="text-sm text-white opacity-80 leading-loose">
+      {expanded ? text : text.substring(0, maxLength) + "... "}
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="text-primary font-medium ml-1"
+      >
+        {expanded ? "Read Less" : "Read More"}
+      </button>
+    </p>
+  );
+};
 interface MarketData {
   id: string;
   symbol: string;
@@ -74,11 +97,11 @@ export default function MarketStats() {
   // const position = ((price - low) / (high - low)) * 100;
 
   return (
-    <div className="px-5 md:px-20 mt-24">
+    <div className="px-5 md:px-20 mt-24" id="services">
       <div className="mb-6">
         <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-4">
           <h4 className="uppercase font-bold text-primary text-xs font-ibm">
-            Trade Now
+            Our Services
           </h4>
         </div>
         <h3 className="text-3xl md:text-4xl text-center font-ubuntu font-bold leading-[1.4]">
@@ -93,92 +116,38 @@ export default function MarketStats() {
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
+                <h4 className="text-base md:text-xl text-primary font-medium mb-2">
                   Financial Planning
                 </h4>
-                <p className="text-sm text-white opacity-80 leading-loose">
-                  At Moneday, financial planning is more than just a budgeting
-                  exercise — it&apos;s a strategic roadmap for wealth creation,
-                  risk management, and long-term financial security. Our
-                  AI-powered platform combines deep data analytics with
-                  personalized financial goal-setting to help clients design
-                  actionable plans tailored to their income, lifestyle, and
-                  aspirations. Whether you&apos;re planning for retirement,
-                  education, a major purchase, or early financial freedom,
-                  Moneday helps you forecast future needs and align your
-                  investment and saving strategies accordingly. Our approach
-                  covers income tracking, expense management, debt reduction,
-                  emergency fund allocation, insurance needs, and tax-efficient
-                  strategies — all customized in real time based on your
-                  evolving financial profile. What sets Moneday apart is the
-                  integration of AI with human oversight, ensuring that every
-                  financial plan is not only optimized for market realities but
-                  also aligned with your personal vision of success.
-                </p>
+                <ReadMore
+                  text={`At Moneday, financial planning is more than just a budgeting exercise — it's a strategic roadmap for wealth creation, risk management, and long-term financial security. Our AI-powered platform combines deep data analytics with personalized financial goal-setting to help clients design actionable plans tailored to their income, lifestyle, and aspirations. Whether you're planning for retirement, education, a major purchase, or early financial freedom, Moneday helps you forecast future needs and align your investment and saving strategies accordingly. Our approach covers income tracking, expense management, debt reduction, emergency fund allocation, insurance needs, and tax-efficient strategies — all customized in real time based on your evolving financial profile. What sets Moneday apart is the integration of AI with human oversight, ensuring that every financial plan is not only optimized for market realities but also aligned with your personal vision of success.`}
+                />
               </div>
             </div>
           </SwiperSlide>
+
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
+                <h4 className="text-base md:text-xl text-primary font-medium mb-2">
                   Portfolio Management
                 </h4>
-                <p className="text-sm text-white opacity-80 leading-loose">
-                  Moneday offers intelligent, dynamic portfolio management that
-                  adapts to market movements and personal preferences. Whether
-                  you&apos;re a conservative investor focusing on capital
-                  preservation or an aggressive trader seeking high returns, our
-                  AI-driven system constructs and manages portfolios that
-                  balance risk, diversification, and performance. Our platform
-                  supports a wide range of asset classes — including stocks,
-                  ETFs, bonds, commodities, forex, crypto, and CFDs — allowing
-                  clients to build highly diversified portfolios. Moneday&apos;s
-                  AI continuously monitors asset performance, market shifts, and
-                  macroeconomic trends to make adjustments in real time, aiming
-                  to maximize returns while minimizing downside risk. Clients
-                  can choose between fully automated portfolio strategies,
-                  co-managed models, or even hands-on control with AI-backed
-                  guidance. Transparency, liquidity, and performance tracking
-                  are central to our portfolio service, and every client has
-                  access to a live dashboard for real-time updates, risk
-                  analytics, and performance reports. This is portfolio
-                  management for the modern investor — intelligent, flexible,
-                  and aligned with daily earning goals.
-                </p>
+                <ReadMore
+                  text={`Moneday offers intelligent, dynamic portfolio management that adapts to market movements and personal preferences. Whether you're a conservative investor focusing on capital preservation or an aggressive trader seeking high returns, our AI-driven system constructs and manages portfolios that balance risk, diversification, and performance. Our platform supports a wide range of asset classes — including stocks, ETFs, bonds, commodities, forex, crypto, and CFDs — allowing clients to build highly diversified portfolios. Moneday's AI continuously monitors asset performance, market shifts, and macroeconomic trends to make adjustments in real time, aiming to maximize returns while minimizing downside risk. Clients can choose between fully automated portfolio strategies, co-managed models, or even hands-on control with AI-backed guidance. Transparency, liquidity, and performance tracking are central to our portfolio service, and every client has access to a live dashboard for real-time updates, risk analytics, and performance reports. This is portfolio management for the modern investor — intelligent, flexible, and aligned with daily earning goals.`}
+                />
               </div>
             </div>
           </SwiperSlide>
+
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
+                <h4 className="text-base md:text-xl text-primary font-medium mb-2">
                   Investment Advisory
                 </h4>
-                <p className="text-sm text-white opacity-80 leading-loose">
-                  Moneday&apos;s Investment Advisory service combines the power of
-                  machine learning with the insight of experienced financial
-                  experts to deliver tailored investment guidance. Rather than
-                  offering generic advice, we analyze your unique financial
-                  goals, risk tolerance, time horizon, and market preferences to
-                  recommend the most suitable investment strategies. Our AI
-                  engine evaluates thousands of assets across global markets,
-                  identifying opportunities based on technical indicators,
-                  fundamental analysis, sentiment tracking, and historical
-                  performance. Whether you&apos;re looking to grow wealth steadily,
-                  capitalize on short-term trading opportunities, or hedge
-                  against inflation, our system can recommend diversified
-                  approaches across both traditional and alternative
-                  investments. What makes Moneday&apos;s advisory service stand out
-                  is its ability to adapt. As markets evolve or your financial
-                  situation changes, the platform updates your investment
-                  strategy in real time. You also have access to expert
-                  consultants who can provide additional context, answer
-                  questions, and help refine your approach. From beginner
-                  investors to seasoned professionals, Moneday delivers clear,
-                  actionable investment advice grounded in data, driven by AI,
-                  and overseen by trusted professionals.
-                </p>
+                <ReadMore
+                  text={`Moneday's Investment Advisory service combines the power of machine learning with the insight of experienced financial experts to deliver tailored investment guidance. Rather than offering generic advice, we analyze your unique financial goals, risk tolerance, time horizon, and market preferences to recommend the most suitable investment strategies. Our AI engine evaluates thousands of assets across global markets, identifying opportunities based on technical indicators, fundamental analysis, sentiment tracking, and historical performance. Whether you're looking to grow wealth steadily, capitalize on short-term trading opportunities, or hedge against inflation, our system can recommend diversified approaches across both traditional and alternative investments. What makes Moneday's advisory service stand out is its ability to adapt. As markets evolve or your financial situation changes, the platform updates your investment strategy in real time. You also have access to expert consultants who can provide additional context, answer questions, and help refine your approach. From beginner investors to seasoned professionals, Moneday delivers clear, actionable investment advice grounded in data, driven by AI, and overseen by trusted professionals.`}
+                />
               </div>
             </div>
           </SwiperSlide>

@@ -9,11 +9,11 @@ export default function TradingPlatforms() {
       <div className="mb-6">
         <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-4">
           <h4 className="uppercase font-bold text-primary text-xs font-ibm">
-            Platforms
+            Assets
           </h4>
         </div>
         <h3 className="text-4xl text-center font-ubuntu font-bold leading-[1.4]">
-          Trading Platforms
+          Trading Assets
         </h3>
       </div>
       <div>

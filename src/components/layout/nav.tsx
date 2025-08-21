@@ -1,7 +1,7 @@
 "use client";
 
 import LogoImg from "@/assets/logo.png";
-import LogoNewImg from "@/assets/logo-new.jpeg";
+import LogoNewImg from "@/assets/logo-new.png";
 import { Drawer, Modal } from "antd";
 import Image from "next/image";
 import Link from "next/link";

@@ -30,6 +30,33 @@ interface MarketData {
   };
 }
 
+const ReadMore = ({
+  text,
+  maxLength = 300,
+}: {
+  text: string;
+  maxLength?: number;
+}) => {
+  const [expanded, setExpanded] = useState(false);
+
+  if (text.length <= maxLength)
+    return (
+      <p className="text-sm text-white opacity-80 leading-loose">{text}</p>
+    );
+
+  return (
+    <p className="text-sm text-white opacity-80 leading-loose">
+      {expanded ? text : text.substring(0, maxLength) + "... "}
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="text-primary font-medium ml-1"
+      >
+        {expanded ? "Read Less" : "Read More"}
+      </button>
+    </p>
+  );
+};
+
 export default function PoweredByAI() {
   const responsiveness = {
     0: {
@@ -69,7 +96,7 @@ export default function PoweredByAI() {
       <div className="mb-6">
         <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-4">
           <h4 className="uppercase font-bold text-primary text-xs font-ibm">
-            Trade Now
+            Powered By AI
           </h4>
         </div>
         <h3 className="text-3xl md:text-4xl text-center font-ubuntu font-bold leading-[1.4]">
@@ -84,91 +111,51 @@ export default function PoweredByAI() {
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
+                <h4 className="text-base md:text-xl text-primary font-medium mb-2">
                   AI-Driven Trading Signals Across All Financial Markets
                 </h4>
-                <p className="text-sm text-white opacity-80 leading-loose">
-                  At the heart of Moneday lies an advanced AI engine designed to
-                  analyze and generate daily trading signals across the full
-                  spectrum of global financial instruments. Whether clients are
-                  trading stocks, forex, cryptocurrencies, commodities, or more
-                  specialized markets like ETFs and bonds, the AI continuously
-                  scans price movements, technical patterns, economic
-                  indicators, and global sentiment to deliver high-probability
-                  trade opportunities. These insights aren&apos;t limited to a
-                  handful of popular assets — they extend across all tradable
-                  markets, including CFDs and less volatile instruments,
-                  ensuring that every client, regardless of their preferred
-                  asset class, receives actionable, data-backed signals each
-                  day.
-                </p>
+                <ReadMore
+                  text={`At the heart of Moneday lies an advanced AI engine designed to analyze and generate daily trading signals across the full spectrum of global financial instruments. Whether clients are trading stocks, forex, cryptocurrencies, commodities, or more specialized markets like ETFs and bonds, the AI continuously scans price movements, technical patterns, economic indicators, and global sentiment to deliver high-probability trade opportunities. These insights aren't limited to a handful of popular assets — they extend across all tradable markets, including CFDs and less volatile instruments, ensuring that every client, regardless of their preferred asset class, receives actionable, data-backed signals each day.`}
+                />
               </div>
             </div>
           </SwiperSlide>
+
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
+                <h4 className="text-base md:text-xl text-primary font-medium mb-2">
                   Automated & Semi-Automated Trading Execution
                 </h4>
-                <p className="text-sm text-white opacity-80 leading-loose">
-                  To simplify and streamline the trading experience, Moneday
-                  offers automated and semi-automated execution tools compatible
-                  with most major trading platforms and brokers. Clients can
-                  allow the AI to execute trades on their behalf or use signals
-                  manually while retaining full control. This automation covers
-                  all asset types — from equities and ETFs to commodities,
-                  bonds, and even niche derivatives — giving traders the power
-                  to operate across diversified portfolios without needing to
-                  monitor the markets 24/7. With dynamic capital allocation and
-                  real-time risk management baked in, the system intelligently
-                  adjusts trade exposure to suit market conditions and
-                  individual risk preferences.
-                </p>
+                <ReadMore
+                  text={`To simplify and streamline the trading experience, Moneday offers automated and semi-automated execution tools compatible with most major trading platforms and brokers. Clients can allow the AI to execute trades on their behalf or use signals manually while retaining full control. This automation covers all asset types — from equities and ETFs to commodities, bonds, and even niche derivatives — giving traders the power to operate across diversified portfolios without needing to monitor the markets 24/7. With dynamic capital allocation and real-time risk management baked in, the system intelligently adjusts trade exposure to suit market conditions and individual risk preferences.`}
+                />
               </div>
             </div>
           </SwiperSlide>
+
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
+                <h4 className="text-base md:text-xl text-primary font-medium mb-2">
                   Smart Earnings Tracker & Performance Analytics
                 </h4>
-                <p className="text-sm text-white opacity-80 leading-loose">
-                  Daily earnings aren&apos;t just a goal — they&apos;re a
-                  measurable reality with Moneday. Every client has access to a
-                  personalized earnings dashboard that provides a clear picture
-                  of profits, trade history, risk exposure, and growth trends
-                  across all instruments they engage with. Whether trading
-                  volatile assets like crypto or more stable investments like
-                  government bonds or ETFs, clients can track performance in
-                  real time. The platform&apos;s AI goes a step further by
-                  offering predictive insights and optimization suggestions,
-                  helping traders make smarter decisions and scale their
-                  earnings consistently.
-                </p>
+                <ReadMore
+                  text={`Daily earnings aren't just a goal — they're a measurable reality with Moneday. Every client has access to a personalized earnings dashboard that provides a clear picture of profits, trade history, risk exposure, and growth trends across all instruments they engage with. Whether trading volatile assets like crypto or more stable investments like government bonds or ETFs, clients can track performance in real time. The platform's AI goes a step further by offering predictive insights and optimization suggestions, helping traders make smarter decisions and scale their earnings consistently.`}
+                />
               </div>
             </div>
           </SwiperSlide>
+
           <SwiperSlide>
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
-                <h4 className="text-base md:text-xl text-primary uppercas font-medium mb-2">
+                <h4 className="text-base md:text-xl text-primary font-medium mb-2">
                   Education, Community & Trader Support Hub
                 </h4>
-                <p className="text-sm text-white opacity-80 leading-loose">
-                  Understanding that success comes from both smart technology
-                  and informed users, Moneday offers a rich support ecosystem.
-                  Clients gain access to a vibrant community of global traders,
-                  daily market recaps powered by AI, and educational resources
-                  covering every financial instrument available on the platform.
-                  Whether someone is new to ETF trading, exploring bond
-                  strategies, or optimizing a multi-asset portfolio,
-                  there&apos;s always guidance available. Live sessions,
-                  tutorials, and strategic insights are tailored not just for
-                  learning — but for growing daily earnings with confidence and
-                  clarity.
-                </p>
+                <ReadMore
+                  text={`Understanding that success comes from both smart technology and informed users, Moneday offers a rich support ecosystem. Clients gain access to a vibrant community of global traders, daily market recaps powered by AI, and educational resources covering every financial instrument available on the platform. Whether someone is new to ETF trading, exploring bond strategies, or optimizing a multi-asset portfolio, there's always guidance available. Live sessions, tutorials, and strategic insights are tailored not just for learning — but for growing daily earnings with confidence and clarity.`}
+                />
               </div>
             </div>
           </SwiperSlide>

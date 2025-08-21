@@ -112,7 +112,7 @@ export default function HeroSection(props: ComponentInterface) {
               Trade Now
             </h4>
           </div>
-          <h3 className="text-4xl md:text-6xl text-center font-ubuntu font-bold leading-[1.4] md:leading-[1.2] mb-2 md:w-[55%] mx-auto">
+          <h3 className="text-4xl md:text-6xl text-center font-ubuntu font-bold leading-[1.4] md:leading-[1.2] mb-3 md:w-[55%] mx-auto">
             Your Ultimate Daily Earnings Powered By AI
           </h3>
           {/* <div className="bg-[#34251F] border border-solid border-primary py-1 px-8 w-max mx-auto rounded- mb-4 relative">
@@ -127,7 +127,19 @@ export default function HeroSection(props: ComponentInterface) {
           <p className="text-white opacity-80 leading-loose text-base md:text-lg text-center mb-4 block md:w-[45%] mx-auto">
             Earn Daily Returns from Automated Forecast-Based & CFD Trading
           </p>
-          <ul className="flex gap-4 justify-center mb-7">
+          <p className="text-white opacity-60 leading-loose text-base md:text-sm text-center mb-4 block md:w-[65%] mx-auto">
+            Moneday Automated Trader enables you to turn insights into income by
+            trading on political, economic, and climate event predictions.
+            Leverage powerful AI to participate in forecast markets and execute
+            high-frequency CFD trades across global financial instruments — all
+            fully automated. Benefit from intelligent trading strategies,
+            real-time execution, and around-the-clock support. Earn up to 2.83%
+            daily, with profits automatically credited to your account or
+            reinvested for exponential growth. Enjoy fast, flexible withdrawals
+            through credit/debit cards, bank transfers, and leading digital
+            wallets — giving you full control over your capital at any time
+          </p>
+          {/* <ul className="flex gap-4 justify-center mb-7">
             <li className="text-sm leading-loose opacity-50">Transparent</li>
             <li className="text-sm leading-loose opacity-50">|</li>
             <li className="text-sm leading-loose opacity-50">Secure</li>
@@ -135,8 +147,16 @@ export default function HeroSection(props: ComponentInterface) {
             <li className="text-sm leading-loose opacity-50">
               Globally Trusted
             </li>
-          </ul>
+          </ul> */}
           <div className="flex items-center justify-center gap-3 mb-10">
+            <button
+              onClick={() => props.authControl(true)}
+              className="rounded-lg w-full md:w-[20rem] text-white text-sm py-3 px-8 bg-primary border border-solid border-primary cursor-pointer"
+            >
+              Create Account
+            </button>
+          </div>
+          {/* <div className="flex items-center justify-center gap-3 mb-10">
             <button
               onClick={() => props.authControl(true)}
               className="rounded-lg text-white text-sm py-3 px-8 bg-primary border border-solid border-primary cursor-pointer"
@@ -149,7 +169,7 @@ export default function HeroSection(props: ComponentInterface) {
             >
               View Markets
             </Link>
-          </div>
+          </div> */}
         </div>
         <div>
           <Table dataSource={dataSource} columns={columns} pagination={false} />
