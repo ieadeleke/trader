@@ -8,7 +8,6 @@ import MarketSpread from "@/components/MarketSpreads";
 import Numbers from "@/components/Numbers";
 import PoweredByAI from "@/components/PoweredByAI";
 import Testimonials from "@/components/Testimonials";
-import WhatIsTrading from "@/components/Trading";
 import TradingPlatforms from "@/components/TradingPlatforms";
 import DisplayLayout from "@/layout/Displaylayout";
 import { useState } from "react";

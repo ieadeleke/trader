@@ -10,6 +10,17 @@ import "swiper/css/scrollbar";
 import { Rate } from "antd";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import CathyImg from "@/assets/testimonials/cathy.png";
+import SarahImg from "@/assets/testimonials/sarah.png";
+import GraceImg from "@/assets/testimonials/grace.png";
+
+import ChapelImg from "@/assets/testimonials/chapel.jpg";
+import DavidImg from "@/assets/testimonials/david.jpg";
+import CarlonImg from "@/assets/testimonials/carlon.jpg";
+
+import Image from "next/image";
+
+
 export default function Testimonials() {
   const responsiveness = {
     0: {
@@ -77,7 +88,13 @@ export default function Testimonials() {
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
               <div className="px-4 md:px-8 pt-4 pb-6 flex gap-4 items-center">
-                <div className="size-12 rounded-full bg-gray-500"></div>
+                <div className="size-12 rounded-full bg-gray-500">
+                  <Image
+                    src={SarahImg}
+                    alt="cathy" width={1000} height={1000} quality={100}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
                     Sarah Johnson
@@ -110,10 +127,16 @@ export default function Testimonials() {
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
               <div className="px-4 md:px-8 pt-4 pb-6 flex gap-4 items-center">
-                <div className="size-12 rounded-full bg-gray-500"></div>
+                <div className="size-12 rounded-full bg-gray-500">
+                  <Image
+                    src={GraceImg}
+                    alt="cathy" width={1000} height={1000} quality={100}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
-                    Michael Adeyemi
+                    Grace Hamill
                   </h4>
                 </div>
               </div>
@@ -143,10 +166,16 @@ export default function Testimonials() {
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
               <div className="px-4 md:px-8 pt-4 pb-6 flex gap-4 items-center">
-                <div className="size-12 rounded-full bg-gray-500"></div>
+                <div className="size-12 rounded-full bg-gray-500">
+                  <Image
+                    src={CathyImg}
+                    alt="cathy" width={1000} height={1000} quality={100}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
-                    Priya Patel
+                    Cathy Purdy
                   </h4>
                 </div>
               </div>
@@ -176,7 +205,13 @@ export default function Testimonials() {
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
               <div className="px-4 md:px-8 pt-4 pb-6 flex gap-4 items-center">
-                <div className="size-12 rounded-full bg-gray-500"></div>
+                <div className="size-12 rounded-full bg-gray-500">
+                  <Image
+                    src={ChapelImg}
+                    alt="cathy" width={1000} height={1000} quality={100}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
                     Daniel Carter
@@ -209,10 +244,16 @@ export default function Testimonials() {
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
               <div className="px-4 md:px-8 pt-4 pb-6 flex gap-4 items-center">
-                <div className="size-12 rounded-full bg-gray-500"></div>
+                <div className="size-12 rounded-full bg-gray-500">
+                  <Image
+                    src={DavidImg}
+                    alt="cathy" width={1000} height={1000} quality={100}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
-                    Aisha Mohammed
+                    Liam Mateo
                   </h4>
                 </div>
               </div>
@@ -242,7 +283,13 @@ export default function Testimonials() {
               </div>
               <div className="h-[.4px] w-full bg-white opacity-20"></div>
               <div className="px-4 md:px-8 pt-4 pb-6 flex gap-4 items-center">
-                <div className="size-12 rounded-full bg-gray-500"></div>
+                <div className="size-12 rounded-full bg-gray-500">
+                  <Image
+                    src={CarlonImg}
+                    alt="cathy" width={1000} height={1000} quality={100}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
                 <div>
                   <h4 className="text-sm font-medium text-white">David Kim</h4>
                 </div>
