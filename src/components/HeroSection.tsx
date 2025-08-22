@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-import HeroImg from "@/assets/hero.png";
+import HeroImg from "@/assets/heroman.png";
+import CoinImg from "@/assets/coin.png";
 import RowImg from "@/assets/row.png";
 
 import Companies from "@/assets/companies.png";
@@ -105,13 +106,13 @@ export default function HeroSection(props: ComponentInterface) {
 
   return (
     <main>
-      <section className="px-5 md:px-20 pt-32 md:pt-44" id="home">
+      <section className="relative px-5 md:px-20 pt-32 md:pt-44" id="home">
         <div className="mb-6">
-          <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-3">
+          {/* <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-3">
             <h4 className="uppercase font-bold text-primary text-xs md:text-sm font-ibm">
               Trade Now
             </h4>
-          </div>
+          </div> */}
           <h3 className="text-4xl md:text-6xl text-center font-ubuntu font-bold leading-[1.4] md:leading-[1.2] mb-3 md:w-[55%] mx-auto">
             Your Ultimate Daily Earnings Powered By AI
           </h3>
@@ -139,15 +140,6 @@ export default function HeroSection(props: ComponentInterface) {
             through credit/debit cards, bank transfers, and leading digital
             wallets — giving you full control over your capital at any time
           </p>
-          {/* <ul className="flex gap-4 justify-center mb-7">
-            <li className="text-sm leading-loose opacity-50">Transparent</li>
-            <li className="text-sm leading-loose opacity-50">|</li>
-            <li className="text-sm leading-loose opacity-50">Secure</li>
-            <li className="text-sm leading-loose opacity-50">|</li>
-            <li className="text-sm leading-loose opacity-50">
-              Globally Trusted
-            </li>
-          </ul> */}
           <div className="flex items-center justify-center gap-3 mb-10">
             <button
               onClick={() => props.authControl(true)}
@@ -156,31 +148,26 @@ export default function HeroSection(props: ComponentInterface) {
               Create Account
             </button>
           </div>
-          {/* <div className="flex items-center justify-center gap-3 mb-10">
-            <button
-              onClick={() => props.authControl(true)}
-              className="rounded-lg text-white text-sm py-3 px-8 bg-primary border border-solid border-primary cursor-pointer"
-            >
-              Start Earning
-            </button>
-            <Link
-              href="/#markets"
-              className="rounded-lg text-white text-sm py-3 px-10 bg-transparent border border-solid border-white"
-            >
-              View Markets
-            </Link>
-          </div> */}
         </div>
-        <div>
-          <Table dataSource={dataSource} columns={columns} pagination={false} />
-          {/* <Image
+        <div className="z-40 relative">
+          <Image
             src={HeroImg}
             alt="trading chart"
             quality={100}
             width={1000}
             height={1000}
             className="w-full h-full"
-          /> */}
+          />
+        </div>
+        <div className="absolute bottom-0 left-0 w-full z-20">
+          <Image
+            src={CoinImg}
+            alt="trading chart"
+            quality={100}
+            width={1000}
+            height={1000}
+            className="w-[160px] h-auto"
+          />
         </div>
       </section>
       <div className="hidde md:block px-0 md:px-20 mt-20 md:mt-28">

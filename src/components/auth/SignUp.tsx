@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { Label } from "../ui/label";
@@ -6,17 +6,24 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-import { format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
- 
-import { cn } from "@/lib/utils"
-import { Calendar } from "@/components/ui/calendar"
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const SignUpForm = () => {
   const { control } = useForm();
@@ -133,6 +140,21 @@ const SignUpForm = () => {
               />
             )}
           />
+        </div>
+        <div className="form-group mb-4">
+          <Label className="mb-4 font-ibm font-normal text-white opacity-80">
+            How do you want to receive your money?
+          </Label>
+          <Select>
+            <SelectTrigger className="w-full h-[3.7rem] py-7 text-white opacity-80 text-sm">
+              <SelectValue placeholder="" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="bank_transfer">Bank Transfer</SelectItem>
+              <SelectItem value="crypto">Crypto</SelectItem>
+              <SelectItem value="paypal">Paypal</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div className="form-group flex-1 mb-8">
