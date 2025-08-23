@@ -19,7 +19,7 @@ export default function EasySteps() {
             <p className="md:pl-6 text-primary mb-4 md:mb-6 text-xs md:text-sm uppercase font-ubuntu font-medium">
               Easy Steps
             </p>
-            <h2 className="text-2xl md:text-5xl mb-8 md:mb-10 font-bold text-white font-ubuntu">
+            <h2 className="text-2xl md:text-5xl mb-8 md:mb-10 font-bold text-primary font-ubuntu">
               How it Works
             </h2>
             <div className="mt-5 flex flex-col gap-10">

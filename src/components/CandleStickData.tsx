@@ -118,7 +118,7 @@ export const MultiAssetCandleChart: React.FC = () => {
     <div>
       {/* Dropdown to select asset type */}
       <div style={{ marginBottom: 16 }}>
-        <label htmlFor="asset-type">View Markets: </label>
+        <label htmlFor="asset-type" className="text-primary">View Markets: </label>
         <select
           id="asset-type"
           value={assetType}
@@ -144,7 +144,7 @@ export const MultiAssetCandleChart: React.FC = () => {
 
       {/* Dropdown to select symbol */}
       <div style={{ marginBottom: 16 }}>
-        <label htmlFor="symbol-select">Select Symbol: </label>
+        <label htmlFor="symbol-select" className="text-primary">Select: </label>
         <select
           id="symbol-select"
           value={symbol}

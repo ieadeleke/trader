@@ -99,7 +99,7 @@ export default function PoweredByAI() {
             Powered By AI
           </h4>
         </div>
-        <h3 className="text-3xl md:text-4xl text-center font-ubuntu font-bold leading-[1.4]">
+        <h3 className="text-3xl md:text-4xl text-center font-ubuntu text-primary font-bold leading-[1.4]">
           Powered by AI: Moneday Trading Solutions
         </h3>
       </div>

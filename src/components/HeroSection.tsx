@@ -113,7 +113,7 @@ export default function HeroSection(props: ComponentInterface) {
               Trade Now
             </h4>
           </div> */}
-          <h3 className="text-4xl md:text-6xl text-center font-ubuntu font-bold leading-[1.4] md:leading-[1.2] mb-3 md:w-[55%] mx-auto">
+          <h3 className="text-4xl md:text-6xl text-center font-ubuntu font-bold text-primary leading-[1.4] md:leading-[1.2] mb-3 md:w-[55%] mx-auto">
             Your Ultimate Daily Earnings Powered By AI
           </h3>
           {/* <div className="bg-[#34251F] border border-solid border-primary py-1 px-8 w-max mx-auto rounded- mb-4 relative">

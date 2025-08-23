@@ -21,9 +21,10 @@ const Footer = () => {
               className="w-[120px] md:w-[150px] h-auto max-w-[630px] mb-4"
             />
             <p className="leading-loose text-sm md:text-base opacity-80">
-              Moneday is a trading platform built for daily earnings. Automated
-              strategies, fast withdrawals, and strong security make trading
-              simple, transparent, and rewarding for everyone.
+              At Moneday, we believe that financial freedom should not be
+              delayed. Traditional trading platforms make you wait weeks or
+              months to enjoy your earnings — but with us, every day is a
+              payday.
             </p>
           </div>
         </div>

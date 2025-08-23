@@ -48,7 +48,7 @@ export default function Numbers(props: ComponentInterface) {
               Experience
             </h4>
           </div>
-          <h3 className="text-3xl md:text-4xl mb-3 font-ubuntu font-bold w-[95%] leading-[1.4]">
+          <h3 className="text-3xl md:text-4xl mb-3 font-ubuntu text-primary font-bold w-[95%] leading-[1.4]">
             Join Thousands Earning Daily Profits
           </h3>
           <p className="text-white font-ibm opacity-80 text-base md:text-base leading-relaxed md:w-[90%] mb-7">

@@ -104,7 +104,7 @@ export default function MarketStats() {
             Our Services
           </h4>
         </div>
-        <h3 className="text-3xl md:text-4xl text-center font-ubuntu font-bold leading-[1.4]">
+        <h3 className="text-3xl md:text-4xl text-center text-primary font-ubuntu font-bold leading-[1.4]">
           Grow with Moneday
         </h3>
       </div>

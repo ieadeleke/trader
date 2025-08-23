@@ -17,7 +17,7 @@ export default function Flow() {
           />
         </div>
         <div>
-          <h3 className="text-2xl md:text-3xl mb-3 md:mb-5 font-ubuntu font-bold">
+          <h3 className="text-2xl md:text-3xl text-primary mb-3 md:mb-5 font-ubuntu font-bold">
             Our Mission
           </h3>
           <p className="text-sm md:text-base leading-loose opacity-80 mb-4 md:mb-3">
