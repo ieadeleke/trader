@@ -13,7 +13,7 @@ export default function TradingPlatforms() {
           </h4>
         </div>
         <h3 className="text-4xl text-center font-ubuntu font-bold leading-[1.4]">
-          Trading Assets
+          Markets You Earn From
         </h3>
       </div>
       <div>
