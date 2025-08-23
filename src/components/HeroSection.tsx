@@ -106,7 +106,7 @@ export default function HeroSection(props: ComponentInterface) {
 
   return (
     <main>
-      <section className="relative px-5 md:px-20 pt-32 md:pt-44" id="home">
+      <section className="hero-section relative px-5 md:px-20 pt-32 md:pt-44" id="home">
         <div className="mb-6">
           {/* <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-3">
             <h4 className="uppercase font-bold text-primary text-xs md:text-sm font-ibm">
@@ -128,7 +128,7 @@ export default function HeroSection(props: ComponentInterface) {
           <p className="text-white opacity-80 leading-loose text-base md:text-lg text-center mb-4 block md:w-[45%] mx-auto">
             Earn Daily Returns from Automated Forecast-Based & CFD Trading
           </p>
-          <p className="text-white opacity-60 leading-loose text-base md:text-sm text-center mb-4 block md:w-[65%] mx-auto">
+          <p className="text-white opacity-60 leading-loose text-sm md:text-sm text-center mb-4 block md:w-[65%] mx-auto">
             Moneday Automated Trader enables you to turn insights into income by
             trading on political, economic, and climate event predictions.
             Leverage powerful AI to participate in forecast markets and execute
@@ -143,13 +143,19 @@ export default function HeroSection(props: ComponentInterface) {
           <div className="flex items-center justify-center gap-3 mb-10">
             <button
               onClick={() => props.authControl(true)}
-              className="rounded-lg w-full md:w-[20rem] text-white text-sm py-3 px-8 bg-primary border border-solid border-primary cursor-pointer"
+              className="rounded-lg w-full md:w-[20rem] text-white text-sm py-4 px-8 bg-primary border border-solid border-primary cursor-pointer"
             >
               Create Account
             </button>
+            <button
+              onClick={() => props.authControl(true)}
+              className="rounded-lg w-full md:w-[20rem] text-white text-sm py-4 px-8 bg-transparent border border-solid border-primary cursor-pointer"
+            >
+              Sign In
+            </button>
           </div>
         </div>
-        <div className="z-40 relative">
+        {/* <div className="z-40 relative">
           <Image
             src={HeroImg}
             alt="trading and ai"
@@ -158,7 +164,7 @@ export default function HeroSection(props: ComponentInterface) {
             height={1000}
             className="w-full h-[20rem] object-center object-cover md:h-[35rem] rounded-lg"
           />
-        </div>
+        </div> */}
         <div className="absolute bottom-0 left-0 w-full z-20">
           <Image
             src={CoinImg}

@@ -33,11 +33,10 @@ export default function EasySteps() {
                 </div>
                 <div>
                   <h3 className="text-lg md:text-xl mb-1 font-medium font-ubuntu">
-                    Sign up and Deposit
+                    Create an Account
                   </h3>
                   <p className="text-sm md:text-base leading-loose md:leading-relaxed text-white max-w-[508px]">
-                    Create your free Moneday account, complete verification, and
-                    fund your wallet with a secure deposit.
+                    Create your free Moneday account and complete verification.
                   </p>
                 </div>
               </div>

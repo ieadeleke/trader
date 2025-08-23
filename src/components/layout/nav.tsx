@@ -148,11 +148,11 @@ const Navigation = (props: NavInterface) => {
           <div className="px-5 pt-4 pb-10 flex w-full items-center justify-between absolute">
             <div className="">
               <Image
-                src={LogoImg}
+                src={LogoNewImg}
                 alt="Logo"
                 width={100}
                 height={50}
-                className="h-7 md:h-14 w-[auto] object-contain"
+                className="w-[120px] md:w-[150px] h-auto object-contain"
               />
             </div>
             <div onClick={toggleDrawer}>
