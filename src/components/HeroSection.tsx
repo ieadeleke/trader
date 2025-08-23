@@ -140,9 +140,11 @@ export default function HeroSection(props: ComponentInterface) {
             through credit/debit cards, bank transfers, and leading digital
             wallets — giving you full control over your capital at any time
           </p>
-          <div className="flex items-center justify-center gap-3 mb-10">
+          <div className="flex items-center z-40 relative justify-center gap-3 mb-10">
             <button
-              onClick={() => props.authControl(true)}
+              onClick={() => {
+                props.authControl(true);
+              }}
               className="rounded-lg w-full md:w-[20rem] text-white text-sm py-4 px-8 bg-primary border border-solid border-primary cursor-pointer"
             >
               Create Account

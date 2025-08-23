@@ -42,12 +42,14 @@ const Navigation = (props: NavInterface) => {
     setDisplayContactUsModal(!displayContactUsModal);
   };
 
-  const toggleContactDrawer = () => setDisplayContactUsModal(!displayContactUsModal);
+  const toggleContactDrawer = () =>
+    setDisplayContactUsModal(!displayContactUsModal);
 
   const displayContactModalDisplay = () => setDisplayContactUsModal(true);
   const hideContactModalDisplay = () => setDisplayContactUsModal(false);
 
   useEffect(() => {
+    console.log("auth control changed", props.authControl);
     if (props.authControl) {
       displayAuthModalDisplay();
     } else {
