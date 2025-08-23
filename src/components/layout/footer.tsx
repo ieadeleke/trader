@@ -3,6 +3,11 @@ import Link from "next/link";
 
 import LogoImg from "@/assets/logo-new.png";
 
+import { FaXTwitter } from "react-icons/fa6";
+import { GrInstagram } from "react-icons/gr";
+import { BiLogoTelegram } from "react-icons/bi";
+import { RiFacebookFill } from "react-icons/ri";
+
 const Footer = () => {
   return (
     <footer>
@@ -138,11 +143,18 @@ const Footer = () => {
       </div>
       <div className="py-3 px-5 md:px-28 pb-10">
         <div className="h-[1px] mb-10 md:mb-8 bg-white opacity-20"></div>
-        <p className="text-sm text-white opacity-80">
-          Copyright &copy; 2023 &mdash; 2025{" "}
-          <span className="text-primary"> Moneday </span>
-          All rights reserved
-        </p>
+        <div className="flex flex-col md:flex-row gap-8 md:gap-0 justify-between md:items-center">
+          <p className="text-sm text-white opacity-80">
+            Copyright &copy; 2023 &mdash; 2025{" "}
+            <span className="text-primary"> Moneday </span>
+            All rights reserved
+          </p>
+          <div className="flex gap-4 items-center">
+            <FaXTwitter className="text-xl" />
+            <RiFacebookFill className="text-xl" />
+            <BiLogoTelegram className="text-xl" />
+          </div>
+        </div>
       </div>
     </footer>
   );
