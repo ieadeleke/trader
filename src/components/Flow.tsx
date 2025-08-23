@@ -38,9 +38,9 @@ export default function Flow() {
             Moneday gives you the tools, the trust, and the speed to make your
             money work for you — one day at a time.
           </p>
-          <button className="bg-primary text-sm py-4 px-6 md:px-10 rounded-[8px]">
+          {/* <button className="bg-primary text-sm py-4 px-6 md:px-10 rounded-[8px]">
             Reach out to us
-          </button>
+          </button> */}
         </div>
       </div>
       <div className="hidden md:block mt-28">

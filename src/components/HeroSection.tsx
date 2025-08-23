@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import HeroImg from "@/assets/heroman.png";
+import HeroImg from "@/assets/main.png";
 import CoinImg from "@/assets/coin.png";
 import RowImg from "@/assets/row.png";
 
@@ -152,11 +152,11 @@ export default function HeroSection(props: ComponentInterface) {
         <div className="z-40 relative">
           <Image
             src={HeroImg}
-            alt="trading chart"
+            alt="trading and ai"
             quality={100}
             width={1000}
             height={1000}
-            className="w-full h-full"
+            className="w-full h-[20rem] object-center object-cover md:h-[35rem] rounded-lg"
           />
         </div>
         <div className="absolute bottom-0 left-0 w-full z-20">
