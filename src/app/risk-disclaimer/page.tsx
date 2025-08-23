@@ -16,7 +16,7 @@ export default function RiskDisclaimer() {
 
         <section className="px-5 md:px-12 py-20 md:py-12 md:w-[60%] mx-auto">
           <h1 className="text-xl font-semibold mb-4">
-            ForTrader Risk Disclaimer
+            Moneday Risk Disclaimer
           </h1>
           {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
@@ -26,8 +26,8 @@ export default function RiskDisclaimer() {
             Trading foreign currencies, cryptocurrencies, and other digital
             assets involves significant risk and may not be suitable for all
             investors. This Risk Disclaimer explains the potential risks
-            associated with using the ForTrader platform. By accessing or using
-            ForTrader, you acknowledge and accept these risks.
+            associated with using the Moneday platform. By accessing or using
+            Moneday, you acknowledge and accept these risks.
           </p>
 
           <hr className="my-6" />
@@ -78,7 +78,7 @@ export default function RiskDisclaimer() {
               Internet connectivity issues may prevent access to your account.
             </li>
             <li>
-              ForTrader implements strict security measures, but no online
+              Moneday implements strict security measures, but no online
               system is immune to cyberattacks.
             </li>
           </ul>
@@ -87,7 +87,7 @@ export default function RiskDisclaimer() {
 
           <h2 className="text-base font-semibold mb-3">6. No Financial Advice</h2>
           <p className="text-sm leading-loose mb-3">
-            Information provided on ForTrader, including charts, prices, and
+            Information provided on Moneday, including charts, prices, and
             news updates, is for informational purposes only. It should not be
             considered financial, investment, or legal advice. You are solely
             responsible for your trading decisions.
@@ -97,9 +97,9 @@ export default function RiskDisclaimer() {
 
           <h2 className="text-base font-semibold mb-3">7. Limitation of Liability</h2>
           <p className="text-sm leading-loose mb-3">
-            ForTrader is not responsible for any direct, indirect, or
+            Moneday is not responsible for any direct, indirect, or
             consequential losses arising from your use of the Platform. You
-            agree that your use of ForTrader is entirely at your own risk and
+            agree that your use of Moneday is entirely at your own risk and
             that all trading decisions are made independently by you.
           </p>
 

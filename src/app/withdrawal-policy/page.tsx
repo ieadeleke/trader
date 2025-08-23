@@ -14,7 +14,7 @@ export default function WithdrawalPolicy() {
 
         <section className="px-5 md:px-12 py-20 md:py-12 md:w-[60%] mx-auto">
           <h1 className="text-xl font-semibold mb-4">
-            ForTrader Withdrawal Policy
+            Moneday Withdrawal Policy
           </h1>
           {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
@@ -22,7 +22,7 @@ export default function WithdrawalPolicy() {
 
           <p className="text-sm leading-loose mb-3">
             This Withdrawal Policy outlines the terms and conditions under which
-            clients may request and receive withdrawals from their ForTrader
+            clients may request and receive withdrawals from their Moneday
             account. By using our services, you agree to the following
             provisions.
           </p>
@@ -40,7 +40,7 @@ export default function WithdrawalPolicy() {
               (bank account, credit card, e-wallet, or crypto wallet).
             </li>
             <li>
-              ForTrader reserves the right to request additional verification
+              Moneday reserves the right to request additional verification
               before processing a withdrawal.
             </li>
           </ul>
@@ -59,7 +59,7 @@ export default function WithdrawalPolicy() {
 
           <h2 className="text-base font-semibold mb-3">3. Fees</h2>
           <p className="text-sm leading-loose mb-3">
-            ForTrader does not charge internal fees for withdrawals. However,
+            Moneday does not charge internal fees for withdrawals. However,
             clients are responsible for any external banking, currency exchange,
             or third-party transaction fees.
           </p>
@@ -82,7 +82,7 @@ export default function WithdrawalPolicy() {
               positions or unsettled transactions.
             </li>
             <li>
-              ForTrader reserves the right to suspend or delay withdrawals if
+              Moneday reserves the right to suspend or delay withdrawals if
               suspicious or fraudulent activity is detected.
             </li>
             <li>
@@ -106,10 +106,10 @@ export default function WithdrawalPolicy() {
           <p className="text-sm leading-loose mb-3">
             For any withdrawal-related questions, please contact us at:{" "}
             <a
-              href="mailto:support@fortrader.com"
+              href="mailto:support@Moneday.com"
               className="text-blue-600 underline"
             >
-              support@fortrader.com
+              support@Moneday.com
             </a>
           </p>
         </section>

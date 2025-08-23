@@ -16,15 +16,15 @@ export default function TermsAndConditions() {
 
         <section className="px-5 md:px-12 py-20 md:py-12 md:w-[60%] mx-auto">
           <h1 className="text-xl font-semibold mb-4">
-            ForTrader Terms and Conditions
+            Moneday Terms and Conditions
           </h1>
           {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
           </p> */}
 
           <p className="text-sm leading-loose mb-3">
-            Welcome to ForTrader. These Terms and Conditions (“Terms”) govern
-            your access to and use of the ForTrader website, mobile application,
+            Welcome to Moneday. These Terms and Conditions (“Terms”) govern
+            your access to and use of the Moneday website, mobile application,
             and related services (collectively, the “Platform”). By creating an
             account or using our services, you agree to comply with these Terms.
             Please read them carefully.
@@ -36,9 +36,9 @@ export default function TermsAndConditions() {
             1. Company Information
           </h2>
           <p className="text-sm leading-loose mb-3">
-            ForTrader is an online forex and digital asset exchange platform
+            Moneday is an online forex and digital asset exchange platform
             that allows users to trade foreign currencies, cryptocurrencies, and
-            related financial products. ForTrader operates globally but may
+            related financial products. Moneday operates globally but may
             restrict services in jurisdictions where such activities are
             prohibited by law.
           </p>
@@ -56,7 +56,7 @@ export default function TermsAndConditions() {
               regulations.
             </li>
             <li>
-              ForTrader reserves the right to suspend or terminate accounts that
+              Moneday reserves the right to suspend or terminate accounts that
               provide false information or engage in prohibited activities.
             </li>
           </ul>
@@ -68,7 +68,7 @@ export default function TermsAndConditions() {
           </h2>
           <ul className="list-disc pl-5 text-sm leading-loose mb-3 space-y-2">
             <li>
-              Trading on ForTrader involves significant risks, including market
+              Trading on Moneday involves significant risks, including market
               volatility and potential loss of capital. Users trade at their own
               risk.
             </li>
@@ -87,7 +87,7 @@ export default function TermsAndConditions() {
           <h2 className="text-base font-semibold mb-3">4. Fees and Payments</h2>
           <ul className="list-disc pl-5 text-sm leading-loose mb-3 space-y-2">
             <li>
-              ForTrader charges transaction fees, withdrawal fees, and other
+              Moneday charges transaction fees, withdrawal fees, and other
               applicable service fees as stated on our official website.
             </li>
             <li>Fees may be updated from time to time without prior notice.</li>
@@ -124,7 +124,7 @@ export default function TermsAndConditions() {
               and may not be suitable for all investors.
             </li>
             <li>
-              ForTrader does not guarantee profits or the future value of any
+              Moneday does not guarantee profits or the future value of any
               asset traded on the Platform.
             </li>
             <li>
@@ -139,7 +139,7 @@ export default function TermsAndConditions() {
           </h2>
           <ul className="list-disc pl-5 text-sm leading-loose mb-3 space-y-2">
             <li>
-              ForTrader is not liable for indirect, incidental, or consequential
+              Moneday is not liable for indirect, incidental, or consequential
               damages arising from use of the Platform.
             </li>
             <li>
@@ -164,7 +164,7 @@ export default function TermsAndConditions() {
               regulations.
             </li>
             <li>
-              ForTrader may report suspicious activities to regulatory
+              Moneday may report suspicious activities to regulatory
               authorities without prior notice to the user.
             </li>
           </ul>

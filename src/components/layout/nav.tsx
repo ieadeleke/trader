@@ -111,14 +111,14 @@ const Navigation = (props: NavInterface) => {
               onClick={toggleContactModalDisplay}
               className="bg-transparent text-sm text-white cursor-pointer"
             >
-              Contact Us
+              Sign In
             </button>
           </li>
           <button
             className="bg-primary text-sm text-white py-3 px-6 rounded-lg cursor-pointer"
             onClick={toggleModalDisplay}
           >
-            Open Account
+            Create Account
           </button>
         </ul>
       </div>
@@ -145,7 +145,7 @@ const Navigation = (props: NavInterface) => {
       </Modal>
       <Drawer open={openMenu} onClose={toggleDrawer} footer={null}>
         <div className="flex flex-col relative h-full">
-          <div className="px-5 pt-4 pb-10 flex w-full items-center justify-between absolute">
+          <div className="px-5 pt-4 pb-10 flex w-full items-center justify-between ">
             <div className="">
               <Image
                 src={LogoNewImg}
@@ -159,11 +159,11 @@ const Navigation = (props: NavInterface) => {
               <FaTimes className="text-2xl text-[#ff0000]" />
             </div>
           </div>
-          <ul className="h-full flex justify-center text-center flex-col gap-6">
+          <ul className="h-full flex md:justify-center md:text-center flex-col gap-6">
             <li className="pb-4 text-black">
               <Link
                 href="/"
-                className="text-white text-2xl font-medium p-4 w-full"
+                className="text-white text-xl opacity-70 font-medium p-4 w-full"
                 onClick={toggleDrawer}
               >
                 Home
@@ -172,7 +172,7 @@ const Navigation = (props: NavInterface) => {
             <li className="pb-4 text-black">
               <Link
                 href="/#aboutus"
-                className="text-white text-2xl font-medium p-4 w-full"
+                className="text-white text-xl opacity-70 font-medium p-4 w-full"
                 onClick={toggleDrawer}
               >
                 About Us
@@ -181,7 +181,7 @@ const Navigation = (props: NavInterface) => {
             <li className="pb-4 text-black">
               <Link
                 href="/#services"
-                className="text-white text-2xl font-medium p-4 w-full"
+                className="text-white text-xl opacity-70 font-medium p-4 w-full"
                 onClick={toggleDrawer}
               >
                 Services
@@ -190,7 +190,7 @@ const Navigation = (props: NavInterface) => {
             <li className="pb-4 text-black">
               <Link
                 href="/#howitworks"
-                className="text-white text-2xl font-medium p-4 w-full"
+                className="text-white text-xl opacity-70 font-medium p-4 w-full"
                 onClick={toggleDrawer}
               >
                 How It Works
@@ -199,10 +199,37 @@ const Navigation = (props: NavInterface) => {
             <li className="pb-4 text-black">
               <Link
                 href="/#testimonials"
-                className="text-white text-2xl font-medium p-4 w-full"
+                className="text-white text-xl opacity-70 font-medium p-4 w-full"
                 onClick={toggleDrawer}
               >
                 Testimonials
+              </Link>
+            </li>
+            <li className="pb-4 text-black">
+              <Link
+                href="/risk-disclaimer"
+                className="text-white text-xl opacity-70 font-medium p-4 w-full"
+                onClick={toggleDrawer}
+              >
+                Risk Disclaimer
+              </Link>
+            </li>
+            <li className="pb-4 text-black">
+              <Link
+                href="/privacy-policy"
+                className="text-white text-xl opacity-70 font-medium p-4 w-full"
+                onClick={toggleDrawer}
+              >
+                Privacy Policy
+              </Link>
+            </li>
+            <li className="pb-4 text-black">
+              <Link
+                href="/terms-of-use"
+                className="text-white text-xl opacity-70 font-medium p-4 w-full"
+                onClick={toggleDrawer}
+              >
+                Terms of Use
               </Link>
             </li>
           </ul>

@@ -36,8 +36,8 @@ const SignUpForm = () => {
             Create a free account
           </h2>
           <p className="text-base leading-relaxed text-center font-ibm text-white opacity-80">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
-            aliquam, beatae dicta, maiores, expedita natus placeat
+            Create your free Moneday account and join thousands of traders
+            earning right away.
           </p>
         </div>
         <div className="grid grid-cols-2 mb-4 gap-3">

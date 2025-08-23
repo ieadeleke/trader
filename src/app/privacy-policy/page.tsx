@@ -16,14 +16,14 @@ export default function PrivacyPolicy() {
 
         <section className="px-5 md:px-12 py-20 md:py-12 md:w-[60%] mx-auto">
           <h1 className="text-xl font-semibold mb-4">
-            ForTrader Privacy Policy
+            Moneday Privacy Policy
           </h1>
           {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
           </p> */}
 
           <p className="text-sm leading-loose mb-3">
-            At ForTrader, we value your privacy and are committed to protecting
+            At Moneday, we value your privacy and are committed to protecting
             your personal information. This Privacy Policy explains how we
             collect, use, store, and share your data when you access our
             platform, mobile application, or related services (collectively, the
@@ -85,7 +85,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="text-base font-semibold mb-3">4. Cookies and Tracking</h2>
           <p className="text-sm leading-loose mb-3">
-            ForTrader uses cookies and similar tracking technologies to enhance
+            Moneday uses cookies and similar tracking technologies to enhance
             user experience, analyze traffic, and customize content. You may
             adjust your browser settings to refuse cookies, but some features of
             the Platform may not function properly.
@@ -134,7 +134,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="text-base font-semibold mb-3">8. International Data Transfers</h2>
           <p className="text-sm leading-loose mb-3">
-            As a global platform, ForTrader may transfer and store your
+            As a global platform, Moneday may transfer and store your
             information in different countries. We ensure appropriate safeguards
             are in place to protect your data in compliance with applicable data
             protection laws.
@@ -144,7 +144,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="text-base font-semibold mb-3">9. Changes to this Policy</h2>
           <p className="text-sm leading-loose mb-3">
-            ForTrader may update this Privacy Policy from time to time. Any
+            Moneday may update this Privacy Policy from time to time. Any
             changes will be effective immediately upon posting on our website,
             and continued use of our Platform constitutes acceptance of those
             changes.
@@ -156,7 +156,7 @@ export default function PrivacyPolicy() {
           <p className="text-sm leading-loose mb-3">
             If you have any questions about this Privacy Policy or how your data
             is handled, please contact us at:{" "}
-            <span className="font-semibold">support@fortrader.com</span>.
+            <span className="font-semibold">support@Moneday.com</span>.
           </p>
         </section>
       </div>

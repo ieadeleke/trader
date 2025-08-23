@@ -16,7 +16,7 @@ export default function AmlKycPolicy() {
 
         <section className="px-5 md:px-12 py-20 md:py-12 md:w-[60%] mx-auto">
           <h1 className="text-xl font-semibold mb-4">
-            ForTrader AML & KYC Policy
+            Moneday AML & KYC Policy
           </h1>
           {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
@@ -24,7 +24,7 @@ export default function AmlKycPolicy() {
 
           <p className="text-sm leading-loose mb-3">
             This Anti-Money Laundering (AML) and Know Your Customer (KYC) Policy
-            outlines the procedures and controls implemented by ForTrader to
+            outlines the procedures and controls implemented by Moneday to
             prevent money laundering, terrorist financing, fraud, and other
             illegal financial activities. Compliance with this policy is
             mandatory for all users of the Platform.
@@ -51,7 +51,7 @@ export default function AmlKycPolicy() {
             2. Ongoing Monitoring
           </h2>
           <p className="text-sm leading-loose mb-3">
-            ForTrader continuously monitors customer transactions to identify
+            Moneday continuously monitors customer transactions to identify
             unusual or suspicious activity. This may include:
           </p>
           <ul className="list-disc pl-5 text-sm leading-loose mb-3 space-y-2">
@@ -66,7 +66,7 @@ export default function AmlKycPolicy() {
             3. Reporting Obligations
           </h2>
           <p className="text-sm leading-loose mb-3">
-            ForTrader complies with applicable AML regulations by reporting
+            Moneday complies with applicable AML regulations by reporting
             suspicious transactions to relevant financial intelligence units and
             regulatory authorities. Users may not be notified if a report is
             filed in connection with their account.
@@ -78,7 +78,7 @@ export default function AmlKycPolicy() {
             4. Prohibited Activities
           </h2>
           <p className="text-sm leading-loose mb-3">
-            Customers are strictly prohibited from using ForTrader for:
+            Customers are strictly prohibited from using Moneday for:
           </p>
           <ul className="list-disc pl-5 text-sm leading-loose mb-3 space-y-2">
             <li>Money laundering or terrorism financing.</li>
@@ -93,7 +93,7 @@ export default function AmlKycPolicy() {
             5. Risk-Based Approach
           </h2>
           <p className="text-sm leading-loose mb-3">
-            ForTrader applies a risk-based approach to customer due diligence.
+            Moneday applies a risk-based approach to customer due diligence.
             Higher-risk users may be required to provide additional information
             or undergo enhanced verification.
           </p>
@@ -130,10 +130,10 @@ export default function AmlKycPolicy() {
             If you have questions about this AML & KYC Policy, please contact
             us at:{" "}
             <a
-              href="mailto:support@fortrader.com"
+              href="mailto:support@Moneday.com"
               className="text-blue-600 underline"
             >
-              support@fortrader.com
+              support@Moneday.com
             </a>
           </p>
         </section>

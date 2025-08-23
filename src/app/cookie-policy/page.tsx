@@ -14,15 +14,15 @@ export default function CookiePolicy() {
 
         <section className="px-5 md:px-12 py-20 md:py-12 md:w-[60%] mx-auto">
           <h1 className="text-xl font-semibold mb-4">
-            ForTrader Cookie Policy
+            Moneday Cookie Policy
           </h1>
           {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
           </p> */}
 
           <p className="text-sm leading-loose mb-3">
-            This Cookie Policy explains how ForTrader uses cookies and similar
-            technologies on our platform (&apos;Platform&apos;). By using ForTrader, you
+            This Cookie Policy explains how Moneday uses cookies and similar
+            technologies on our platform (&apos;Platform&apos;). By using Moneday, you
             consent to the use of cookies in accordance with this policy.
           </p>
 
@@ -62,7 +62,7 @@ export default function CookiePolicy() {
           <h2 className="text-base font-semibold mb-3">3. Third-Party Cookies</h2>
           <p className="text-sm leading-loose mb-3">
             Some cookies are placed by third-party services such as analytics
-            providers and advertising partners. ForTrader is not responsible for
+            providers and advertising partners. Moneday is not responsible for
             the practices of these third parties.
           </p>
 
@@ -79,7 +79,7 @@ export default function CookiePolicy() {
 
           <h2 className="text-base font-semibold mb-3">5. Updates to This Policy</h2>
           <p className="text-sm leading-loose mb-3">
-            ForTrader may update this Cookie Policy from time to time. Updates
+            Moneday may update this Cookie Policy from time to time. Updates
             will be posted on this page with a revised effective date.
           </p>
 
@@ -90,10 +90,10 @@ export default function CookiePolicy() {
             If you have any questions about this Cookie Policy, please contact
             us at:{" "}
             <a
-              href="mailto:support@fortrader.com"
+              href="mailto:support@Moneday.com"
               className="text-blue-600 underline"
             >
-              support@fortrader.com
+              support@Moneday.com
             </a>
           </p>
         </section>

@@ -86,7 +86,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${ibm_plex_sans.variable} ${ubuntu.variable} antialiased`}
       >
-        <TawkLayout />
+        {/* <TawkLayout /> */}
         {children}
       </body>
     </html>
