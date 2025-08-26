@@ -16,6 +16,7 @@ const eslintConfig = [
       // turn off completely
       "@typescript-eslint/no-explicit-any": "off",
       "react/jsx-key": "off",
+      "@typescript-eslint/no-unused-vars": "off",
 
       // or just warn instead of error
       // "@typescript-eslint/no-explicit-any": "warn",
