@@ -25,9 +25,9 @@ const SideBar = () => {
                 ? "border-l-4 px-4 border-main border-solid text-main"
                 : "text-white px-5"
             }`}
-            href="/dashboard/home"
+            href="/dashboard/overview"
           >
-            <TbSmartHome className="text-xl" /> Home
+            <TbSmartHome className="text-xl text" /> Home
           </Link>
         </li>
         <li>
@@ -37,9 +37,9 @@ const SideBar = () => {
                 ? "border-l-4 px-4 text-main border-main border-solid"
                 : "text-white px-5"
             }`}
-            href="/dashboard/resume"
+            href="/dashboard/market"
           >
-            <TiDocumentText className="text-xl" /> Markets
+            <TiDocumentText className="text-xl text" /> Markets
           </Link>
         </li>
         <li>
@@ -49,9 +49,9 @@ const SideBar = () => {
                 ? "border-l-4 px-4 text-main border-main border-solid"
                 : "text-white px-5"
             }`}
-            href="/dashboard/applications"
+            href="/dashboard/overview"
           >
-            <HiRectangleGroup className="text-xl" /> Trade
+            <HiRectangleGroup className="text-xl text" /> Trade
           </Link>
         </li>
         <li>
@@ -61,9 +61,9 @@ const SideBar = () => {
                 ? "border-l-4 px-4 text-main border-main border-solid"
                 : "text-white px-5"
             }`}
-            href="/dashboard/contacts"
+            href="/dashboard/loans"
           >
-            <IoMdContacts className="text-xl" /> Contacts
+            <IoMdContacts className="text-xl text" /> Loan
           </Link>
         </li>
         <li>
@@ -73,20 +73,20 @@ const SideBar = () => {
                 ? "border-l-4 px-4 text-main border-main border-solid"
                 : "text-white px-5"
             }`}
-            href="/dashboard/cover-letter"
+            href="/dashboard/overview"
           >
-            <IoMdContacts className="text-xl" /> Profile Settings
+            <IoMdContacts className="text-xl text" /> Profile Settings
           </Link>
         </li>
       </ul>
-      <div className="absolute bottom-10 border-t-2 border-solid border-[#1A354B] [#E7E7E7] [#353333] w-full left-0">
+      <div className="absolute bottom-10 border-t-2 border-solid border-border w-full left-0">
         <ul className="flex flex-col px-5 pt-10 gap-10">
           <li>
             <Link
               href=""
               className="flex gap-3 items-center text-white text-sm"
             >
-              <MdOutlineSupport className="text-xl" /> Support
+              <MdOutlineSupport className="text-xl text" /> Support
             </Link>
           </li>
           <li>
@@ -94,7 +94,7 @@ const SideBar = () => {
               href=""
               className="flex gap-3 items-center text-white text-sm"
             >
-              <BiLogOut className="text-xl" /> Log Out
+              <BiLogOut className="text-xl text" /> Log Out
             </Link>
           </li>
         </ul>

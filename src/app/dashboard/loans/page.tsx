@@ -1,16 +1,17 @@
 "use client";
 
 import CryptoDashboard from "@/components/dashboard/CryptoDashboard";
+import LoansPageContent from "@/components/dashboard/LoanContent";
 import DashboardLayout from "@/components/layout/dashboard/DashboardLayout";
 
-const Dashboard = () => {
+const LoansPage = () => {
   return (
     <>
       <DashboardLayout pageTitle="Profile Dashboard">
         <>
           <div>
             <div className="w-[85%] pt-16 pb-20 mx-auto font-ibm">
-              <CryptoDashboard />
+              <LoansPageContent />
             </div>
           </div>
         </>
@@ -19,4 +20,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default LoansPage;

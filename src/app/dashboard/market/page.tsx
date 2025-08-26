@@ -3,14 +3,14 @@
 import CryptoDashboard from "@/components/dashboard/CryptoDashboard";
 import DashboardLayout from "@/components/layout/dashboard/DashboardLayout";
 
-const Dashboard = () => {
+const MarketPage = () => {
   return (
     <>
       <DashboardLayout pageTitle="Profile Dashboard">
         <>
           <div>
             <div className="w-[85%] pt-16 pb-20 mx-auto font-ibm">
-              <CryptoDashboard />
+              <CryptoDashboard hideProfile={true} />
             </div>
           </div>
         </>
@@ -19,4 +19,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default MarketPage;

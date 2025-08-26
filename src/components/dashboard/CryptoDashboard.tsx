@@ -1,10 +1,8 @@
 // pages/index.tsx - Complete Cryptocurrency Dashboard
 import React, { useState, useEffect } from "react";
 import {
-  Layout,
   Row,
   Col,
-  Input,
   Select,
   Spin,
   Alert,
@@ -13,6 +11,7 @@ import {
   Card,
   Statistic,
   Tag,
+  Input,
 } from "antd";
 import {
   SearchOutlined,
@@ -23,8 +22,12 @@ import {
   ArrowUpOutlined,
   ArrowDownOutlined,
 } from "@ant-design/icons";
+import { Button } from "../ui/button";
+import { MultiDashboardAssetChart } from "./CryptoCandleStick";
+import WithdrawalModal from "./WithdrawFunds";
+import FundWalletModal from "./FundWalletModal";
+import ConvertTokensModal from "./ConvertTokens";
 
-const { Content } = Layout;
 const { Title, Text } = Typography;
 const { Option } = Select;
 
@@ -63,6 +66,7 @@ interface CryptoData {
 
 interface TrendingCoin {
   id: string;
+  item: any;
   coin_id: number;
   name: string;
   symbol: string;
@@ -224,12 +228,15 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick }) => {
             style={{ width: "32px", height: "32px", borderRadius: "50%" }}
           />
           <div>
-            <Title level={5} style={{ margin: "0", color: "#1f2937" }}>
+            <h4
+              className="text-base font-ibm m-0 p-0 font-semibold"
+              style={{ color: "#1f2937" }}
+            >
               {crypto.name}
-            </Title>
-            <Text style={{ color: "#6b7280", textTransform: "uppercase" }}>
+            </h4>
+            <p className="text-sm font-ibm m-0 p-0 text-gray-500 uppercase">
               {crypto.symbol}
-            </Text>
+            </p>
           </div>
         </div>
         <Tag color={isPositive ? "green" : "red"} style={{ fontWeight: "500" }}>
@@ -238,27 +245,15 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick }) => {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ color: "#4b5563" }}>Price:</Text>
-          <Title level={5} style={{ margin: "0", color: "#1f2937" }}>
+        <div className="flex justify-between items-center">
+          <p className="text-[#4b5563] font-ibm">Price:</p>
+          <h4 className="text-base font-semibold text-[#1f2937] m-0 font-ibm">
             {formatPrice(crypto.current_price)}
-          </Title>
+          </h4>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ color: "#4b5563" }}>24h Change:</Text>
+        <div className="flex justify-between items-center">
+          <p className="text-[#4b5563] font-ibm">24h Change:</p>
           <div
             style={{
               display: "flex",
@@ -268,36 +263,28 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick }) => {
             }}
           >
             {isPositive ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
-            <Text style={{ color: isPositive ? "#059669" : "#dc2626" }}>
+            <p
+              className={`${
+                isPositive ? "text-[#059669]" : "text-[#dc2626]"
+              } font-ibm`}
+            >
               {Math.abs(crypto.price_change_percentage_24h).toFixed(2)}%
-            </Text>
+            </p>
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ color: "#4b5563" }}>Market Cap:</Text>
-          <Text style={{ color: "#1f2937", fontWeight: "500" }}>
+        <div className="flex justify-between items-center">
+          <p className="text-[#4b5563] font-ibm">Market Cap:</p>
+          <h4 className="text-base font-semibold text-[#1f2937] m-0 font-ibm">
             {formatMarketCap(crypto.market_cap)}
-          </Text>
+          </h4>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ color: "#4b5563" }}>Volume (24h):</Text>
-          <Text style={{ color: "#1f2937", fontWeight: "500" }}>
+        <div className="flex justify-between items-center">
+          <p className="text-[#4b5563] font-ibm">Volume (24h):</p>
+          <h4 className="text-base font-semibold text-[#1f2937] m-0 font-ibm">
             {formatMarketCap(crypto.total_volume)}
-          </Text>
+          </h4>
         </div>
       </div>
     </Card>
@@ -327,54 +314,30 @@ const TrendingCard: React.FC<TrendingCardProps> = ({ coin, index }) => {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div
-            style={{
-              backgroundColor: "rgba(255, 255, 255, 0.2)",
-              borderRadius: "50%",
-              width: "32px",
-              height: "32px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "14px",
-              fontWeight: "bold",
-            }}
-          >
-            {index + 1}
+          <div className="bg-white/20 rounded-full flex items-center justify-center size-[24px] font-bold font-ibm">
+            <h5 className="font-ibm text-white text-[12px]">{index + 1}</h5>
           </div>
           <img
-            src={coin.small}
-            alt={coin.name}
-            style={{ width: "24px", height: "24px", borderRadius: "50%" }}
+            src={coin?.item.small}
+            alt={coin?.item.name}
+            className="size-[24px] rounded-full"
           />
           <div>
-            <Title level={5} style={{ margin: "0", color: "white" }}>
-              {coin.name}
-            </Title>
-            <Text
-              style={{
-                color: "rgba(255, 255, 255, 0.8)",
-                textTransform: "uppercase",
-                fontSize: "12px",
-              }}
-            >
-              {coin.symbol}
-            </Text>
+            <h3 className="text-white font-ibm m-0 p-0 text-base font-semibold">
+              {coin?.item.name}
+            </h3>
+            <p className="text-white/80 font-ibm m-0 p-0 text-xs uppercase">
+              {coin?.item.symbol}
+            </p>
           </div>
         </div>
         <div style={{ textAlign: "right" }}>
-          <Text
-            style={{
-              color: "rgba(255, 255, 255, 0.8)",
-              display: "block",
-              fontSize: "12px",
-            }}
-          >
-            Rank #{coin.market_cap_rank}
-          </Text>
-          <Text style={{ color: "white", fontSize: "12px" }}>
+          <p className="text-white/80 block text-xs font-ibm">
+            Rank #{coin?.item.market_cap_rank}
+          </p>
+          <p className="text-white/80 block text-xs font-ibm">
             {coin?.price_btc?.toFixed(8)} BTC
-          </Text>
+          </p>
         </div>
       </div>
     </Card>
@@ -386,8 +349,10 @@ interface StatCardProps {
   value: string | number;
   change?: number;
   prefix?: React.ReactNode;
+  variant?: string;
   suffix?: string;
   loading?: boolean;
+  size: "small" | "large";
 }
 
 const StatCard: React.FC<StatCardProps> = ({
@@ -397,56 +362,67 @@ const StatCard: React.FC<StatCardProps> = ({
   prefix,
   suffix,
   loading,
+  variant,
+  size,
 }) => {
   const isPositive = change !== undefined ? change > 0 : undefined;
 
-  const cardStyle = {
-    backgroundColor: "#ffffff",
-    border: "1px solid #e5e7eb",
-    borderRadius: "8px",
-  };
-
   return (
-    <Card style={cardStyle}>
-      <Statistic
-        title={<span style={{ color: "#4b5563" }}>{title}</span>}
-        value={value}
-        loading={loading}
-        prefix={prefix}
-        suffix={suffix}
-        valueStyle={{
-          color:
-            isPositive !== undefined
-              ? isPositive
-                ? "#059669"
-                : "#dc2626"
-              : "#1890ff",
-          fontSize: "24px",
-          fontWeight: "bold",
-        }}
-      />
-      {change !== undefined && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "4px",
-            marginTop: "8px",
-            color: isPositive ? "#059669" : "#dc2626",
-          }}
+    <div className="bg-transparent p-4 h-full">
+      <div>
+        <p
+          className={`text-sm text-white opacity-80 font-ibm ${
+            variant === "white" ? "mb-3" : size === "large" ? "mb-5" : "mb-7"
+          }`}
         >
-          {isPositive ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
-          <span style={{ fontSize: "14px" }}>
-            {Math.abs(change).toFixed(2)}% (24h)
-          </span>
+          {title}
+        </p>
+        <div className="flex items-end gap-4">
+          <h3
+            className={`${
+              size === "large" ? "text-4xl" : "text-xl"
+            } font-ibm font-bold flex items-end gap-1 ${
+              variant === "white"
+                ? "text-white"
+                : isPositive !== undefined
+                ? isPositive
+                  ? "text-[#059669]"
+                  : "text-[#dc2626]"
+                : "text-[#1890ff]"
+            }`}
+          >
+            {size === "small" && <span className="text-xl">{prefix}</span>}
+            {value}
+            {suffix && <span className="text-lg">{suffix}</span>}
+          </h3>
+          {change !== undefined && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+                marginTop: "8px",
+                color: isPositive ? "#059669" : "#dc2626",
+              }}
+            >
+              {isPositive ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
+              <span className="text-base font-ibm">
+                {Math.abs(change).toFixed(2)}% (24h)
+              </span>
+            </div>
+          )}
         </div>
-      )}
-    </Card>
+      </div>
+    </div>
   );
 };
 
+interface DashboardProps {
+  hideProfile?: boolean;
+}
+
 // Main Dashboard Component
-const CryptoDashboard: React.FC = () => {
+const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
   const [cryptoData, setCryptoData] = useState<CryptoData[]>([]);
   const [trendingCoins, setTrendingCoins] = useState<TrendingCoin[]>([]);
   const [globalData, setGlobalData] = useState<GlobalData | null>(null);
@@ -455,6 +431,9 @@ const CryptoDashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("market_cap_desc");
   const [currentPage, setCurrentPage] = useState(1);
+  const [openWithdrawalModal, setOpenWithdrawalModal] = useState(false);
+  const [openFundWalletModal, setOpenFundWalletModal] = useState(false);
+  const [convertWalletModal, setConvertWalletModal] = useState(false);
   const pageSize = 20;
 
   const fetchData = async () => {
@@ -469,7 +448,7 @@ const CryptoDashboard: React.FC = () => {
       ]);
 
       setCryptoData(cryptos);
-      setTrendingCoins(trending.coins.slice(0, 7));
+      setTrendingCoins(trending.coins.slice(0, 6));
       setGlobalData(global);
     } catch (err) {
       setError("Failed to fetch cryptocurrency data. Please try again.");
@@ -486,6 +465,28 @@ const CryptoDashboard: React.FC = () => {
     const interval = setInterval(fetchData, 60000);
     return () => clearInterval(interval);
   }, []);
+
+  const toggleWithdrawalModal = () => {
+    setOpenWithdrawalModal(!openWithdrawalModal);
+  };
+  const toggleFundWalletModal = () => {
+    setOpenFundWalletModal(!openFundWalletModal);
+  };
+  const toggleConvertWalletModal = () => {
+    setConvertWalletModal(!convertWalletModal);
+  };
+
+  // convert tokens modal
+  const tokens = ["bitcoin", "ethereum", "usdt", "stellar"];
+
+  const handleConvert = (data: {
+    fromToken: string;
+    toToken: string;
+    amount: number;
+  }) => {
+    console.log("Conversion request:", data);
+    // TODO: Call your backend API to process the conversion
+  };
 
   const filteredData = cryptoData
     .filter(
@@ -527,7 +528,7 @@ const CryptoDashboard: React.FC = () => {
 
   const layoutStyle = {
     minHeight: "100vh",
-    backgroundColor: "#f9fafb",
+    // backgroundColor: "#f9fafb",
   };
 
   const headerStyle = {
@@ -569,24 +570,8 @@ const CryptoDashboard: React.FC = () => {
   }
 
   return (
-    <Layout style={layoutStyle}>
-      {/* <Header style={headerStyle}>
-        <div style={headerContentStyle}>
-          <Title level={3} style={{ margin: '0', color: '#1f2937' }}>
-            🚀 Crypto Dashboard
-          </Title>
-          <Button
-            icon={<ReloadOutlined />}
-            onClick={fetchData}
-            loading={loading}
-            style={{ borderColor: '#d1d5db' }}
-          >
-            Refresh
-          </Button>
-        </div>
-      </Header> */}
-
-      <Content style={{ padding: "24px" }}>
+    <div style={layoutStyle}>
+      <div>
         {error && (
           <Alert
             message="Error"
@@ -597,115 +582,163 @@ const CryptoDashboard: React.FC = () => {
             style={{ marginBottom: "24px" }}
           />
         )}
-
+        {hideProfile ? (
+          ""
+        ) : (
+          <div className="flex justify-between items-center mb-3">
+            <h2 className="text-3xl font-semibold text-white">Hello Ife,</h2>
+            <div className="flex gap-3 items-center">
+              <Button className="py-5 px-8" onClick={toggleFundWalletModal}>
+                Fund Wallet
+              </Button>
+              <Button
+                className="py-5 px-8"
+                variant="outline"
+                onClick={toggleWithdrawalModal}
+              >
+                Withdrawal
+              </Button>
+              <Button
+                className="py-5 px-8"
+                variant="secondary"
+                onClick={toggleConvertWalletModal}
+              >
+                Convert Tokens
+              </Button>
+            </div>
+          </div>
+        )}
         {/* Global Stats */}
-        <Row gutter={[16, 16]} style={{ marginBottom: "32px" }}>
-          <Col xs={24} sm={12} lg={6}>
-            <StatCard
-              title="Total Market Cap"
-              value={
-                globalData
-                  ? formatLargeNumber(globalData.data.total_market_cap.usd)
-                  : ""
-              }
-              change={globalData?.data.market_cap_change_percentage_24h_usd}
-              prefix={<DollarOutlined />}
-              loading={!globalData}
-            />
-          </Col>
-          <Col xs={24} sm={12} lg={6}>
-            <StatCard
-              title="Active Cryptocurrencies"
-              value={
-                globalData?.data.active_cryptocurrencies.toLocaleString() || ""
-              }
-              prefix={<BarChartOutlined />}
-              loading={!globalData}
-            />
-          </Col>
-          <Col xs={24} sm={12} lg={6}>
-            <StatCard
-              title="Markets"
-              value={globalData?.data.markets.toLocaleString() || ""}
-              prefix={<GlobalOutlined />}
-              loading={!globalData}
-            />
-          </Col>
-          <Col xs={24} sm={12} lg={6}>
-            <StatCard
-              title="BTC Dominance"
-              value={
-                globalData
-                  ? `${globalData.data.market_cap_percentage.btc.toFixed(1)}%`
-                  : ""
-              }
-              prefix={<TrophyOutlined />}
-              loading={!globalData}
-            />
-          </Col>
-        </Row>
-
+        <div className="border-2 border-solid border-border rounded-lg mb-8 p-4">
+          {hideProfile ? (
+            ""
+          ) : (
+            <div>
+              <StatCard
+                title="Your Wallet Balance"
+                size="large"
+                variant="white"
+                value={"0.00000345"}
+                suffix="BTC"
+                loading={!globalData}
+              />
+            </div>
+          )}
+          <div className="flex flex-col md:grid grid-cols-[1fr_1.5fr] bor gap-4">
+            <div>
+              <StatCard
+                title="Total Market Cap"
+                size="large"
+                value={
+                  globalData
+                    ? formatLargeNumber(globalData.data.total_market_cap.usd)
+                    : ""
+                }
+                change={globalData?.data.market_cap_change_percentage_24h_usd}
+                prefix={<DollarOutlined />}
+                loading={!globalData}
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <StatCard
+                  title="Active Cryptocurrencies"
+                  size="small"
+                  value={
+                    globalData?.data.active_cryptocurrencies.toLocaleString() ||
+                    ""
+                  }
+                  prefix={<BarChartOutlined />}
+                  loading={!globalData}
+                />
+              </div>
+              <div>
+                <StatCard
+                  title="Markets"
+                  size="small"
+                  value={globalData?.data.markets.toLocaleString() || ""}
+                  prefix={<GlobalOutlined />}
+                  loading={!globalData}
+                />
+              </div>
+              {/* <div>
+              <StatCard
+                title="BTC Dominance"
+                value={
+                  globalData
+                    ? `${globalData.data.market_cap_percentage.btc.toFixed(1)}%`
+                    : ""
+                }
+                prefix={<TrophyOutlined />}
+                loading={!globalData}
+              />
+            </div> */}
+            </div>
+          </div>
+        </div>
+        <div className="border-2 border-solid border-border rounded-lg mb-8 p-4">
+          <MultiDashboardAssetChart />
+        </div>
         {/* Trending Coins */}
         <div style={{ marginBottom: "32px" }}>
-          <Title level={4} style={{ color: "#1f2937", marginBottom: "16px" }}>
+          <h3 className="text-xl font-semibold mb-2 text-white">
             🔥 Trending Coins
-          </Title>
-          <Row gutter={[16, 16]}>
+          </h3>
+          <div className="flex flex-col md:grid grid-cols-1 md:grid-cols-3 gap-4">
             {trendingCoins.map((coin, index) => (
-              <Col key={coin.id} xs={24} sm={12} md={8} lg={6} xl={4}>
+              <div key={coin.id}>
                 <TrendingCard coin={coin} index={index} />
-              </Col>
+              </div>
             ))}
-          </Row>
+          </div>
         </div>
 
         {/* Search and Filter Controls */}
-        <div style={searchControlStyle}>
-          <Row gutter={[16, 16]} align="middle">
-            <Col xs={24} sm={12} md={8}>
+        <div className="border-2 border-solid border-border rounded-lg mb-8 p-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            <div>
               <Input
                 placeholder="Search cryptocurrencies..."
                 prefix={<SearchOutlined />}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ width: "100%" }}
+                className="h-[3.5rem] w-full"
               />
-            </Col>
-            <Col xs={24} sm={12} md={8}>
-              <Select
-                value={sortBy}
-                onChange={setSortBy}
-                style={{ width: "100%" }}
-              >
-                <Option value="market_cap_desc">
-                  Market Cap (High to Low)
-                </Option>
-                <Option value="price_desc">Price (High to Low)</Option>
-                <Option value="change_desc">24h Change (High to Low)</Option>
-                <Option value="volume_desc">Volume (High to Low)</Option>
-              </Select>
-            </Col>
-            <Col xs={24} md={8}>
-              <div style={{ textAlign: "right", color: "#4b5563" }}>
+            </div>
+            <Select
+              value={sortBy}
+              className="w-full h-[3.5rem]"
+              onChange={setSortBy}
+            >
+              <Option value="market_cap_desc">Market Cap (High to Low)</Option>
+              <Option value="price_desc">Price (High to Low)</Option>
+              <Option value="change_desc">24h Change (High to Low)</Option>
+              <Option value="volume_desc">Volume (High to Low)</Option>
+            </Select>
+            <div>
+              <p className="text-right text-sm text-gray-500">
                 Showing {paginatedData.length} of {filteredData.length} results
-              </div>
-            </Col>
-          </Row>
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Cryptocurrency Grid */}
-        <Row gutter={[16, 16]} style={{ marginBottom: "24px" }}>
+        <div
+          className="grid grid-cols-3 gap-3 border-2 border-solid border-border rounded-lg mb-8 p-4"
+          style={{ marginBottom: "24px" }}
+        >
           {paginatedData.map((crypto) => (
-            <Col key={crypto.id} xs={24} sm={12} md={8} lg={6}>
+            <div key={crypto.id}>
               <CryptoCard
                 crypto={crypto}
                 onClick={() => {
                   console.log("Navigate to", crypto.id);
                 }}
               />
-            </Col>
+            </div>
           ))}
-        </Row>
+        </div>
 
         {/* Pagination */}
         {filteredData.length > pageSize && (
@@ -723,8 +756,24 @@ const CryptoDashboard: React.FC = () => {
             />
           </div>
         )}
-      </Content>
-    </Layout>
+      </div>
+      <WithdrawalModal
+        open={openWithdrawalModal}
+        onClose={toggleWithdrawalModal}
+        onSubmit={toggleWithdrawalModal}
+      />
+      <FundWalletModal
+        open={openFundWalletModal}
+        onClose={toggleFundWalletModal}
+        // onSubmit={toggleFundWalletModal}
+      />
+      <ConvertTokensModal
+        open={convertWalletModal}
+        onClose={toggleConvertWalletModal}
+        onSubmit={handleConvert}
+        availableTokens={tokens}
+      />
+    </div>
   );
 };
 
