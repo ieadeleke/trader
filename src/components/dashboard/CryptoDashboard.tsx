@@ -27,6 +27,7 @@ import { MultiDashboardAssetChart } from "./CryptoCandleStick";
 import WithdrawalModal from "./WithdrawFunds";
 import FundWalletModal from "./FundWalletModal";
 import ConvertTokensModal from "./ConvertTokens";
+import Image from "next/image";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -222,7 +223,10 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick }) => {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <img
+          <Image
+            quality={100}
+            width={1000}
+            height={1000}
             src={crypto.image}
             alt={crypto.name}
             style={{ width: "32px", height: "32px", borderRadius: "50%" }}
@@ -317,7 +321,10 @@ const TrendingCard: React.FC<TrendingCardProps> = ({ coin, index }) => {
           <div className="bg-white/20 rounded-full flex items-center justify-center size-[24px] font-bold font-ibm">
             <h5 className="font-ibm text-white text-[12px]">{index + 1}</h5>
           </div>
-          <img
+          <Image
+            quality={100}
+            width={1000}
+            height={1000}
             src={coin?.item.small}
             alt={coin?.item.name}
             className="size-[24px] rounded-full"

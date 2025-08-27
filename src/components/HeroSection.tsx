@@ -68,7 +68,7 @@ export default function HeroSection(props: ComponentInterface) {
       key: "name",
       render: (text: string, record: any) => (
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <img
+          <Image quality={100} width={1000} height={1000}
             src={record.image}
             alt={record.name}
             style={{ width: 24, height: 24 }}

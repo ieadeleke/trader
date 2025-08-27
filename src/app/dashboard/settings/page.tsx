@@ -33,7 +33,8 @@ const ProfileSettings = () => {
     <DashboardLayout pageTitle="Profile Settings">
       <>
         <div className="w-[85%] pt-20 pb-20 mx-auto">
-          <ProfileSettings />
+          
+          {/* <ProfileSettings /> */}
         </div>
       </>
     </DashboardLayout>

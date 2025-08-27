@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Image from "next/image";
 
 interface MarketData {
   id: string;
@@ -47,7 +48,7 @@ export default function MarketStats() {
     <div className="bg-black text-white p-6 rounded-xl max-w-5xl mx-auto">
       {/* Top section */}
       <div className="flex items-center gap-4">
-        <img src={data.image.large} alt={data.name} className="w-12 h-12" />
+        <Image quality={100} width={1000} height={1000} src={data.image.large} alt={data.name} className="w-12 h-12" />
         <div>
           <h1 className="text-2xl font-bold">{data.name}</h1>
           <p className="bg-blue-900 text-blue-300 px-2 py-0.5 rounded text-xs inline-block">

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from "next/image";
 
 const UserSettings = (e: React.ChangeEvent<HTMLInputElement>) => {
   const [formData, setFormData] = useState({
@@ -60,7 +61,10 @@ const UserSettings = (e: React.ChangeEvent<HTMLInputElement>) => {
                 <div className="flex items-center gap-6">
                   <div className="w-20 h-20 rounded-full bg-gray-200 overflow-hidden">
                     {formData.profileImage ? (
-                      <img
+                      <Image
+                        quality={100}
+                        width={1000}
+                        height={1000}
                         src={formData.profileImage}
                         alt="Profile"
                         className="w-full h-full object-cover"

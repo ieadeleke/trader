@@ -16,6 +16,7 @@ import {
   Tag,
 } from "antd";
 import ScrollVelocity from "./animations/ScrollVelocity";
+import Image from "next/image";
 
 
 // Types
@@ -166,7 +167,7 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick }) => {
     <div className="w-full border border-solid border-[#353535] bg-[#232323] py-2 px-3 rounded-[6px]">
       <div className="flex gap-5 items-center">
         <div className="flex gap-2 items-center">
-          <img
+          <Image quality={100} width={1000} height={1000}
             src={crypto.image}
             alt={crypto.name}
             style={{ width: "20px", height: "20px" }}
