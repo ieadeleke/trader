@@ -1,4 +1,4 @@
-export const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8800";
+export const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "https://tradar-be.onrender.com";
 
 export const apiUrl = (path: string) => {
   if (!path.startsWith("/")) return `${API_BASE}/${path}`;
