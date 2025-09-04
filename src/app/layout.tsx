@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, IBM_Plex_Sans, Ubuntu } from "next/font/google";
 import "./globals.css";
 import TawkLayout from "./documents";
+import { AuthProvider } from "@/context/AuthContext";
+import { ToastProvider } from "@/context/ToastContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,8 +88,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${ibm_plex_sans.variable} ${ubuntu.variable} antialiased`}
       >
-        {/* <TawkLayout /> */}
-        {children}
+        <ToastProvider>
+        <AuthProvider>
+          {/* <TawkLayout /> */}
+          {children}
+        </AuthProvider>
+        </ToastProvider>
       </body>
     </html>
   );

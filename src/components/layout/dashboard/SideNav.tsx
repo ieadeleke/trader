@@ -49,7 +49,7 @@ const SideBar = () => {
                 ? "border-l-4 px-4 text-main border-main border-solid"
                 : "text-white px-5"
             }`}
-            href="/dashboard/overview"
+            href="/dashboard/overview/trade"
           >
             <HiRectangleGroup className="text-xl text" /> Trade
           </Link>
@@ -73,7 +73,7 @@ const SideBar = () => {
                 ? "border-l-4 px-4 text-main border-main border-solid"
                 : "text-white px-5"
             }`}
-            href="/dashboard/overview"
+            href="/dashboard/settings"
           >
             <IoMdContacts className="text-xl text" /> Profile Settings
           </Link>

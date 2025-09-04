@@ -8,11 +8,13 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
+import { useAuth } from "@/context/AuthContext";
 
-const UserSettings = (e: React.ChangeEvent<HTMLInputElement>) => {
+const UserSettings = () => {
+  const {user} = useAuth();
   const [formData, setFormData] = useState({
-    name: "Ife Adeleke",
-    email: "eadelekeife@gmail.com",
+    name: `${user?.firstName} ${user?.lastName}`,
+    email: user?.email,
     password: "",
     profileImage: "",
     notifications: {

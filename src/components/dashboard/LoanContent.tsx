@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
-import { Modal, Table, message } from "antd";
+import { Modal, Table } from "antd";
+import { useToast } from "@/context/ToastContext";
+import Spinner from "@/components/ui/spin";
+import { apiUrl } from "@/utils/api";
 
 type Loan = {
   id: number;
@@ -29,75 +32,112 @@ export default function LoansPageContent() {
   const [collateral, setCollateral] = useState("");
 
   const [activeLoans, setActiveLoans] = useState<Loan[]>([]);
+  const [fetching, setFetching] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [requestSuccess, setRequestSuccess] = useState<string | null>(null);
+  const { successToast, errorToast, info } = useToast();
 
-  // Mock loan offers
-  const loanOffers = [
-    { id: 1, apr: 12, duration: 30, collateral: "BTC" },
-    { id: 2, apr: 15, duration: 90, collateral: "ETH" },
-    { id: 3, apr: 20, duration: 180, collateral: "USDT" },
-  ];
-
-  // Handle new loan application
-  const handleApply = () => {
-    if (!amount || !duration || !collateral) {
-      message.error("Fill in all fields!");
-      return;
-    }
-
-    const offer = loanOffers.find((o) => o.duration === Number(duration) && o.collateral === collateral);
-    if (!offer) {
-      message.error("Invalid loan offer.");
-      return;
-    }
-
-    const startDate = new Date();
-    const dueDate = new Date(startDate);
-    dueDate.setDate(startDate.getDate() + Number(duration));
-
-    const newLoan: Loan = {
-      id: activeLoans.length + 1,
-      amount: Number(amount),
-      apr: offer.apr,
-      duration: offer.duration,
-      collateral,
-      startDate,
-      dueDate,
-      balance: Number(amount),
-      status: "Active",
-    };
-
-    setActiveLoans((prev) => [...prev, newLoan]);
-    setAmount("");
-    setDuration("");
-    setCollateral("");
-    setOpen(false);
-    message.success("Loan successfully created!");
+  // Helpers for currency formatting
+  const formatWithCommas = (value: number | string) => {
+    if (value === null || value === undefined) return "";
+    const [intPart, decPart] = String(value).split(".");
+    const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return decPart !== undefined ? `${formattedInt}.${decPart}` : formattedInt;
+  };
+  const parseAmount = (value: string) => {
+    if (!value) return 0;
+    const cleaned = value.replace(/[^0-9.]/g, "");
+    const parts = cleaned.split(".");
+    const normalized = parts.length > 1 ? parts[0] + "." + parts.slice(1).join("") : parts[0];
+    const num = Number(normalized);
+    return isNaN(num) ? 0 : num;
   };
 
-  // Calculate accrued interest daily
+  // Mock loan offers (reduced APRs)
+  const loanOffers = [
+    { id: 1, apr: 8, duration: 30, collateral: "BTC" },
+    { id: 2, apr: 10, duration: 90, collateral: "ETH" },
+    { id: 3, apr: 12, duration: 180, collateral: "USDT" },
+  ];
+
+  // Fetch user's loan records
+  const fetchLoans = async () => {
+    try {
+      setFetching(true);
+      const res = await fetch(apiUrl("/api/loans"), {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Failed to fetch loans");
+      const items: any[] = data?.data || data || [];
+      const mapped: Loan[] = items.map((it, idx) => ({
+        id: it.id ?? idx + 1,
+        amount: Number(it.amount ?? it.principal ?? 0),
+        apr: Number(it.apr ?? it.interestRate ?? 0),
+        duration: Number(it.durationDays ?? it.duration ?? 0),
+        collateral: String(it.collateral ?? it.asset ?? ""),
+        startDate: it.startDate ? new Date(it.startDate) : new Date(),
+        dueDate: it.dueDate ? new Date(it.dueDate) : new Date(),
+        balance: Number(it.balance ?? it.outstanding ?? it.amount ?? 0),
+        status: (it.status as Loan["status"]) ?? "Active",
+      }));
+      setActiveLoans(mapped);
+    } catch (err: any) {
+      errorToast(err.message || "Failed to fetch loans");
+    } finally {
+      setFetching(false);
+    }
+  };
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveLoans((loans) =>
-        loans.map((loan) => {
-          if (loan.status !== "Active") return loan;
-
-          const daysElapsed = Math.floor((Date.now() - loan.startDate.getTime()) / (1000 * 60 * 60 * 24));
-          const dailyRate = loan.apr / 365 / 100;
-          const interest = loan.amount * dailyRate * daysElapsed;
-
-          const updatedBalance = loan.amount + interest;
-
-          let status: Loan["status"] = loan.status;
-          if (loan.balance <= 0) status = "Repaid";
-          else if (Date.now() > loan.dueDate.getTime()) status = "Overdue";
-
-          return { ...loan, balance: updatedBalance, status };
-        })
-      );
-    }, 5000); // refresh every 5s
-
-    return () => clearInterval(interval);
+    fetchLoans();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Handle new loan application
+  const handleApply = async () => {
+    const amtNumber = parseAmount(amount);
+    if (!amtNumber || !duration || !collateral) {
+      errorToast("Fill in all fields!");
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      const res = await fetch(apiUrl("/api/loans/request"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          amount: amtNumber,
+          duration: Number(duration),
+          collateral,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Loan request failed");
+
+      successToast("Loan request submitted. A support officer will reach out to you.");
+      setRequestSuccess("Your request was received. A support officer will reach out to you.");
+      setAmount("");
+      setDuration("");
+      setCollateral("");
+      // Refresh loan records
+      fetchLoans();
+    } catch (err: any) {
+      errorToast(err.message || "Loan request failed");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // Interest accrual simulation removed to rely on backend records
 
   // Handle repayment
   const handleRepay = (loan: Loan, repayAmount: number) => {
@@ -113,7 +153,7 @@ export default function LoansPageContent() {
       )
     );
     setRepayOpen(null);
-    message.success("Repayment successful!");
+    successToast("Repayment successful!");
   };
 
   return (
@@ -134,7 +174,13 @@ export default function LoansPageContent() {
             pagination={false}
             rowKey="id"
           />
-          <Button onClick={() => setOpen(true)} className="mt-4 w-full">
+          <Button
+            onClick={() => {
+              setRequestSuccess(null);
+              setOpen(true);
+            }}
+            className="mt-4 w-full"
+          >
             Apply for Loan
           </Button>
         </CardContent>
@@ -145,13 +191,14 @@ export default function LoansPageContent() {
         <CardContent className="p-4">
           <h2 className="text-lg font-semibold mb-4">My Active Loans</h2>
           <Table
+            loading={fetching}
             dataSource={activeLoans}
             columns={[
-              { title: "Amount", dataIndex: "amount", key: "amount" },
+              { title: "Amount", dataIndex: "amount", key: "amount", render: (val) => `$${formatWithCommas(val)}` },
               { title: "APR", dataIndex: "apr", key: "apr", render: (val) => `${val}%` },
               { title: "Duration", dataIndex: "duration", key: "duration", render: (val) => `${val} days` },
               { title: "Collateral", dataIndex: "collateral", key: "collateral" },
-              { title: "Balance", dataIndex: "balance", key: "balance", render: (val) => `$${val.toFixed(2)}` },
+              { title: "Balance", dataIndex: "balance", key: "balance", render: (val) => `$${formatWithCommas(Number(val).toFixed(2))}` },
               { title: "Due Date", dataIndex: "dueDate", key: "dueDate", render: (date: Date) => new Date(date).toLocaleDateString() },
               { title: "Status", dataIndex: "status", key: "status" },
               {
@@ -172,24 +219,47 @@ export default function LoansPageContent() {
       </Card>
 
       {/* Apply Loan Modal */}
-      <Modal open={open} onCancel={() => setOpen(false)} footer={null} centered>
+      <Modal
+        open={open}
+        onCancel={() => {
+          setRequestSuccess(null);
+          setOpen(false);
+        }}
+        footer={null}
+        centered
+      >
         <div className="p-4 space-y-4">
           <h2 className="text-xl font-semibold text-center text-white font-ibm">Apply for Loan</h2>
 
           <div className="space-y-2">
             <Label className="text-white">Amount</Label>
-            <Input
-              type="number"
-              placeholder="Enter loan amount"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/80">$</span>
+              <Input
+                type="text"
+                inputMode="decimal"
+                placeholder="Enter loan amount"
+                value={amount}
+                onChange={(e) => {
+                  const raw = e.target.value;
+                  const cleaned = raw.replace(/[^0-9.]/g, "");
+                  const parts = cleaned.split(".");
+                  const normalized = parts.length > 1 ? parts[0] + "." + parts.slice(1).join("") : parts[0];
+                  const [intP, decP] = normalized.split(".");
+                  const formattedInt = intP ? intP.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "";
+                  const formatted = decP !== undefined ? `${formattedInt}.${decP}` : formattedInt;
+                  setAmount(formatted);
+                }}
+                className="pl-8"
+                disabled={submitting || !!requestSuccess}
+              />
+            </div>
           </div>
 
           <div className="space-y-2">
             <Label className="text-white">Duration</Label>
             <Select onValueChange={setDuration} value={duration}>
-              <SelectTrigger className="w-full h-[3.2rem]">
+              <SelectTrigger className="w-full h-[3.2rem]" disabled={submitting || !!requestSuccess}>
                 <SelectValue placeholder="Select duration" />
               </SelectTrigger>
               <SelectContent>
@@ -205,7 +275,7 @@ export default function LoansPageContent() {
           <div className="space-y-2 mb-4">
             <Label className="text-white">Collateral</Label>
             <Select onValueChange={setCollateral} value={collateral}>
-              <SelectTrigger className="w-full h-[3.2rem]">
+              <SelectTrigger className="w-full h-[3.2rem]" disabled={submitting || !!requestSuccess}>
                 <SelectValue placeholder="Select collateral" />
               </SelectTrigger>
               <SelectContent>
@@ -218,9 +288,26 @@ export default function LoansPageContent() {
             </Select>
           </div>
 
-          <Button onClick={handleApply} className="w-full py-6">
-            Submit Loan Request
-          </Button>
+          {requestSuccess ? (
+            <Button
+              onClick={() => {
+                setRequestSuccess(null);
+                setOpen(false);
+              }}
+              className="w-full py-6"
+            >
+              Close
+            </Button>
+          ) : (
+            <Button onClick={handleApply} className="w-full py-6" disabled={submitting}>
+              {submitting ? <Spinner color="#fff" fontSize="20px" /> : "Submit Loan Request"}
+            </Button>
+          )}
+          {requestSuccess && (
+            <p className="text-green-400 text-sm text-center mt-2">
+              {requestSuccess}
+            </p>
+          )}
         </div>
       </Modal>
 

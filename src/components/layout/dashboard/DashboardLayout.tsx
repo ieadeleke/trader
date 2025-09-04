@@ -9,6 +9,7 @@ import Link from "next/link";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { VscSettingsGear } from "react-icons/vsc";
 import { TbPlus } from "react-icons/tb";
+import { useAuth } from "@/context/AuthContext";
 // import useUser from "@/hooks/useUser";
 
 interface DashboardInterface {
@@ -17,7 +18,7 @@ interface DashboardInterface {
 }
 
 const DashboardLayout = (props: DashboardInterface) => {
-  //   let { user } = useUser();
+    let { user } = useAuth();
   return (
     <div className="flex bg-[#FBFBFB] overflow-hidden h-screen main-dashboard-sect">
       <div className="w-[250px] float-left h-full bg- [#0A0A0A] border-r border-solid border-border [#272C34] [#8E91A6]">
@@ -55,14 +56,12 @@ const DashboardLayout = (props: DashboardInterface) => {
               <li className="border-[#eaecef] border-solid border rounded-full py-2 px-2 flex items-center gap-2">
                 <div className="size-8 bg-[#eaecef] flex justify-center items-center rounded-full">
                   <h4 className="text-black text-xs">
-                    IA
-                    {/* {user?.userDetails?.firstName.slice(0, 1).toUpperCase()}{" "}
-                    {user?.userDetails?.lastName.slice(0, 1).toUpperCase()} */}
+                    {user?.firstName.slice(0, 1).toUpperCase()}{" "}
+                    {user?.lastName.slice(0, 1).toUpperCase()}
                   </h4>
                 </div>
                 <p className="text-sm text-[#eaecef]">
-                  Ifeoluwase Adeleke
-                  {/* {user?.userDetails?.firstName} {user?.userDetails?.lastName} */}
+                  {user?.firstName} {user?.lastName}
                 </p>
               </li>
             </ul>

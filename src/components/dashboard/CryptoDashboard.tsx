@@ -28,6 +28,9 @@ import WithdrawalModal from "./WithdrawFunds";
 import FundWalletModal from "./FundWalletModal";
 import ConvertTokensModal from "./ConvertTokens";
 import Image from "next/image";
+import { useAuth } from "@/context/AuthContext";
+import { useToast } from "@/context/ToastContext";
+import { apiFetch } from "@/utils/api";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -430,7 +433,10 @@ interface DashboardProps {
 
 // Main Dashboard Component
 const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
+  const { user } = useAuth();
+  const { successToast, errorToast } = useToast();
   const [cryptoData, setCryptoData] = useState<CryptoData[]>([]);
+  const [customerData, setCustomerData] = useState<any>({});
   const [trendingCoins, setTrendingCoins] = useState<TrendingCoin[]>([]);
   const [globalData, setGlobalData] = useState<GlobalData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -465,8 +471,22 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
     }
   };
 
+  const fetchUserWalletBalance = async () => {
+    setLoading(true);
+    try {
+      const res = await apiFetch("/api/wallets", { method: "GET", auth: true });
+      const data = await res.json();
+      setCustomerData(data?.data[0]);
+    } catch (err: any) {
+      errorToast("Something went wrong while fetching data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchUserWalletBalance();
 
     // Set up auto-refresh every 60 seconds
     const interval = setInterval(fetchData, 60000);
@@ -593,7 +613,9 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
           ""
         ) : (
           <div className="flex justify-between items-center mb-3">
-            <h2 className="text-3xl font-semibold text-white">Hello Ife,</h2>
+            <h2 className="text-3xl font-semibold text-white">
+              Hello {user?.firstName},
+            </h2>
             <div className="flex gap-3 items-center">
               <Button className="py-5 px-8" onClick={toggleFundWalletModal}>
                 Fund Wallet
@@ -617,20 +639,40 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
         )}
         {/* Global Stats */}
         <div className="border-2 border-solid border-border rounded-lg mb-8 p-4">
-          {hideProfile ? (
-            ""
-          ) : (
+          <div className="flex items-center justify-between flex-wrap">
             <div>
-              <StatCard
-                title="Your Wallet Balance"
-                size="large"
-                variant="white"
-                value={"0.00000345"}
-                suffix="BTC"
-                loading={!globalData}
-              />
+              {hideProfile ? (
+                ""
+              ) : (
+                <div>
+                  <StatCard
+                    title="Your Wallet Balance"
+                    size="large"
+                    variant="white"
+                    value={customerData?.balance}
+                    suffix={customerData?.asset}
+                    loading={!globalData}
+                  />
+                </div>
+              )}
             </div>
-          )}
+            <div>
+              {hideProfile ? (
+                ""
+              ) : (
+                <div>
+                  <StatCard
+                    size="small"
+                    title="Your Wallet Address"
+                    variant="white"
+                    value={customerData?.address}
+                    suffix={customerData?.asset}
+                    loading={!globalData}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
           <div className="flex flex-col md:grid grid-cols-[1fr_1.5fr] bor gap-4">
             <div>
               <StatCard

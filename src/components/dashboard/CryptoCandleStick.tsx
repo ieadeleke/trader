@@ -1,7 +1,7 @@
 // MultiAssetChart.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import CandlestickChart from "react-candlestick-chart";
 import {
   LineChart,
@@ -29,15 +29,28 @@ const COINS = ["bitcoin", "ethereum", "stellar"] as const;
 const STOCKS = ["AAPL", "MSFT", "GOOGL"] as const;
 const COMMODITIES = ["GOLD", "WTI", "SILVER"] as const;
 const BONDS = ["US10Y"] as const;
+const FOREX = ["EURUSD", "GBPUSD", "USDJPY", "USDCHF", "AUDUSD"] as const;
 
-type AssetType = "crypto" | "stock" | "commodity" | "bond";
+type AssetType = "crypto" | "stock" | "commodity" | "bond" | "forex";
 type ChartType = "candlestick" | "line" | "area" | "bar";
 
-export const MultiDashboardAssetChart: React.FC = () => {
-  const [assetType, setAssetType] = useState<AssetType>("crypto");
+interface Props {
+  assetType?: AssetType;
+  symbol?: string;
+  controls?: boolean; // show internal selectors
+}
+
+export const MultiDashboardAssetChart: React.FC<Props> = (props) => {
+  const controlled = useMemo(() => props.assetType && props.symbol, [props.assetType, props.symbol]);
+  const [assetType, setAssetType] = useState<AssetType>(props.assetType || "crypto");
   const [chartType, setChartType] = useState<ChartType>("candlestick");
-  const [symbol, setSymbol] = useState<string>("bitcoin");
+  const [symbol, setSymbol] = useState<string>(props.symbol || "bitcoin");
   const [data, setData] = useState<Candle[]>([]);
+
+  useEffect(() => {
+    if (props.assetType) setAssetType(props.assetType);
+    if (props.symbol) setSymbol(props.symbol);
+  }, [props.assetType, props.symbol]);
 
   useEffect(() => {
     (async () => {
@@ -57,20 +70,37 @@ export const MultiDashboardAssetChart: React.FC = () => {
       }
 
       if (assetType === "stock" || assetType === "commodity") {
-        url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=YOUR_API_KEY`;
-        transform = (raw: any) => {
-          const series = raw["Time Series (Daily)"] || {};
-          return Object.entries(series)
-            .slice(0, 30)
-            .map(([date, ohlc]: any) => ({
-              date: new Date(date).getTime(), // convert to timestamp
-              open: parseFloat(ohlc["1. open"]),
-              high: parseFloat(ohlc["2. high"]),
-              low: parseFloat(ohlc["3. low"]),
-              close: parseFloat(ohlc["4. close"]),
-            }))
-            .reverse();
-        };
+        if (assetType === "commodity" && symbol === "WTI") {
+          const teKey = process.env.NEXT_PUBLIC_TRADING_ECONOMICS_KEY;
+          url = `https://api.tradingeconomics.com/markets/commodity/CL1:COM?c=${teKey}`;
+          transform = (raw: any) => {
+            const series = raw[0]?.historicalData || [];
+            return series.slice(-60).map((d: any) => ({
+              date: new Date(d.date).getTime(),
+              open: Number(d.open),
+              high: Number(d.high),
+              low: Number(d.low),
+              close: Number(d.close),
+            }));
+          };
+        } else {
+          const key = process.env.NEXT_PUBLIC_ALPHA_VANTAGE_KEY;
+          const mappedSymbol = assetType === 'commodity' && symbol === 'GOLD' ? 'XAUUSD' : assetType === 'commodity' && symbol === 'SILVER' ? 'XAGUSD' : symbol;
+          url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${mappedSymbol}&apikey=${key}`;
+          transform = (raw: any) => {
+            const series = raw["Time Series (Daily)"] || {};
+            return Object.entries(series)
+              .slice(0, 60)
+              .map(([date, ohlc]: any) => ({
+                date: new Date(date).getTime(), // convert to timestamp
+                open: parseFloat(ohlc["1. open"]),
+                high: parseFloat(ohlc["2. high"]),
+                low: parseFloat(ohlc["3. low"]),
+                close: parseFloat(ohlc["4. close"]),
+              }))
+              .reverse();
+          };
+        }
       }
 
       if (assetType === "bond") {
@@ -84,6 +114,26 @@ export const MultiDashboardAssetChart: React.FC = () => {
             low: d.low,
             close: d.close,
           }));
+        };
+      }
+
+      if (assetType === "forex") {
+        const key = process.env.NEXT_PUBLIC_ALPHA_VANTAGE_KEY;
+        const from = symbol.slice(0, 3);
+        const to = symbol.slice(3, 6);
+        url = `https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=${from}&to_symbol=${to}&apikey=${key}`;
+        transform = (raw: any) => {
+          const series = raw["Time Series FX (Daily)"] || {};
+          return Object.entries(series)
+            .slice(0, 60)
+            .map(([date, ohlc]: any) => ({
+              date: new Date(date).getTime(), // timestamp
+              open: parseFloat(ohlc["1. open"]),
+              high: parseFloat(ohlc["2. high"]),
+              low: parseFloat(ohlc["3. low"]),
+              close: parseFloat(ohlc["4. close"]),
+            }))
+            .reverse();
         };
       }
 
@@ -105,6 +155,8 @@ export const MultiDashboardAssetChart: React.FC = () => {
       ? STOCKS
       : assetType === "commodity"
       ? COMMODITIES
+      : assetType === "forex"
+      ? FOREX
       : BONDS;
 
   const renderChart = () => {
@@ -192,72 +244,76 @@ export const MultiDashboardAssetChart: React.FC = () => {
     return null;
   };
 
+  const showControls = props.controls !== false && !controlled;
+
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        {/* Dropdown to select asset type */}
-        <div>
-          <label htmlFor="asset-type" className="text-primary mr-2">
-            View Markets:
-          </label>
-          <select
-            id="asset-type"
-            value={assetType}
-            onChange={(e) => {
-              setAssetType(e.target.value as AssetType);
-              setSymbol(
-                e.target.value === "crypto"
-                  ? "bitcoin"
-                  : e.target.value === "stock"
-                  ? "AAPL"
-                  : e.target.value === "commodity"
-                  ? "GOLD"
-                  : "US10Y"
-              );
-            }}
-          >
-            <option value="crypto">Crypto</option>
-            <option value="stock">Stock</option>
-            <option value="commodity">Commodity</option>
-            <option value="bond">Bond</option>
-          </select>
-        </div>
+      {showControls && (
+        <div className="flex justify-between items-center">
+          {/* Dropdown to select asset type */}
+          <div>
+            <label htmlFor="asset-type" className="text-primary mr-2">
+              View Markets:
+            </label>
+            <select
+              id="asset-type"
+              value={assetType}
+              onChange={(e) => {
+                setAssetType(e.target.value as AssetType);
+                setSymbol(
+                  e.target.value === "crypto"
+                    ? "bitcoin"
+                    : e.target.value === "stock"
+                    ? "AAPL"
+                    : e.target.value === "commodity"
+                    ? "GOLD"
+                    : "US10Y"
+                );
+              }}
+            >
+              <option value="crypto">Crypto</option>
+              <option value="stock">Stock</option>
+              <option value="commodity">Commodity</option>
+              <option value="bond">Bond</option>
+            </select>
+          </div>
 
-        {/* Dropdown to select symbol */}
-        <div>
-          <label htmlFor="symbol-select" className="text-primary mr-2">
-            Select:
-          </label>
-          <select
-            id="symbol-select"
-            value={symbol}
-            onChange={(e) => setSymbol(e.target.value)}
-          >
-            {options.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-        </div>
+          {/* Dropdown to select symbol */}
+          <div>
+            <label htmlFor="symbol-select" className="text-primary mr-2">
+              Select:
+            </label>
+            <select
+              id="symbol-select"
+              value={symbol}
+              onChange={(e) => setSymbol(e.target.value)}
+            >
+              {options.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        {/* Dropdown to select chart type */}
-        <div>
-          <label htmlFor="chart-type" className="text-primary mr-2">
-            Chart Type:
-          </label>
-          <select
-            id="chart-type"
-            value={chartType}
-            onChange={(e) => setChartType(e.target.value as ChartType)}
-          >
-            <option value="candlestick">Candlestick</option>
-            <option value="line">Line</option>
-            <option value="area">Area</option>
-            <option value="bar">Bar</option>
-          </select>
+          {/* Dropdown to select chart type */}
+          <div>
+            <label htmlFor="chart-type" className="text-primary mr-2">
+              Chart Type:
+            </label>
+            <select
+              id="chart-type"
+              value={chartType}
+              onChange={(e) => setChartType(e.target.value as ChartType)}
+            >
+              <option value="candlestick">Candlestick</option>
+              <option value="line">Line</option>
+              <option value="area">Area</option>
+              <option value="bar">Bar</option>
+            </select>
+          </div>
         </div>
-      </div>
+      )}
       {renderChart()}
     </div>
   );

@@ -49,7 +49,6 @@ const Navigation = (props: NavInterface) => {
   const hideContactModalDisplay = () => setDisplayContactUsModal(false);
 
   useEffect(() => {
-    console.log("auth control changed", props.authControl);
     if (props.authControl) {
       displayAuthModalDisplay();
     } else {
