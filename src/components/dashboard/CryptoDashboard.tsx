@@ -814,7 +814,7 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
       <FundWalletModal
         open={openFundWalletModal}
         onClose={toggleFundWalletModal}
-        // onSubmit={toggleFundWalletModal}
+        onSuccess={fetchUserWalletBalance}
       />
       <ConvertTokensModal
         open={convertWalletModal}

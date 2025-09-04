@@ -68,6 +68,10 @@ const DashboardLayout = (props: DashboardInterface) => {
           </div>
         </div>
         <div className="flex main-content flex-col">{props.children}</div>
+        {/* App Version */}
+        <div className="fixed bottom-2 right-3 text-[11px] text-[#eaecef]/60 select-none pointer-events-none">
+          v 2.1.1
+        </div>
       </div>
     </div>
   );

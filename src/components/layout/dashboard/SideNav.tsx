@@ -33,6 +33,18 @@ const SideBar = () => {
         <li>
           <Link
             className={`flex gap-3 items-center text-sm ${
+              pathName === "/dashboard/transactions"
+                ? "border-l-4 px-4 text-main border-main border-solid"
+                : "text-white px-5"
+            }`}
+            href="/dashboard/transactions"
+          >
+            <TiDocumentText className="text-xl text" /> Transactions
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`flex gap-3 items-center text-sm ${
               pathName === "/dashboard/resume"
                 ? "border-l-4 px-4 text-main border-main border-solid"
                 : "text-white px-5"
