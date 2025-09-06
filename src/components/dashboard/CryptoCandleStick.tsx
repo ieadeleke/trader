@@ -1,7 +1,7 @@
 // MultiAssetChart.tsx
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import CandlestickChart from "react-candlestick-chart";
 import {
   LineChart,
@@ -46,6 +46,24 @@ export const MultiDashboardAssetChart: React.FC<Props> = (props) => {
   const [chartType, setChartType] = useState<ChartType>("candlestick");
   const [symbol, setSymbol] = useState<string>(props.symbol || "bitcoin");
   const [data, setData] = useState<Candle[]>([]);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [chartWidth, setChartWidth] = useState<number>(800);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const RO = (window as any).ResizeObserver;
+    const ro = RO ? new RO((entries: any[]) => {
+      for (const entry of entries) {
+        const w = (entry.contentRect && entry.contentRect.width) || el.clientWidth || 800;
+        setChartWidth(Math.max(320, Math.floor(w)));
+      }
+    }) : null;
+    if (ro) ro.observe(el);
+    // initial measure
+    setChartWidth(Math.max(320, Math.floor(el.clientWidth || 800)));
+    return () => { ro && ro.disconnect(); };
+  }, []);
 
   useEffect(() => {
     if (props.assetType) setAssetType(props.assetType);
@@ -165,7 +183,7 @@ export const MultiDashboardAssetChart: React.FC<Props> = (props) => {
         <CandlestickChart
           id="multi-asset-chart"
           data={data}
-          width={1250}
+          width={chartWidth}
           height={500}
           decimal={2}
           ColorPalette={{
@@ -247,7 +265,7 @@ export const MultiDashboardAssetChart: React.FC<Props> = (props) => {
   const showControls = props.controls !== false && !controlled;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" ref={containerRef} style={{ width: "100%", overflowX: "hidden" }}>
       {showControls && (
         <div className="flex justify-between items-center">
           {/* Dropdown to select asset type */}

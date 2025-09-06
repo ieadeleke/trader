@@ -29,7 +29,7 @@ export default function LoansPageContent() {
   const [repayOpen, setRepayOpen] = useState<Loan | null>(null);
   const [amount, setAmount] = useState("");
   const [duration, setDuration] = useState("");
-  const [collateral, setCollateral] = useState("");
+  // Collateral selection removed
 
   const [activeLoans, setActiveLoans] = useState<Loan[]>([]);
   const [fetching, setFetching] = useState<boolean>(false);
@@ -101,8 +101,12 @@ export default function LoansPageContent() {
   // Handle new loan application
   const handleApply = async () => {
     const amtNumber = parseAmount(amount);
-    if (!amtNumber || !duration || !collateral) {
+    if (!amtNumber || !duration) {
       errorToast("Fill in all fields!");
+      return;
+    }
+    if (amtNumber < 20000) {
+      errorToast("Minimum loan amount is $20,000");
       return;
     }
 
@@ -117,7 +121,6 @@ export default function LoansPageContent() {
         body: JSON.stringify({
           amount: amtNumber,
           duration: Number(duration),
-          collateral,
         }),
       });
       const data = await res.json();
@@ -127,7 +130,7 @@ export default function LoansPageContent() {
       setRequestSuccess("Your request was received. A support officer will reach out to you.");
       setAmount("");
       setDuration("");
-      setCollateral("");
+      // collateral no longer required
       // Refresh loan records
       fetchLoans();
     } catch (err: any) {
@@ -254,6 +257,7 @@ export default function LoansPageContent() {
                 disabled={submitting || !!requestSuccess}
               />
             </div>
+            <p className="text-xs text-gray-400">Minimum amount: $20,000</p>
           </div>
 
           <div className="space-y-2">
@@ -272,21 +276,7 @@ export default function LoansPageContent() {
             </Select>
           </div>
 
-          <div className="space-y-2 mb-4">
-            <Label className="text-white">Collateral</Label>
-            <Select onValueChange={setCollateral} value={collateral}>
-              <SelectTrigger className="w-full h-[3.2rem]" disabled={submitting || !!requestSuccess}>
-                <SelectValue placeholder="Select collateral" />
-              </SelectTrigger>
-              <SelectContent>
-                {loanOffers.map((offer) => (
-                  <SelectItem key={offer.id} value={offer.collateral}>
-                    {offer.collateral}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          {/* Collateral selection removed */}
 
           {requestSuccess ? (
             <Button

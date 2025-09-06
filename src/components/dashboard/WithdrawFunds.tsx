@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 interface WithdrawalModalProps {
   open: boolean;
@@ -93,7 +94,6 @@ export default function WithdrawalModal({
                 <SelectContent>
                   <SelectItem value="crypto">Crypto</SelectItem>
                   <SelectItem value="bank">Bank Transfer</SelectItem>
-                  <SelectItem value="paypal">PayPal</SelectItem>
                   {/* <SelectItem value="mobile">Mobile Money</SelectItem> */}
                 </SelectContent>
               </Select>
@@ -122,49 +122,18 @@ export default function WithdrawalModal({
             )}
 
             {method === "bank" && (
-              <>
-                <div className="space-y-2">
-                  <Label className="text-white">Bank Name</Label>
-                  <Input
-                    placeholder="Enter bank name"
-                    value={formData.bankName || ""}
-                    onChange={(e) => handleChange("bankName", e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-white">Account Number</Label>
-                  <Input
-                    placeholder="Enter account number"
-                    value={formData.accountNumber || ""}
-                    onChange={(e) =>
-                      handleChange("accountNumber", e.target.value)
-                    }
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-white">Account Holder</Label>
-                  <Input
-                    placeholder="Enter account holder name"
-                    value={formData.accountHolder || ""}
-                    onChange={(e) =>
-                      handleChange("accountHolder", e.target.value)
-                    }
-                  />
-                </div>
-              </>
-            )}
-
-            {method === "paypal" && (
               <div className="space-y-2">
-                <Label className="text-white">PayPal Email</Label>
-                <Input
-                  type="email"
-                  placeholder="Enter PayPal email"
-                  value={formData.paypalEmail || ""}
-                  onChange={(e) => handleChange("paypalEmail", e.target.value)}
+                <Label className="text-white">Banking Details</Label>
+                <Textarea
+                  placeholder="Fill in your banking details"
+                  value={formData.bankDetails || ""}
+                  onChange={(e) => handleChange("bankDetails", e.target.value)}
+                  className="text-white opacity-90"
                 />
               </div>
             )}
+
+            {/* PayPal option removed */}
 
             {method === "mobile" && (
               <>

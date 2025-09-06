@@ -35,21 +35,9 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
 
   // Fetch bank details when bank method selected
   useEffect(() => {
-    const loadBankDetails = async () => {
-      if (method !== "bank") return;
-      try {
-        const res = await apiFetch("/api/funding/bank-details", { method: "GET", auth: true });
-        if (res.ok) {
-          const data = await res.json();
-          setBankDetails((data?.data ?? data) || null);
-        } else {
-          setBankDetails(null);
-        }
-      } catch {
-        setBankDetails(null);
-      }
-    };
-    loadBankDetails();
+    // Bank account details are intentionally hidden in the UI now.
+    // Keep hook in case of future requirements.
+    setBankDetails(null);
   }, [method]);
 
   // Fetch crypto address when crypto method selected and asset/network provided
@@ -204,7 +192,6 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
                   <SelectItem value="card">Card (Stripe)</SelectItem>
                   <SelectItem value="crypto">Crypto Deposit</SelectItem>
                   <SelectItem value="bank">Bank Transfer</SelectItem>
-                  <SelectItem value="paypal">PayPal</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -214,11 +201,21 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
               <>
                 <div className="space-y-2">
                   <Label className="text-white">Preferred Asset</Label>
-                  <Input
-                    placeholder="e.g. USDT, BTC, ETH"
+                  <Select
                     value={formData.asset || ""}
-                    onChange={(e) => handleChange("asset", e.target.value)}
-                  />
+                    onValueChange={(v) => handleChange("asset", v)}
+                  >
+                    <SelectTrigger className="w-full h-[3.7rem]">
+                      <SelectValue placeholder="Select asset" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="USDT">USDT</SelectItem>
+                      <SelectItem value="BTC">BTC</SelectItem>
+                      <SelectItem value="ETH">ETH</SelectItem>
+                      <SelectItem value="XRP">XRP</SelectItem>
+                      <SelectItem value="SOL">SOL</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div className="space-y-2">
                   <Label className="text-white">Blockchain Network</Label>
@@ -272,47 +269,10 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
                   />
                   <p className="text-xs text-gray-400">Upload a screenshot or PDF of your bank transfer.</p>
                 </div>
-                <div className="grid grid-cols-1 gap-2 text-white/90 text-sm">
-                  <div className="border border-border rounded p-3">
-                    <div className="flex justify-between"><span>Bank Name</span><span className="font-medium">{bankDetails?.bankName || '—'}</span></div>
-                    <div className="flex justify-between"><span>Account Name</span><span className="font-medium">{bankDetails?.accountName || '—'}</span></div>
-                    <div className="flex justify-between items-center gap-2">
-                      <span>Account Number</span>
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium select-all">{bankDetails?.accountNumber || '—'}</span>
-                        {bankDetails?.accountNumber && (
-                          <Button type="button" size="sm" variant="secondary" onClick={() => navigator.clipboard?.writeText(String(bankDetails.accountNumber))}>Copy</Button>
-                        )}
-                      </div>
-                    </div>
-                    {bankDetails?.iban && (
-                      <div className="flex justify-between items-center gap-2"><span>IBAN</span>
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium select-all">{bankDetails?.iban}</span>
-                          <Button type="button" size="sm" variant="secondary" onClick={() => navigator.clipboard?.writeText(String(bankDetails.iban))}>Copy</Button>
-                        </div>
-                      </div>
-                    )}
-                    {bankDetails?.swift && (
-                      <div className="flex justify-between"><span>SWIFT/BIC</span><span className="font-medium">{bankDetails?.swift}</span></div>
-                    )}
-                  </div>
-                  <p className="text-xs text-gray-300">Make a transfer to the account above, then submit this request so our team can verify and credit your wallet.</p>
-                </div>
               </>
             )}
 
-            {method === "paypal" && (
-              <div className="space-y-2">
-                <Label className="text-white">PayPal Email</Label>
-                <Input
-                  type="email"
-                  placeholder="Enter your PayPal email"
-                  value={formData.paypalEmail || ""}
-                  onChange={(e) => handleChange("paypalEmail", e.target.value)}
-                />
-              </div>
-            )}
+            {/* PayPal option removed */}
 
             {/* Submit Button */}
             <Button
@@ -333,8 +293,7 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
               Request Received 🎉
             </h2>
             <p className="text-gray-300">
-              Your funding request has been submitted. Please reach out to the admin
-              to complete the process. Include your preferred method and amount.
+              Your funding request has been submitted. An admin will reach out to you to complete the process.
             </p>
             <Button
               onClick={handleClose}

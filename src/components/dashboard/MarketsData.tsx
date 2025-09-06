@@ -13,7 +13,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import ConvertTokensModal from "./ConvertTokens"; // <- from earlier
+// ConvertTokensModal hidden
 import {
   LineChart,
   Line,
@@ -303,11 +303,11 @@ export default function TradePage() {
   const [stock, setStock] = useState(STOCKS[0]);
   const [commodity, setCommodity] = useState(COMMODITIES[0]);
   const [bond, setBond] = useState(BONDS[0]);
-  const [convertOpen, setConvertOpen] = useState(false);
+  // const [convertOpen, setConvertOpen] = useState(false);
   const [lastPrice, setLastPrice] = useState<number | undefined>(undefined);
 
   // Available tokens for ConvertTokensModal when in crypto
-  const availableTokens = useMemo(() => CRYPTO_TOKENS.map((t) => t.id), []);
+  // const availableTokens = useMemo(() => CRYPTO_TOKENS.map((t) => t.id), []);
 
   const activeSymbol = useMemo(() => {
     switch (assetClass) {
@@ -345,9 +345,7 @@ export default function TradePage() {
       {/* Header */}
       <div className="col-span-12 flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-white">Trade</h1>
-        <div className="flex gap-3">
-          <Button onClick={() => setConvertOpen(true)} className="bg-primary text-white rounded-lg px-4">Convert</Button>
-        </div>
+        <div className="flex gap-3" />
       </div>
 
       {/* Left: Chart & selectors */}
@@ -449,15 +447,7 @@ export default function TradePage() {
       </div>
 
       {/* Convert Modal (only truly relevant for crypto, but left global) */}
-      <ConvertTokensModal
-        open={convertOpen}
-        onClose={() => setConvertOpen(false)}
-        onSubmit={(payload: any) => {
-          console.log("Convert submitted", payload);
-          setConvertOpen(false);
-        }}
-        availableTokens={availableTokens}
-      />
+      {/* Convert modal hidden */}
     </div>
   );
 }

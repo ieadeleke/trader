@@ -26,7 +26,6 @@ import { Button } from "../ui/button";
 import { MultiDashboardAssetChart } from "./CryptoCandleStick";
 import WithdrawalModal from "./WithdrawFunds";
 import FundWalletModal from "./FundWalletModal";
-import ConvertTokensModal from "./ConvertTokens";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/context/ToastContext";
@@ -446,7 +445,7 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [openWithdrawalModal, setOpenWithdrawalModal] = useState(false);
   const [openFundWalletModal, setOpenFundWalletModal] = useState(false);
-  const [convertWalletModal, setConvertWalletModal] = useState(false);
+  // Convert Tokens feature hidden
   const pageSize = 20;
 
   const fetchData = async () => {
@@ -499,21 +498,11 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
   const toggleFundWalletModal = () => {
     setOpenFundWalletModal(!openFundWalletModal);
   };
-  const toggleConvertWalletModal = () => {
-    setConvertWalletModal(!convertWalletModal);
-  };
+  // const toggleConvertWalletModal = () => {};
 
   // convert tokens modal
-  const tokens = ["bitcoin", "ethereum", "usdt", "stellar"];
-
-  const handleConvert = (data: {
-    fromToken: string;
-    toToken: string;
-    amount: number;
-  }) => {
-    console.log("Conversion request:", data);
-    // TODO: Call your backend API to process the conversion
-  };
+  // const tokens = ["bitcoin", "ethereum", "usdt", "stellar"];
+  // const handleConvert = (data: { fromToken: string; toToken: string; amount: number }) => {};
 
   const filteredData = cryptoData
     .filter(
@@ -627,13 +616,7 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
               >
                 Withdrawal
               </Button>
-              <Button
-                className="py-5 px-8"
-                variant="secondary"
-                onClick={toggleConvertWalletModal}
-              >
-                Convert Tokens
-              </Button>
+              {/* Convert Tokens hidden */}
             </div>
           </div>
         )}
@@ -816,12 +799,7 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
         onClose={toggleFundWalletModal}
         onSuccess={fetchUserWalletBalance}
       />
-      <ConvertTokensModal
-        open={convertWalletModal}
-        onClose={toggleConvertWalletModal}
-        onSubmit={handleConvert}
-        availableTokens={tokens}
-      />
+      {/* Convert Tokens modal hidden */}
     </div>
   );
 };

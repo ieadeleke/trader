@@ -94,6 +94,37 @@ const TradeTerminal: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState<string>("");
   
   const [currentPrice, setCurrentPrice] = useState<number>(0);
+  // Autotrade state
+  const [autoAssetType, setAutoAssetType] = useState<AssetType>("crypto");
+  const [autoSymbolsText, setAutoSymbolsText] = useState<string>("bitcoin");
+  const [autoLeverage, setAutoLeverage] = useState<string>("1");
+  const [autoRiskPct, setAutoRiskPct] = useState<string>("1");
+  const [autoSlPct, setAutoSlPct] = useState<string>("0.5");
+  const [autoTpPct, setAutoTpPct] = useState<string>("1");
+  const [autoSignal, setAutoSignal] = useState<string>("momentum");
+  const [autoLbShort, setAutoLbShort] = useState<string>("3");
+  const [autoLbLong, setAutoLbLong] = useState<string>("8");
+  const [autoAtrEnabled, setAutoAtrEnabled] = useState<boolean>(false);
+  const [autoAtrPeriod, setAutoAtrPeriod] = useState<string>("14");
+  const [autoAtrSlMult, setAutoAtrSlMult] = useState<string>("1.5");
+  const [autoAtrTpMult, setAutoAtrTpMult] = useState<string>("2");
+  const [autoMinFreeMarginPct, setAutoMinFreeMarginPct] = useState<string>("10");
+  const [autoDailyMaxLossPct, setAutoDailyMaxLossPct] = useState<string>("20");
+  const [autoAvoidDup, setAutoAvoidDup] = useState<boolean>(true);
+  const [autoSizingMode, setAutoSizingMode] = useState<string>("percent");
+  const [autoFixedNotional, setAutoFixedNotional] = useState<string>("0");
+  const [autoKellyFraction, setAutoKellyFraction] = useState<string>("5");
+  const [autoOverridesText, setAutoOverridesText] = useState<string>("[]");
+  const [autoMaxConcurrent, setAutoMaxConcurrent] = useState<string>("1");
+  const [autoIntervalSec, setAutoIntervalSec] = useState<string>("60");
+  const [autoRunning, setAutoRunning] = useState<boolean>(false);
+  const [autoNextRunSec, setAutoNextRunSec] = useState<number | null>(null);
+  const [autoPaused, setAutoPaused] = useState<boolean>(false);
+  const [autoResumeAt, setAutoResumeAt] = useState<string | null>(null);
+  const [loadingAuto, setLoadingAuto] = useState<boolean>(false);
+  const [savingAuto, setSavingAuto] = useState<boolean>(false);
+  const [startingAuto, setStartingAuto] = useState<boolean>(false);
+  const [stoppingAuto, setStoppingAuto] = useState<boolean>(false);
 
   const symbols = useMemo(() => {
     if (assetType === "crypto") return COINS as readonly string[];
@@ -205,10 +236,53 @@ const TradeTerminal: React.FC = () => {
             }
           }
         } catch {}
+        // Load autotrade settings + status
+        try {
+          setLoadingAuto(true);
+          const sres = await apiFetch('/api/trade/autotrade', { method: 'GET', auth: true });
+          if (sres.ok) {
+            const sdata = await sres.json();
+            const cfg = sdata?.data ?? sdata ?? {};
+            if (cfg?.assetType) setAutoAssetType(cfg.assetType as AssetType);
+            if (Array.isArray(cfg?.symbols)) setAutoSymbolsText(cfg.symbols.join(","));
+            if (cfg?.leverage != null) setAutoLeverage(String(cfg.leverage));
+            if (cfg?.riskPerTradePct != null) setAutoRiskPct(String(cfg.riskPerTradePct));
+            if (cfg?.maxConcurrentPositions != null) setAutoMaxConcurrent(String(cfg.maxConcurrentPositions));
+            if (cfg?.intervalSec != null) setAutoIntervalSec(String(cfg.intervalSec));
+            if (cfg?.slPct != null) setAutoSlPct(String(cfg.slPct));
+            if (cfg?.tpPct != null) setAutoTpPct(String(cfg.tpPct));
+            if (cfg?.signalType) setAutoSignal(String(cfg.signalType));
+            if (cfg?.lookbackShort != null) setAutoLbShort(String(cfg.lookbackShort));
+            if (cfg?.lookbackLong != null) setAutoLbLong(String(cfg.lookbackLong));
+            if (cfg?.atrEnabled != null) setAutoAtrEnabled(Boolean(cfg.atrEnabled));
+            if (cfg?.atrPeriod != null) setAutoAtrPeriod(String(cfg.atrPeriod));
+            if (cfg?.atrSlMult != null) setAutoAtrSlMult(String(cfg.atrSlMult));
+            if (cfg?.atrTpMult != null) setAutoAtrTpMult(String(cfg.atrTpMult));
+            if (cfg?.minFreeMarginPct != null) setAutoMinFreeMarginPct(String(cfg.minFreeMarginPct));
+            if (cfg?.dailyMaxLossPct != null) setAutoDailyMaxLossPct(String(cfg.dailyMaxLossPct));
+            if (cfg?.avoidDuplicateSide != null) setAutoAvoidDup(Boolean(cfg.avoidDuplicateSide));
+            if (cfg?.sizingMode) setAutoSizingMode(String(cfg.sizingMode));
+            if (cfg?.fixedNotionalUSD != null) setAutoFixedNotional(String(cfg.fixedNotionalUSD));
+            if (cfg?.kellyFractionPct != null) setAutoKellyFraction(String(cfg.kellyFractionPct));
+            if (Array.isArray(cfg?.overrides)) setAutoOverridesText(JSON.stringify(cfg.overrides, null, 2));
+          }
+          const tres = await apiFetch('/api/trade/autotrade/status', { method: 'GET', auth: true });
+          if (tres.ok) {
+            const tdata = await tres.json();
+            const st = tdata?.data ?? tdata ?? {};
+            setAutoRunning(!!st?.running);
+            setAutoNextRunSec(typeof st?.nextRunInSec === 'number' ? st.nextRunInSec : null);
+            if (st?.paused != null) {
+              setAutoPaused(!!st.paused);
+              setAutoResumeAt(st?.resumeAt ? new Date(st.resumeAt).toLocaleString() : null);
+            }
+          }
+        } catch {}
       } catch (e) {
         // ignore
       } finally {
         setLoadingPortfolio(false);
+        setLoadingAuto(false);
       }
     };
     loadPortfolio();
@@ -334,6 +408,125 @@ const TradeTerminal: React.FC = () => {
   const equity = balance + marginUsed + unrealizedPnL;
   const freeMargin = equity - marginUsed; // effectively wallet balance + unrealized
 
+  // Autotrade helpers
+  const saveAutoSettings = async () => {
+    try {
+      setSavingAuto(true);
+      const symbols = autoSymbolsText.split(',').map(s => s.trim()).filter(Boolean);
+      // Parse overrides JSON if provided
+      let overrides: any = undefined;
+      try {
+        overrides = JSON.parse(autoOverridesText || '[]');
+        if (!Array.isArray(overrides)) throw new Error('Overrides must be an array');
+      } catch (e:any) {
+        throw new Error('Overrides JSON invalid. Expect an array of objects.');
+      }
+      const res = await apiFetch('/api/trade/autotrade', { method: 'POST', auth: true, json: {
+        assetType: autoAssetType,
+        symbols,
+        leverage: Number(autoLeverage) || 1,
+        riskPerTradePct: Number(autoRiskPct) || 1,
+        maxConcurrentPositions: Number(autoMaxConcurrent) || 1,
+        intervalSec: Number(autoIntervalSec) || 60,
+        sizingMode: autoSizingMode,
+        fixedNotionalUSD: Number(autoFixedNotional) || 0,
+        kellyFractionPct: Number(autoKellyFraction) || 0,
+        slPct: Number(autoSlPct) || 0,
+        tpPct: Number(autoTpPct) || 0,
+        signalType: autoSignal,
+        lookbackShort: Number(autoLbShort) || 3,
+        lookbackLong: Number(autoLbLong) || 8,
+        atrEnabled: !!autoAtrEnabled,
+        atrPeriod: Number(autoAtrPeriod) || 14,
+        atrSlMult: Number(autoAtrSlMult) || 1.5,
+        atrTpMult: Number(autoAtrTpMult) || 2,
+        minFreeMarginPct: Number(autoMinFreeMarginPct) || 0,
+        dailyMaxLossPct: Number(autoDailyMaxLossPct) || 0,
+        avoidDuplicateSide: !!autoAvoidDup,
+        overrides,
+      }});
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.message || 'Failed to save');
+      successToast('Autotrade settings saved');
+    } catch(e:any){ errorToast(e.message || 'Failed to save autotrade'); }
+    finally { setSavingAuto(false); }
+  };
+
+  const refreshAutoStatus = async () => {
+    try {
+      const tres = await apiFetch('/api/trade/autotrade/status', { method: 'GET', auth: true });
+      if (tres.ok) {
+        const tdata = await tres.json();
+        const st = tdata?.data ?? tdata ?? {};
+        setAutoRunning(!!st?.running);
+        setAutoNextRunSec(typeof st?.nextRunInSec === 'number' ? st.nextRunInSec : null);
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    if (!autoRunning) return;
+    const t = setInterval(refreshAutoStatus, 5000);
+    return () => clearInterval(t);
+  }, [autoRunning]);
+
+  const startAuto = async () => {
+    try {
+      setStartingAuto(true);
+      const symbols = autoSymbolsText.split(',').map(s => s.trim()).filter(Boolean);
+      let overrides: any = undefined;
+      try {
+        overrides = JSON.parse(autoOverridesText || '[]');
+        if (!Array.isArray(overrides)) throw new Error('Overrides must be an array');
+      } catch (e:any) {
+        throw new Error('Overrides JSON invalid. Expect an array of objects.');
+      }
+      const res = await apiFetch('/api/trade/autotrade/start', { method: 'POST', auth: true, json: {
+        assetType: autoAssetType,
+        symbols,
+        leverage: Number(autoLeverage) || 1,
+        riskPerTradePct: Number(autoRiskPct) || 1,
+        maxConcurrentPositions: Number(autoMaxConcurrent) || 1,
+        intervalSec: Number(autoIntervalSec) || 60,
+        sizingMode: autoSizingMode,
+        fixedNotionalUSD: Number(autoFixedNotional) || 0,
+        kellyFractionPct: Number(autoKellyFraction) || 0,
+        slPct: Number(autoSlPct) || 0,
+        tpPct: Number(autoTpPct) || 0,
+        signalType: autoSignal,
+        lookbackShort: Number(autoLbShort) || 3,
+        lookbackLong: Number(autoLbLong) || 8,
+        atrEnabled: !!autoAtrEnabled,
+        atrPeriod: Number(autoAtrPeriod) || 14,
+        atrSlMult: Number(autoAtrSlMult) || 1.5,
+        atrTpMult: Number(autoAtrTpMult) || 2,
+        minFreeMarginPct: Number(autoMinFreeMarginPct) || 0,
+        dailyMaxLossPct: Number(autoDailyMaxLossPct) || 0,
+        avoidDuplicateSide: !!autoAvoidDup,
+        overrides,
+      }});
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.message || 'Start failed');
+      setAutoRunning(true);
+      successToast('Autotrade started');
+      refreshAutoStatus();
+    } catch(e:any){ errorToast(e.message || 'Failed to start autotrade'); }
+    finally { setStartingAuto(false); }
+  };
+
+  const stopAuto = async () => {
+    try {
+      setStoppingAuto(true);
+      const res = await apiFetch('/api/trade/autotrade/stop', { method: 'POST', auth: true });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.message || 'Stop failed');
+      setAutoRunning(false);
+      setAutoNextRunSec(null);
+      successToast('Autotrade stopped');
+    } catch(e:any){ errorToast(e.message || 'Failed to stop autotrade'); }
+    finally { setStoppingAuto(false); }
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -408,7 +601,7 @@ const TradeTerminal: React.FC = () => {
                   <div className="text-lg font-semibold">${freeMargin.toFixed(2)}</div>
                 </div>
               </div>
-              <div className="flex gap-3">
+              <div className="flex flex-col gap-3">
                 <Button className="flex-1 bg-green-600 hover:bg-green-700" onClick={() => setDepositOpen(true)}>Fund Wallet</Button>
                 <Button className="flex-1 bg-red-600 hover:bg-red-700" onClick={() => setWithdrawOpen(true)}>Withdraw Wallet</Button>
               </div>
@@ -481,6 +674,154 @@ const TradeTerminal: React.FC = () => {
               <Button className="w-full py-6" onClick={placeOrder} disabled={placing}>
                 {placing ? <Spinner color="#fff" fontSize="20px" /> : `${side === "buy" ? "Buy" : "Sell"} ${symbol}`}
               </Button>
+          </CardContent>
+          </Card>
+
+          {/* Autotrade */}
+          <Card className="bg-[#1e1e2d] text-white mt-4">
+            <CardContent className="p-4 space-y-3">
+              <h3 className="text-lg font-semibold">Autotrade</h3>
+              {autoPaused && (
+                <div className="bg-yellow-600/30 border border-yellow-500 text-yellow-200 text-sm p-2 rounded">
+                  Autotrade paused due to risk controls. Resumes {autoResumeAt || 'later'}.
+                </div>
+              )}
+              {loadingAuto && (
+                <div className="w-full flex justify-center"><Spinner /></div>
+              )}
+              <div>
+                <Label className="text-white/80 text-sm">Asset Type</Label>
+                <select
+                  className="bg-transparent border px-3 py-2 rounded w-full"
+                  value={autoAssetType}
+                  onChange={(e) => setAutoAssetType(e.target.value as AssetType)}
+                >
+                  <option value="crypto">Crypto</option>
+                  <option value="stock">Stock</option>
+                  <option value="commodity">Commodity</option>
+                  <option value="forex">Forex</option>
+                </select>
+              </div>
+              <div>
+                <Label className="text-white/80 text-sm">Symbols (comma-separated)</Label>
+                <Input value={autoSymbolsText} onChange={(e) => setAutoSymbolsText(e.target.value)} placeholder="bitcoin,ethereum" />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <Label className="text-white/80 text-sm">Leverage (x)</Label>
+                  <Input value={autoLeverage} onChange={(e) => setAutoLeverage(e.target.value)} placeholder="1" />
+                </div>
+                <div>
+                  <Label className="text-white/80 text-sm">Risk per Trade (%)</Label>
+                  <Input value={autoRiskPct} onChange={(e) => setAutoRiskPct(e.target.value)} placeholder="1" />
+                </div>
+                <div className="col-span-2">
+                  <Label className="text-white/80 text-sm">Sizing Mode</Label>
+                  <select className="bg-transparent border px-3 py-2 rounded w-full" value={autoSizingMode} onChange={(e)=>setAutoSizingMode(e.target.value)}>
+                    <option value="percent">Percent of Wallet</option>
+                    <option value="fixed">Fixed Notional (USD)</option>
+                    <option value="kelly">Kelly Fraction (%)</option>
+                  </select>
+                </div>
+                {autoSizingMode === 'fixed' && (
+                  <div className="col-span-2">
+                    <Label className="text-white/80 text-sm">Fixed Notional (USD)</Label>
+                    <Input value={autoFixedNotional} onChange={(e)=>setAutoFixedNotional(e.target.value)} placeholder="100" />
+                  </div>
+                )}
+                {autoSizingMode === 'kelly' && (
+                  <div className="col-span-2">
+                    <Label className="text-white/80 text-sm">Kelly Fraction (%)</Label>
+                    <Input value={autoKellyFraction} onChange={(e)=>setAutoKellyFraction(e.target.value)} placeholder="5" />
+                  </div>
+                )}
+                <div>
+                  <Label className="text-white/80 text-sm">Max Concurrent</Label>
+                  <Input value={autoMaxConcurrent} onChange={(e) => setAutoMaxConcurrent(e.target.value)} placeholder="1" />
+                </div>
+                <div>
+                  <Label className="text-white/80 text-sm">Interval (sec)</Label>
+                  <Input value={autoIntervalSec} onChange={(e) => setAutoIntervalSec(e.target.value)} placeholder="60" />
+                </div>
+                <div>
+                  <Label className="text-white/80 text-sm">Stop Loss (%)</Label>
+                  <Input value={autoSlPct} onChange={(e) => setAutoSlPct(e.target.value)} placeholder="0.5" />
+                </div>
+                <div>
+                  <Label className="text-white/80 text-sm">Take Profit (%)</Label>
+                  <Input value={autoTpPct} onChange={(e) => setAutoTpPct(e.target.value)} placeholder="1" />
+                </div>
+                <div>
+                  <Label className="text-white/80 text-sm">Signal</Label>
+                  <select className="bg-transparent border px-3 py-2 rounded w-full" value={autoSignal} onChange={(e)=>setAutoSignal(e.target.value)}>
+                    <option value="momentum">Momentum (SMA)</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-2 gap-3 col-span-2">
+                  <div>
+                    <Label className="text-white/80 text-sm">SMA Short</Label>
+                    <Input value={autoLbShort} onChange={(e) => setAutoLbShort(e.target.value)} placeholder="3" />
+                  </div>
+                  <div>
+                    <Label className="text-white/80 text-sm">SMA Long</Label>
+                    <Input value={autoLbLong} onChange={(e) => setAutoLbLong(e.target.value)} placeholder="8" />
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 mt-2">
+                <input type="checkbox" checked={autoAtrEnabled} onChange={(e)=>setAutoAtrEnabled(e.target.checked)} />
+                <Label className="text-white/80 text-sm">Use ATR for SL/TP</Label>
+              </div>
+              {autoAtrEnabled && (
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <Label className="text-white/80 text-sm">ATR Period</Label>
+                    <Input value={autoAtrPeriod} onChange={(e)=>setAutoAtrPeriod(e.target.value)} placeholder="14" />
+                  </div>
+                  <div>
+                    <Label className="text-white/80 text-sm">ATR SL Mult</Label>
+                    <Input value={autoAtrSlMult} onChange={(e)=>setAutoAtrSlMult(e.target.value)} placeholder="1.5" />
+                  </div>
+                  <div>
+                    <Label className="text-white/80 text-sm">ATR TP Mult</Label>
+                    <Input value={autoAtrTpMult} onChange={(e)=>setAutoAtrTpMult(e.target.value)} placeholder="2" />
+                  </div>
+                </div>
+              )}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <Label className="text-white/80 text-sm">Min Free Margin (%)</Label>
+                  <Input value={autoMinFreeMarginPct} onChange={(e)=>setAutoMinFreeMarginPct(e.target.value)} placeholder="10" />
+                </div>
+                <div>
+                  <Label className="text-white/80 text-sm">Daily Max Loss (%)</Label>
+                  <Input value={autoDailyMaxLossPct} onChange={(e)=>setAutoDailyMaxLossPct(e.target.value)} placeholder="20" />
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <input type="checkbox" checked={autoAvoidDup} onChange={(e)=>setAutoAvoidDup(e.target.checked)} />
+                <Label className="text-white/80 text-sm">Avoid opening same-side trade on same symbol</Label>
+              </div>
+              <div>
+                <Label className="text-white/80 text-sm">Per-Symbol Overrides (JSON array)</Label>
+                <textarea className="w-full bg-transparent border rounded p-2 text-sm" rows={5} value={autoOverridesText} onChange={(e)=>setAutoOverridesText(e.target.value)} placeholder='[{"symbol":"bitcoin","slPct":0.8,"tpPct":1.6}]' />
+              </div>
+              <div className="flex gap-3">
+                <Button className="flex-1 bg-[#475569]" disabled={savingAuto} onClick={saveAutoSettings}>
+                  {savingAuto ? <Spinner color="#fff" fontSize="18px" /> : 'Save Settings'}
+                </Button>
+              </div>
+              <div className="flex gap-3">
+                <Button className="flex-1 bg-green-600 hover:bg-green-700" disabled={startingAuto || autoRunning} onClick={startAuto}>
+                  {startingAuto ? <Spinner color="#fff" fontSize="18px" /> : 'Start'}
+                </Button>
+                <Button className="flex-1 bg-red-600 hover:bg-red-700" disabled={stoppingAuto || !autoRunning} onClick={stopAuto}>
+                  {stoppingAuto ? <Spinner color="#fff" fontSize="18px" /> : 'Stop'}
+                </Button>
+              </div>
+              <div className="text-white/70 text-xs">
+                Status: {autoRunning ? 'Running' : 'Stopped'}{autoRunning && (autoNextRunSec!=null ? ` • next in ${autoNextRunSec}s` : '')}
+              </div>
             </CardContent>
           </Card>
         </div>
