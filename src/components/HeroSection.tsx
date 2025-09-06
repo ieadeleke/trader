@@ -68,7 +68,10 @@ export default function HeroSection(props: ComponentInterface) {
       key: "name",
       render: (text: string, record: any) => (
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <Image quality={100} width={1000} height={1000}
+          <Image
+            quality={100}
+            width={1000}
+            height={1000}
             src={record.image}
             alt={record.name}
             style={{ width: 24, height: 24 }}
@@ -106,7 +109,10 @@ export default function HeroSection(props: ComponentInterface) {
 
   return (
     <main>
-      <section className="hero-section relative px-5 md:px-20 pt-32 md:pt-44" id="home">
+      <section
+        className="hero-section relative px-5 md:px-20 pt-32 md:pt-44"
+        id="home"
+      >
         <div className="mb-6">
           {/* <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-3">
             <h4 className="uppercase font-bold text-primary text-xs md:text-sm font-ibm">
@@ -149,12 +155,12 @@ export default function HeroSection(props: ComponentInterface) {
             >
               Create Account
             </button>
-            <button
-              onClick={() => props.authControl(true)}
+            <Link
+              href="/auth/signin"
               className="rounded-lg w-full md:w-[20rem] text-white text-sm py-4 px-8 bg-transparent border border-solid border-primary cursor-pointer"
             >
               Sign In
-            </button>
+            </Link>
           </div>
         </div>
         {/* <div className="z-40 relative">

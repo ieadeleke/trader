@@ -180,7 +180,7 @@ const SignUpForm = () => {
                 <CalendarIcon />
                 {formData.dateOfBirth
                   ? format(new Date(formData.dateOfBirth), "PPP")
-                  : "Pick a date"}
+                  : "Date of Birth"}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">

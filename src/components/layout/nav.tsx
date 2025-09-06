@@ -108,12 +108,12 @@ const Navigation = (props: NavInterface) => {
       <div className="hidden md:block">
         <ul className="flex items-center gap-10">
           <li>
-            <button
-              onClick={toggleContactModalDisplay}
+            <Link
+              href="/auth/signin"
               className="bg-transparent text-sm text-white cursor-pointer"
             >
               Sign In
-            </button>
+            </Link>
           </li>
           <button
             className="bg-primary text-sm text-white py-3 px-6 rounded-lg cursor-pointer"
