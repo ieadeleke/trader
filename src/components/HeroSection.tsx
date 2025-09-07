@@ -157,7 +157,7 @@ export default function HeroSection(props: ComponentInterface) {
             </button>
             <Link
               href="/auth/signin"
-              className="rounded-lg w-full md:w-[20rem] text-white text-sm py-4 px-8 bg-transparent border border-solid border-primary cursor-pointer"
+              className="rounded-lg w-full md:w-[20rem] text-white text-sm py-4 px-8 bg-transparent border border-solid border-primary cursor-pointer text-center"
             >
               Sign In
             </Link>
