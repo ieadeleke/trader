@@ -19,26 +19,45 @@ interface WithdrawalModalProps {
   open: boolean;
   onClose: () => void;
   onSubmit: (data: any) => void;
+  onSuccess?: () => void;
 }
 
-export default function WithdrawalModal({
-  open,
-  onClose,
-  onSubmit,
-}: WithdrawalModalProps) {
+export default function WithdrawalModal({ open, onClose, onSubmit, onSuccess }: WithdrawalModalProps) {
   const [amount, setAmount] = useState("");
   const [method, setMethod] = useState("");
   const [formData, setFormData] = useState<any>({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (key: string, value: string) => {
     setFormData((prev: any) => ({ ...prev, [key]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!amount || !method) return;
-    // onSubmit({ amount, method, ...formData });
-    setSubmitted(true);
+    try {
+      setLoading(true);
+      const payload: any = { amount: Number(amount), method };
+      if (method === 'crypto') {
+        payload.network = formData.network || '';
+        payload.wallet = formData.wallet || '';
+      } else if (method === 'bank') {
+        payload.bankDetails = formData.bankDetails || '';
+      }
+      const res = await fetch(`/api/withdrawals/request`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.message || 'Withdrawal request failed');
+      setSubmitted(true);
+      if (onSuccess) onSuccess();
+    } catch (_) {
+      // Keep UX simple: silently fail? Optionally wire toast here.
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClose = () => {
@@ -158,11 +177,8 @@ export default function WithdrawalModal({
             )}
 
             {/* Submit Button */}
-            <Button
-              onClick={handleSubmit}
-              className="w-full py-7 text-sm bg-primary text-white rounded-lg"
-            >
-              Confirm Withdrawal
+            <Button onClick={handleSubmit} disabled={loading} className="w-full py-7 text-sm bg-primary text-white rounded-lg">
+              {loading ? 'Submitting...' : 'Confirm Withdrawal'}
             </Button>
           </>
         ) : (

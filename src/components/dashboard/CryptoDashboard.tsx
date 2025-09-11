@@ -639,7 +639,7 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
                 </div>
               )}
             </div>
-            <div>
+            {/* <div>
               {hideProfile ? (
                 ""
               ) : (
@@ -654,7 +654,7 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
                   />
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-col md:grid grid-cols-[1fr_1.5fr] bor gap-4">
             <div>
@@ -793,6 +793,9 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
         open={openWithdrawalModal}
         onClose={toggleWithdrawalModal}
         onSubmit={toggleWithdrawalModal}
+        onSuccess={() => {
+          try { window.location.href = '/dashboard/transactions'; } catch (_) {}
+        }}
       />
       <FundWalletModal
         open={openFundWalletModal}

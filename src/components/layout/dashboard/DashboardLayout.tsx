@@ -6,9 +6,10 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import Link from "next/link";
 
 import { VscSettingsGear } from "react-icons/vsc";
-import { TbPlus, TbChartCandle } from "react-icons/tb";
+import { TbChartCandle, TbCurrencyDollar } from "react-icons/tb";
 import { useAuth } from "@/context/AuthContext";
 import FundWalletModal from "@/components/dashboard/FundWalletModal";
+import { useRouter } from "next/navigation";
 // import useUser from "@/hooks/useUser";
 
 interface DashboardInterface {
@@ -19,6 +20,7 @@ interface DashboardInterface {
 const DashboardLayout = (props: DashboardInterface) => {
     let { user } = useAuth();
     const [fundOpen, setFundOpen] = useState(false);
+    const router = useRouter();
   return (
     <div className="flex bg-[#FBFBFB] overflow-hidden h-screen main-dashboard-sect">
       <div className="w-[250px] float-left h-full bg- [#0A0A0A] border-r border-solid border-border [#272C34] [#8E91A6]">
@@ -55,7 +57,7 @@ const DashboardLayout = (props: DashboardInterface) => {
                   aria-label="Fund Wallet"
                   title="Fund Wallet"
                 >
-                  <TbPlus className="text-base text-[#eaecef]" />
+                  <TbCurrencyDollar className="text-base text-[#eaecef]" />
                 </button>
               </li>
               <li className="border-[#eaecef] border-solid border rounded-full py-2 px-2 flex items-center gap-2">
@@ -73,7 +75,14 @@ const DashboardLayout = (props: DashboardInterface) => {
           </div>
         </div>
         <div className="flex main-content flex-col">{props.children}</div>
-        <FundWalletModal open={fundOpen} onClose={() => setFundOpen(false)} />
+        <FundWalletModal
+          open={fundOpen}
+          onClose={() => setFundOpen(false)}
+          onSuccess={() => {
+            setFundOpen(false);
+            try { router.push('/dashboard/transactions'); } catch (_) {}
+          }}
+        />
         {/* App Version */}
         <div className="fixed bottom-2 right-3 text-[11px] text-[#eaecef]/60 select-none pointer-events-none">
           v 2.1.1

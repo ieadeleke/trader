@@ -921,7 +921,14 @@ const TradeTerminal: React.FC = () => {
 
       {/* Wallet-integrated modals */}
       <FundWalletModal open={depositOpen} onClose={() => setDepositOpen(false)} />
-      <WithdrawalModal open={withdrawOpen} onClose={() => setWithdrawOpen(false)} onSubmit={() => {}} />
+      <WithdrawalModal
+        open={withdrawOpen}
+        onClose={() => setWithdrawOpen(false)}
+        onSubmit={() => {}}
+        onSuccess={() => {
+          try { window.location.href = '/dashboard/transactions'; } catch (_) {}
+        }}
+      />
     </div>
   );
 };
