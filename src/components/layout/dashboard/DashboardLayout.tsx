@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "./SideNav";
 
 import { BiLogOut } from "react-icons/bi";
-import { IoNotifications } from "react-icons/io5";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Link from "next/link";
 
-import { IoNotificationsOutline } from "react-icons/io5";
 import { VscSettingsGear } from "react-icons/vsc";
-import { TbPlus } from "react-icons/tb";
+import { TbPlus, TbChartCandle } from "react-icons/tb";
 import { useAuth } from "@/context/AuthContext";
+import FundWalletModal from "@/components/dashboard/FundWalletModal";
 // import useUser from "@/hooks/useUser";
 
 interface DashboardInterface {
@@ -19,6 +18,7 @@ interface DashboardInterface {
 
 const DashboardLayout = (props: DashboardInterface) => {
     let { user } = useAuth();
+    const [fundOpen, setFundOpen] = useState(false);
   return (
     <div className="flex bg-[#FBFBFB] overflow-hidden h-screen main-dashboard-sect">
       <div className="w-[250px] float-left h-full bg- [#0A0A0A] border-r border-solid border-border [#272C34] [#8E91A6]">
@@ -31,27 +31,32 @@ const DashboardLayout = (props: DashboardInterface) => {
             <ul className="flex items-center gap-5">
               <li>
                 <Link
-                  href=""
+                  href="/dashboard/market"
                   className="border border-solid border-[#eaecef] flex items-center justify-center rounded-full size-8"
+                  aria-label="Go to Trade"
+                  title="Trade"
                 >
-                  <IoNotificationsOutline className="text-base text-[#eaecef]" />
+                  <TbChartCandle className="text-base text-[#eaecef]" />
                 </Link>
               </li>
               <li>
                 <Link
-                  href=""
+                  href="/dashboard/settings"
                   className="border border-solid border-[#eaecef] flex items-center justify-center rounded-full size-8"
                 >
                   <VscSettingsGear className="text-[14px] text-[#eaecef]" />
                 </Link>
               </li>
               <li>
-                <Link
-                  href=""
+                <button
+                  type="button"
+                  onClick={() => setFundOpen(true)}
                   className="border border-solid border-[#eaecef] flex items-center justify-center rounded-full size-8"
+                  aria-label="Fund Wallet"
+                  title="Fund Wallet"
                 >
                   <TbPlus className="text-base text-[#eaecef]" />
-                </Link>
+                </button>
               </li>
               <li className="border-[#eaecef] border-solid border rounded-full py-2 px-2 flex items-center gap-2">
                 <div className="size-8 bg-[#eaecef] flex justify-center items-center rounded-full">
@@ -68,6 +73,7 @@ const DashboardLayout = (props: DashboardInterface) => {
           </div>
         </div>
         <div className="flex main-content flex-col">{props.children}</div>
+        <FundWalletModal open={fundOpen} onClose={() => setFundOpen(false)} />
         {/* App Version */}
         <div className="fixed bottom-2 right-3 text-[11px] text-[#eaecef]/60 select-none pointer-events-none">
           v 2.1.1
