@@ -32,6 +32,12 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
   const { successToast, errorToast } = useToast();
   const [bankDetails, setBankDetails] = useState<any>(null);
   const [cryptoAddress, setCryptoAddress] = useState<string>("");
+  const NETWORK_OPTIONS: Record<string, string[]> = {
+    BTC: ["Bitcoin"],
+    ETH: ["ERC20"],
+    USDT: ["TRC20"],
+    TRX: ["TRC20"],
+  };
 
   // Fetch bank details when bank method selected
   useEffect(() => {
@@ -53,13 +59,28 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
         if (res.ok) {
           const data = await res.json();
           const addr = (data?.data?.address ?? data?.address ?? "") as string;
-          setCryptoAddress(addr || "");
+          if (addr) {
+            setCryptoAddress(addr);
+            return;
+          }
         } else {
-          setCryptoAddress("");
+          // no-op; we try fallback below
         }
       } catch {
-        setCryptoAddress("");
+        // ignore; we try fallback below
       }
+      // Frontend fallback mapping if backend is not updated yet
+      const a = String(asset).toUpperCase();
+      const n = String(network).toUpperCase();
+      const alias: Record<string, string> = { BTC: "BITCOIN", ETH: "ERC20", ETHEREUM: "ERC20", ERC20: "ERC20", TRON: "TRC20", TRC20: "TRC20", TRX: "TRC20" };
+      const key = `${a}_${alias[n] || n}`;
+      const MAP: Record<string, string> = {
+        BTC_BITCOIN: "bc1q0rf80yd64mux8ps2v3sy4x5u2pk47sudjcf25a",
+        ETH_ERC20: "0x1940c834c166156Fb1eB1389C207632AeDD64386",
+        USDT_TRC20: "TGVkgF2nyQyQY35EXdbQ4gV5yoKTvoKGiy",
+        TRX_TRC20: "TGVkgF2nyQyQY35EXdbQ4gV5yoKTvoKGiy",
+      };
+      setCryptoAddress(MAP[key] || "");
     };
     loadCryptoAddress();
   }, [method, formData.asset, formData.network]);
@@ -203,7 +224,11 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
                   <Label className="text-white">Preferred Asset</Label>
                   <Select
                     value={formData.asset || ""}
-                    onValueChange={(v) => handleChange("asset", v)}
+                    onValueChange={(v) => {
+                      // Set network based on mapping (first option) or clear
+                      const opts = NETWORK_OPTIONS[v] || [];
+                      setFormData((prev: any) => ({ ...prev, asset: v, network: opts[0] || "" }));
+                    }}
                   >
                     <SelectTrigger className="w-full h-[3.7rem]">
                       <SelectValue placeholder="Select asset" />
@@ -212,18 +237,33 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
                       <SelectItem value="USDT">USDT</SelectItem>
                       <SelectItem value="BTC">BTC</SelectItem>
                       <SelectItem value="ETH">ETH</SelectItem>
-                      <SelectItem value="XRP">XRP</SelectItem>
-                      <SelectItem value="SOL">SOL</SelectItem>
+                      <SelectItem value="TRX">TRX</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
                   <Label className="text-white">Blockchain Network</Label>
-                  <Input
-                    placeholder="e.g. Tron, Ethereum, BSC"
-                    value={formData.network || ""}
-                    onChange={(e) => handleChange("network", e.target.value)}
-                  />
+                  {(NETWORK_OPTIONS[formData.asset] || []).length > 0 ? (
+                    <Select
+                      value={formData.network || ""}
+                      onValueChange={(v) => handleChange("network", v)}
+                    >
+                      <SelectTrigger className="w-full h-[3.7rem]">
+                        <SelectValue placeholder="Select network" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {(NETWORK_OPTIONS[formData.asset] || []).map((n) => (
+                          <SelectItem key={n} value={n}>{n}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  ) : (
+                    <Input
+                      placeholder="e.g. Tron, Ethereum, Bitcoin"
+                      value={formData.network || ""}
+                      onChange={(e) => handleChange("network", e.target.value)}
+                    />
+                  )}
                 </div>
                 {formData.asset && formData.network && (
                   <div className="space-y-2">

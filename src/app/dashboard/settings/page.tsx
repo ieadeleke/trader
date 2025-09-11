@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import GeneralSettings from "@/components/dashboard/Settings/GeneralSettings";
 import Security from "@/components/dashboard/Settings/Security";
+import Verification from "@/components/dashboard/Settings/Verification";
 import { useAuth } from "@/context/AuthContext";
 
 const ProfileSettings = () => {
@@ -43,8 +44,8 @@ const ProfileSettings = () => {
                 <TabsTrigger className="h-[4rem]" value="security">
                   Security
                 </TabsTrigger>
-                <TabsTrigger className="h-[4rem]" value="notifications">
-                  Notifications
+                <TabsTrigger className="h-[4rem]" value="verification">
+                  Verification
                 </TabsTrigger>
               </TabsList>
 
@@ -58,8 +59,10 @@ const ProfileSettings = () => {
                 <Security />
               </TabsContent>
 
-              {/* Notifications Settings */}
-              <TabsContent value="notifications"></TabsContent>
+              {/* Verification */}
+              <TabsContent value="verification">
+                <Verification />
+              </TabsContent>
             </Tabs>
           </div>
         </div>
