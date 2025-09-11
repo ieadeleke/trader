@@ -114,7 +114,7 @@ const GeneralSettings = () => {
           </div>
           <div>
             <Label className="text-sm mb-1" htmlFor="dateOfBirth">
-              Email Address
+              Date of Birth
             </Label>
             <Popover>
               <PopoverTrigger asChild>

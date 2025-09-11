@@ -633,7 +633,7 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
                     size="large"
                     variant="white"
                     value={customerData?.balance}
-                    suffix={customerData?.asset}
+                    suffix={"USD"}
                     loading={!globalData}
                   />
                 </div>

@@ -17,7 +17,6 @@ type Loan = {
   amount: number;
   apr: number; // Annual %
   duration: number; // days
-  collateral: string;
   startDate: Date;
   dueDate: Date;
   balance: number;
@@ -55,9 +54,9 @@ export default function LoansPageContent() {
 
   // Mock loan offers (reduced APRs)
   const loanOffers = [
-    { id: 1, apr: 8, duration: 30, collateral: "BTC" },
-    { id: 2, apr: 10, duration: 90, collateral: "ETH" },
-    { id: 3, apr: 12, duration: 180, collateral: "USDT" },
+    { id: 1, apr: 8, duration: 30 },
+    { id: 2, apr: 10, duration: 90 },
+    { id: 3, apr: 12, duration: 180 },
   ];
 
   // Fetch user's loan records
@@ -79,7 +78,6 @@ export default function LoansPageContent() {
         amount: Number(it.amount ?? it.principal ?? 0),
         apr: Number(it.apr ?? it.interestRate ?? 0),
         duration: Number(it.durationDays ?? it.duration ?? 0),
-        collateral: String(it.collateral ?? it.asset ?? ""),
         startDate: it.startDate ? new Date(it.startDate) : new Date(),
         dueDate: it.dueDate ? new Date(it.dueDate) : new Date(),
         balance: Number(it.balance ?? it.outstanding ?? it.amount ?? 0),
@@ -172,7 +170,6 @@ export default function LoansPageContent() {
             columns={[
               { title: "APR", dataIndex: "apr", key: "apr", render: (val) => `${val}%` },
               { title: "Duration", dataIndex: "duration", key: "duration", render: (val) => `${val} days` },
-              { title: "Collateral", dataIndex: "collateral", key: "collateral" },
             ]}
             pagination={false}
             rowKey="id"
@@ -200,7 +197,6 @@ export default function LoansPageContent() {
               { title: "Amount", dataIndex: "amount", key: "amount", render: (val) => `$${formatWithCommas(val)}` },
               { title: "APR", dataIndex: "apr", key: "apr", render: (val) => `${val}%` },
               { title: "Duration", dataIndex: "duration", key: "duration", render: (val) => `${val} days` },
-              { title: "Collateral", dataIndex: "collateral", key: "collateral" },
               { title: "Balance", dataIndex: "balance", key: "balance", render: (val) => `$${formatWithCommas(Number(val).toFixed(2))}` },
               { title: "Due Date", dataIndex: "dueDate", key: "dueDate", render: (date: Date) => new Date(date).toLocaleDateString() },
               { title: "Status", dataIndex: "status", key: "status" },
