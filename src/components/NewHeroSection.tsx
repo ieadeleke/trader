@@ -132,21 +132,21 @@ export default function NewHeroSection(props: ComponentInterface) {
             </button>
           <div className="md:w-max mx-auto">
             <ul className="flex flex-col gap-5">
-              <li className="text-white text-sm text-center opacity-80">
+              <li className="text-white text-base text-center opacity-80 font-bold">
                 ✅ Earn daily from global financial markets without needing
                 trading experience.
               </li>
-              <li className="text-white text-sm text-center opacity-80">
+              <li className="text-white text-base text-center opacity-80 font-bold">
                 ✅ AI + Human Forecasting: Smarter decisions where automation
                 alone can&apos;t.
               </li>
-              <li className="text-white text-sm text-center opacity-80">
+              <li className="text-white text-base text-center opacity-80 font-bold">
                 ✅ 24/7 Oversight: Your capital is watched around the clock.
               </li>
-              <li className="text-white text-sm text-center opacity-80">
+              <li className="text-white text-base text-center opacity-80 font-bold">
                 ✅ Tax-neutral global entity — borderless earnings, no limits.
               </li>
-              <li className="text-white text-sm text-center opacity-80">
+              <li className="text-white text-base text-center opacity-80 font-bold">
                 ✅ Autotrade safety tools (Stop-Loss / Take-Profit / Stop &
                 Sell) keep profits secured
               </li>
