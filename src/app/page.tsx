@@ -14,6 +14,8 @@ import TradingPlatforms from "@/components/TradingPlatforms";
 import DisplayLayout from "@/layout/Displaylayout";
 import { useState } from "react";
 
+
+
 export default function Home() {
   const [authControl, setAuthControl] = useState<boolean>(false);
   return (

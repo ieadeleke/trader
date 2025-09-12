@@ -1,6 +1,6 @@
 "use client";
 
-import LogoImg from "@/assets/logo.png";
+import LogoImg from "@/assets/logo_cfdrocket.png";
 import LogoNewImg from "@/assets/logo-new.png";
 import { Drawer, Modal } from "antd";
 import Image from "next/image";
@@ -67,13 +67,14 @@ const Navigation = (props: NavInterface) => {
   return (
     <nav className="flex py-6 md:py-7 px-5 md:px-20 w-full justify-between items-center fixed z-50 top-0 bg-[#0A0A0A] md:bg-transparent">
       <div className="">
-        <Link href="/">
+        <Link href="/" className="flex gap-3 items-center">
           <Image
-            src={LogoNewImg}
+            src={LogoImg}
             alt="logo"
             quality={100}
-            className="w-[120px] md:w-[150px] h-auto max-w-[630px] mx-auto rounded-lg"
+            className="w-[30px] md:w-[50px] h-auto max-w-[630px] mx-auto rounded-lg"
           />
+          <h4 className="text-white text-xl font-bold uppercase">CFD Rocket</h4>
         </Link>
       </div>
       <div className="hidden md:block">

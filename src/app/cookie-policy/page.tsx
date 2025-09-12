@@ -14,15 +14,15 @@ export default function CookiePolicy() {
 
         <section className="px-5 md:px-12 py-20 md:py-12 md:w-[60%] mx-auto">
           <h1 className="text-xl font-semibold mb-4">
-            Moneday Cookie Policy
+            CFD Rocket Cookie Policy
           </h1>
           {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
           </p> */}
 
           <p className="text-sm leading-loose mb-3">
-            This Cookie Policy explains how Moneday uses cookies and similar
-            technologies on our platform (&apos;Platform&apos;). By using Moneday, you
+            This Cookie Policy explains how CFD Rocket uses cookies and similar
+            technologies on our platform (&apos;Platform&apos;). By using CFD Rocket, you
             consent to the use of cookies in accordance with this policy.
           </p>
 
@@ -62,7 +62,7 @@ export default function CookiePolicy() {
           <h2 className="text-base font-semibold mb-3">3. Third-Party Cookies</h2>
           <p className="text-sm leading-loose mb-3">
             Some cookies are placed by third-party services such as analytics
-            providers and advertising partners. Moneday is not responsible for
+            providers and advertising partners. CFD Rocket is not responsible for
             the practices of these third parties.
           </p>
 
@@ -79,7 +79,7 @@ export default function CookiePolicy() {
 
           <h2 className="text-base font-semibold mb-3">5. Updates to This Policy</h2>
           <p className="text-sm leading-loose mb-3">
-            Moneday may update this Cookie Policy from time to time. Updates
+            CFD Rocket may update this Cookie Policy from time to time. Updates
             will be posted on this page with a revised effective date.
           </p>
 
@@ -90,10 +90,10 @@ export default function CookiePolicy() {
             If you have any questions about this Cookie Policy, please contact
             us at:{" "}
             <a
-              href="mailto:support@Moneday.com"
+              href="mailto:support@CFD Rocket.com"
               className="text-blue-600 underline"
             >
-              support@Moneday.com
+              support@CFD Rocket.com
             </a>
           </p>
         </section>

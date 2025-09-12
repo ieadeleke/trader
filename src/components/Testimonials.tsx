@@ -81,7 +81,7 @@ export default function Testimonials() {
                   </div>
                 </div>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
-                  &ldquo;Moneday has completely changed the way I trade online.
+                  &ldquo;CFD Rocket has completely changed the way I trade online.
                   Withdrawals are fast, reliable, and stress-free every
                   day.&rdquo;
                 </p>
@@ -238,7 +238,7 @@ export default function Testimonials() {
                 </div>
                 <p className="max-w-[380px] text-sm text-white opacity-80 leading-loose">
                   &ldquo;As an entrepreneur, consistent income makes all the
-                  difference. Moneday delivers daily profits that keep my plans
+                  difference. CFD Rocket delivers daily profits that keep my plans
                   moving fast.&rdquo;
                 </p>
               </div>

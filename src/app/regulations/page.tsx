@@ -16,17 +16,17 @@ export default function Regulations() {
 
         <section className="px-5 md:px-12 py-20 md:py-12 md:w-[60%] mx-auto">
           <h1 className="text-xl font-semibold mb-4">
-            Moneday Regulations & Compliance
+            CFD Rocket Regulations & Compliance
           </h1>
           {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
           </p> */}
 
           <p className="text-sm leading-loose mb-3">
-            Moneday is committed to operating transparently and in compliance
+            CFD Rocket is committed to operating transparently and in compliance
             with global financial standards. This Regulations page outlines the
             policies and regulatory frameworks that govern the use of our
-            platform. By using Moneday, you agree to abide by these rules and
+            platform. By using CFD Rocket, you agree to abide by these rules and
             applicable laws in your jurisdiction.
           </p>
 
@@ -34,7 +34,7 @@ export default function Regulations() {
 
           <h2 className="text-base font-semibold mb-3">1. Licensing & Oversight</h2>
           <p className="text-sm leading-loose mb-3">
-            Moneday is operated by [Insert Registered Company Name], a legally
+            CFD Rocket is operated by [Insert Registered Company Name], a legally
             registered entity in Ukraine. The company complies
             with financial service regulations applicable in its country of
             registration and any international frameworks relevant to digital
@@ -46,7 +46,7 @@ export default function Regulations() {
           <h2 className="text-base font-semibold mb-3">2. Anti-Money Laundering (AML)</h2>
           <ul className="list-disc pl-5 text-sm leading-loose mb-3 space-y-2">
             <li>
-              Moneday strictly adheres to AML regulations to prevent illicit
+              CFD Rocket strictly adheres to AML regulations to prevent illicit
               financial activities.
             </li>
             <li>
@@ -70,7 +70,7 @@ export default function Regulations() {
               card, proof of address) during registration.
             </li>
             <li>
-              Moneday reserves the right to request additional documentation
+              CFD Rocket reserves the right to request additional documentation
               for verification at any time.
             </li>
             <li>
@@ -87,7 +87,7 @@ export default function Regulations() {
           <ul className="list-disc pl-5 text-sm leading-loose mb-3 space-y-2">
             <li>
               Users must comply with financial trading laws in their country of
-              residence before using Moneday.
+              residence before using CFD Rocket.
             </li>
             <li>
               Certain jurisdictions may restrict forex or cryptocurrency
@@ -105,7 +105,7 @@ export default function Regulations() {
             5. Data Protection & Privacy
           </h2>
           <p className="text-sm leading-loose mb-3">
-            Moneday complies with applicable data protection laws, including
+            CFD Rocket complies with applicable data protection laws, including
             GDPR where relevant. Personal data is collected, processed, and
             stored securely in line with our{" "}
             <a href="/privacy-policy" className="text-blue-500 underline">
@@ -123,7 +123,7 @@ export default function Regulations() {
               lose all or part of their invested capital.
             </li>
             <li>
-              Moneday provides educational resources and risk warnings but
+              CFD Rocket provides educational resources and risk warnings but
               does not guarantee profits.
             </li>
             <li>

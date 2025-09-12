@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import LogoImg from "@/assets/logo-new.png";
+import LogoImg from "@/assets/logo_cfdrocket.png";
 
 import { FaXTwitter } from "react-icons/fa6";
 import { GrInstagram } from "react-icons/gr";
@@ -14,17 +14,21 @@ const Footer = () => {
       <div className="flex flex-col md:grid grid-cols-[1fr_1.2fr] gap-10 md:gap-36 flex-wrap px-5 md:px-28 pt-28 pb-10 md:pb-20">
         <div className="">
           <div>
-            <Image
-              src={LogoImg}
-              alt="logo"
-              quality={100}
-              className="w-[120px] md:w-[150px] h-auto max-w-[630px] mb-4"
-            />
+            <div className="flex gap-3 mb-3 items-center">
+              <Image
+                src={LogoImg}
+                alt="logo"
+                quality={100}
+                className="w-[30px] md:w-[40px] h-auto max-w-[630px] ounded-lg"
+              />
+              <h4 className="text-white text-xl font-bold uppercase">
+                CFD Rocket
+              </h4>
+            </div>
             <p className="leading-loose text-sm md:text-base opacity-80">
-              At Moneday, we believe that financial freedom should not be
-              delayed. Traditional trading platforms make you wait weeks or
-              months to enjoy your earnings — but with us, every day is a
-              payday.
+              CFDROCKET stands as a trusted global earning system — combining
+              AI, human intelligence, risk protection, borderless access, and
+              transparency — so users can earn smarter every day.
             </p>
           </div>
         </div>
@@ -147,7 +151,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row gap-8 md:gap-0 justify-between md:items-center">
           <p className="text-sm text-white opacity-80">
             Copyright &copy; 2023 &mdash; 2025{" "}
-            <span className="text-primary"> Moneday </span>
+            <span className="text-primary"> CFD Rocket </span>
             All rights reserved
           </p>
           <div className="flex gap-4 items-center">

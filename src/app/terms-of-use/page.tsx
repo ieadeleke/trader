@@ -14,7 +14,7 @@ export default function TermsOfUse() {
 
         <section className="px-5 md:px-12 py-20 md:py-12 md:w-[60%] mx-auto">
           <h1 className="text-xl font-semibold mb-4">
-            Moneday Terms of Use
+            CFD Rocket Terms of Use
           </h1>
           {/* <p className="text-sm leading-loose mb-3">
             Effective Date: August 15, 2025
@@ -22,7 +22,7 @@ export default function TermsOfUse() {
 
           <p className="text-sm leading-loose mb-3">
             These Terms of Use (&apos;Terms&apos;) govern your access to and use of the
-            Moneday platform (&apos;Platform&apos;). By using Moneday, you agree to be
+            CFD Rocket platform (&apos;Platform&apos;). By using CFD Rocket, you agree to be
             bound by these Terms. If you do not agree, please discontinue use of
             the Platform.
           </p>
@@ -32,7 +32,7 @@ export default function TermsOfUse() {
           <h2 className="text-base font-semibold mb-3">1. Eligibility</h2>
           <p className="text-sm leading-loose mb-3">
             You must be at least 18 years old (or the legal age of majority in
-            your jurisdiction) to use Moneday. By accessing the Platform, you
+            your jurisdiction) to use CFD Rocket. By accessing the Platform, you
             confirm that you meet this requirement.
           </p>
 
@@ -42,14 +42,14 @@ export default function TermsOfUse() {
           <ul className="list-disc pl-5 text-sm leading-loose mb-3 space-y-2">
             <li>You must provide accurate and complete information.</li>
             <li>You are responsible for maintaining the security of your account and password.</li>
-            <li>You must notify Moneday immediately of any unauthorized access.</li>
+            <li>You must notify CFD Rocket immediately of any unauthorized access.</li>
           </ul>
 
           <hr className="my-6" />
 
           <h2 className="text-base font-semibold mb-3">3. Acceptable Use</h2>
           <p className="text-sm leading-loose mb-3">
-            You agree not to use Moneday for any unlawful purpose, including
+            You agree not to use CFD Rocket for any unlawful purpose, including
             but not limited to:
           </p>
           <ul className="list-disc pl-5 text-sm leading-loose mb-3 space-y-2">
@@ -64,7 +64,7 @@ export default function TermsOfUse() {
           <p className="text-sm leading-loose mb-3">
             Trading forex, cryptocurrencies, and digital assets carries
             significant risk. You acknowledge that you may lose part or all of
-            your funds and that Moneday is not liable for such losses. Please
+            your funds and that CFD Rocket is not liable for such losses. Please
             read our{" "}
             <a href="/risk-disclaimer" className="text-blue-600 underline">
               Risk Disclaimer
@@ -77,7 +77,7 @@ export default function TermsOfUse() {
           <h2 className="text-base font-semibold mb-3">5. Intellectual Property</h2>
           <p className="text-sm leading-loose mb-3">
             All content, trademarks, logos, software, and intellectual property
-            on the Platform are owned by Moneday or its licensors. You may not
+            on the Platform are owned by CFD Rocket or its licensors. You may not
             copy, distribute, modify, or exploit them without prior written
             consent.
           </p>
@@ -86,7 +86,7 @@ export default function TermsOfUse() {
 
           <h2 className="text-base font-semibold mb-3">6. Third-Party Services</h2>
           <p className="text-sm leading-loose mb-3">
-            Moneday may integrate with third-party tools or services. We are
+            CFD Rocket may integrate with third-party tools or services. We are
             not responsible for the actions, policies, or performance of such
             third parties.
           </p>
@@ -95,7 +95,7 @@ export default function TermsOfUse() {
 
           <h2 className="text-base font-semibold mb-3">7. Limitation of Liability</h2>
           <p className="text-sm leading-loose mb-3">
-            To the fullest extent permitted by law, Moneday is not liable for
+            To the fullest extent permitted by law, CFD Rocket is not liable for
             any damages, losses, or expenses arising from your use of the
             Platform, including but not limited to lost profits, trading losses,
             or system failures.
@@ -105,7 +105,7 @@ export default function TermsOfUse() {
 
           <h2 className="text-base font-semibold mb-3">8. Termination</h2>
           <p className="text-sm leading-loose mb-3">
-            Moneday reserves the right to suspend or terminate your account at
+            CFD Rocket reserves the right to suspend or terminate your account at
             any time, without notice, if you violate these Terms or applicable
             laws.
           </p>
@@ -114,7 +114,7 @@ export default function TermsOfUse() {
 
           <h2 className="text-base font-semibold mb-3">9. Amendments</h2>
           <p className="text-sm leading-loose mb-3">
-            Moneday may update these Terms at any time. Continued use of the
+            CFD Rocket may update these Terms at any time. Continued use of the
             Platform after changes are published constitutes acceptance of the
             revised Terms.
           </p>
@@ -133,10 +133,10 @@ export default function TermsOfUse() {
           <p className="text-sm leading-loose mb-3">
             If you have any questions about these Terms, please contact us at:{" "}
             <a
-              href="mailto:support@Moneday.com"
+              href="mailto:support@cfdrocket.com"
               className="text-blue-600 underline"
             >
-              support@Moneday.com
+              support@cfdrocket.com
             </a>
           </p>
         </section>
