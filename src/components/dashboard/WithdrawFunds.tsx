@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { apiFetch } from "@/utils/api";
 
 interface WithdrawalModalProps {
   open: boolean;
@@ -44,10 +45,14 @@ export default function WithdrawalModal({ open, onClose, onSubmit, onSuccess }: 
       } else if (method === 'bank') {
         payload.bankDetails = formData.bankDetails || '';
       }
-      const res = await fetch(`/api/withdrawals/request`, {
+      const res = await apiFetch(`/api/withdrawals/request`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-        body: JSON.stringify(payload),
+        auth: true,
+        json: {
+          ...payload
+        }
+        // headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+        // body: JSON.stringify(payload),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.message || 'Withdrawal request failed');
