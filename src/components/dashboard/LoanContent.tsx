@@ -11,21 +11,22 @@ import { Modal, Table } from "antd";
 import { useToast } from "@/context/ToastContext";
 import Spinner from "@/components/ui/spin";
 import { apiUrl } from "@/utils/api";
+import { formatMoney } from "@/lib/utils";
 
 type Loan = {
-  id: number;
+  id: string; // backend _id
   amount: number;
   apr: number; // Annual %
   duration: number; // days
   startDate: Date;
   dueDate: Date;
-  balance: number;
+  balance: number; // outstanding principal
   status: "Active" | "Repaid" | "Overdue";
 };
 
 export default function LoansPageContent() {
   const [open, setOpen] = useState(false);
-  const [repayOpen, setRepayOpen] = useState<Loan | null>(null);
+  // No repay modal; clicking Repay will attempt full repayment immediately
   const [amount, setAmount] = useState("");
   const [duration, setDuration] = useState("");
   // Collateral selection removed
@@ -73,8 +74,8 @@ export default function LoansPageContent() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to fetch loans");
       const items: any[] = data?.data || data || [];
-      const mapped: Loan[] = items.map((it, idx) => ({
-        id: it.id ?? idx + 1,
+      const mapped: Loan[] = items.map((it) => ({
+        id: String(it._id || it.id),
         amount: Number(it.amount ?? it.principal ?? 0),
         apr: Number(it.apr ?? it.interestRate ?? 0),
         duration: Number(it.durationDays ?? it.duration ?? 0),
@@ -140,21 +141,24 @@ export default function LoansPageContent() {
 
   // Interest accrual simulation removed to rely on backend records
 
-  // Handle repayment
-  const handleRepay = (loan: Loan, repayAmount: number) => {
-    setActiveLoans((prev) =>
-      prev.map((l) =>
-        l.id === loan.id
-          ? {
-              ...l,
-              balance: Math.max(0, l.balance - repayAmount),
-              status: Math.max(0, l.balance - repayAmount) === 0 ? "Repaid" : l.status,
-            }
-          : l
-      )
-    );
-    setRepayOpen(null);
-    successToast("Repayment successful!");
+  // Handle full repayment: call backend /api/loans/repay with full outstanding principal
+  const handleRepay = async (loan: Loan) => {
+    try {
+      const res = await fetch(apiUrl("/api/loans/repay"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ loanId: loan.id, amount: loan.balance }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.message || "Repayment failed");
+      successToast("Repayment successful");
+      await fetchLoans();
+    } catch (e: any) {
+      errorToast(e?.message || "Repayment failed");
+    }
   };
 
   return (
@@ -194,10 +198,18 @@ export default function LoansPageContent() {
             loading={fetching}
             dataSource={activeLoans}
             columns={[
-              { title: "Amount", dataIndex: "amount", key: "amount", render: (val) => `$${formatWithCommas(val)}` },
+              { title: "Amount", dataIndex: "amount", key: "amount", render: (val) => formatMoney(Number(val || 0)) },
               { title: "APR", dataIndex: "apr", key: "apr", render: (val) => `${val}%` },
               { title: "Duration", dataIndex: "duration", key: "duration", render: (val) => `${val} days` },
-              { title: "Balance", dataIndex: "balance", key: "balance", render: (val) => `$${formatWithCommas(Number(val).toFixed(2))}` },
+              {
+                title: "Repayment Amount",
+                key: "repayment",
+                render: (_, loan: Loan) => {
+                  const base = Number(loan.balance || loan.amount || 0);
+                  const repayment = base + (base * Number(loan.apr || 0)) / 100;
+                  return formatMoney(Number(repayment.toFixed(2)));
+                },
+              },
               { title: "Due Date", dataIndex: "dueDate", key: "dueDate", render: (date: Date) => new Date(date).toLocaleDateString() },
               { title: "Status", dataIndex: "status", key: "status" },
               {
@@ -205,14 +217,14 @@ export default function LoansPageContent() {
                 key: "action",
                 render: (_, loan) =>
                   loan.status === "Active" && (
-                    <Button onClick={() => setRepayOpen(loan)} size="sm" className="bg-green-600 hover:bg-green-700">
+                    <Button onClick={() => handleRepay(loan)} size="sm" className="bg-green-600 hover:bg-green-700">
                       Repay
                     </Button>
                   ),
               },
             ]}
             pagination={false}
-            rowKey="id"
+            rowKey={(r) => r.id}
           />
         </CardContent>
       </Card>
@@ -297,32 +309,7 @@ export default function LoansPageContent() {
         </div>
       </Modal>
 
-      {/* Repayment Modal */}
-      <Modal open={!!repayOpen} onCancel={() => setRepayOpen(null)} footer={null} centered>
-        {repayOpen && (
-          <div className="p-4 space-y-4">
-            <h2 className="text-lg font-semibold text-center">Repay Loan</h2>
-            <p className="text-sm text-gray-300 text-center">
-              Balance: ${repayOpen.balance.toFixed(2)} | Due: {repayOpen.dueDate.toLocaleDateString()}
-            </p>
-            <Input
-              type="number"
-              placeholder="Enter repayment amount"
-              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                if (e.key === "Enter") {
-                  handleRepay(repayOpen, Number((e.target as HTMLInputElement).value));
-                }
-              }}
-            />
-            <Button
-              onClick={() => handleRepay(repayOpen, repayOpen.balance)}
-              className="w-full py-6 bg-green-600 hover:bg-green-700"
-            >
-              Repay Full
-            </Button>
-          </div>
-        )}
-      </Modal>
+      {/* No repayment modal; repayment is full amount on click */}
     </div>
   );
 }

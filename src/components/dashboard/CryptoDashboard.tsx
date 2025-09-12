@@ -30,6 +30,7 @@ import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/context/ToastContext";
 import { apiFetch } from "@/utils/api";
+import { formatMoney } from "@/lib/utils";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -471,15 +472,13 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
   };
 
   const fetchUserWalletBalance = async () => {
-    setLoading(true);
+    // Background wallet fetch; do not toggle the main page loader
     try {
       const res = await apiFetch("/api/wallets", { method: "GET", auth: true });
       const data = await res.json();
-      setCustomerData(data?.data[0]);
+      if (Array.isArray(data?.data) && data.data.length) setCustomerData(data.data[0]);
     } catch (err: any) {
-      errorToast("Something went wrong while fetching data");
-    } finally {
-      setLoading(false);
+      // silent background failure for wallet fetch
     }
   };
 
@@ -489,11 +488,8 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
 
     // Market data refresh every 60s
     const marketInterval = setInterval(fetchData, 60000);
-    // Wallet balance refresh every 5s for near real-time updates
-    const walletInterval = setInterval(fetchUserWalletBalance, 5000);
     return () => {
       clearInterval(marketInterval);
-      clearInterval(walletInterval);
     };
   }, []);
 
@@ -637,8 +633,7 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
                     title="Your Wallet Balance"
                     size="large"
                     variant="white"
-                    value={customerData?.balance}
-                    suffix={"USD"}
+                    value={formatMoney(Number(customerData?.balance || 0))}
                     loading={!globalData}
                   />
                 </div>

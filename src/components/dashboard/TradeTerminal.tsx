@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/context/ToastContext";
 import Spinner from "@/components/ui/spin";
+import { formatMoney } from "@/lib/utils";
 import { MultiDashboardAssetChart } from "./CryptoCandleStick";
 import { apiFetch } from "@/utils/api";
 import FundWalletModal from "./FundWalletModal";
@@ -202,10 +203,11 @@ const TradeTerminal: React.FC = () => {
     };
   }, [assetType, symbol]);
 
-  // Load positions/history from backend and wallet balance
+  // Load positions/history from backend and wallet balance (initial load only shows big loader)
   useEffect(() => {
-    const loadPortfolio = async () => {
-      setLoadingPortfolio(true);
+    let initial = true;
+    const loadPortfolio = async (showLoader: boolean) => {
+      if (showLoader) setLoadingPortfolio(true);
       try {
         // fetch open positions and history
         try {
@@ -281,15 +283,52 @@ const TradeTerminal: React.FC = () => {
       } catch (e) {
         // ignore
       } finally {
-        setLoadingPortfolio(false);
+        if (showLoader) setLoadingPortfolio(false);
         setLoadingAuto(false);
       }
     };
-    loadPortfolio();
-    // Poll portfolio + wallet every 5s to reflect autotrade changes
-    const t = setInterval(loadPortfolio, 5000);
-    return () => clearInterval(t);
+    // Initial load with loader
+    loadPortfolio(true);
+    // Background polling only when autotrade is running (handled in separate effect)
+    return () => {};
   }, []);
+
+  // Background reload every 10s only when autotrade is running
+  useEffect(() => {
+    if (!autoRunning) return;
+    const loadBackground = async () => {
+      // false ⇒ run without big loader for background updates
+      try {
+        // fetch positions, history, wallet silently
+        const pres = await apiFetch('/api/trade/positions', { method: 'GET', auth: true });
+        if (pres.ok) {
+          const pdata = await pres.json();
+          setPositions((pdata?.data ?? pdata ?? []) as Position[]);
+        }
+      } catch {}
+      try {
+        const hres = await apiFetch('/api/trade/history', { method: 'GET', auth: true });
+        if (hres.ok) {
+          const hdata = await hres.json();
+          setHistory((hdata?.data ?? hdata ?? []) as Position[]);
+        }
+      } catch {}
+      try {
+        const wres = await apiFetch('/api/wallets', { method: 'GET', auth: true });
+        if (wres.ok) {
+          const w = await wres.json();
+          const first = Array.isArray(w) ? w[0] : Array.isArray(w?.data) ? w.data[0] : null;
+          if (first && typeof first.balance !== 'undefined') {
+            setBalance(Number(first.balance));
+            if (first.asset) setWalletAsset(String(first.asset));
+            if (first.address) setWalletAddress(String(first.address));
+          }
+        }
+      } catch {}
+    };
+    const t = setInterval(loadBackground, 10000);
+    return () => clearInterval(t);
+  }, [autoRunning]);
 
   // No-op: server is source of truth for positions/history
   const persistPortfolio = async (_next: Portfolio) => {};
@@ -566,7 +605,7 @@ const TradeTerminal: React.FC = () => {
                 </div>
                 <div>
                   <Label className="text-white/80 text-sm">Last Price</Label>
-                  <div className="text-xl font-semibold">${currentPrice ? currentPrice.toFixed(2) : "-"}</div>
+                  <div className="text-xl font-semibold">{currentPrice ? formatMoney(Number(currentPrice.toFixed(2))) : "-"}</div>
                 </div>
               </div>
               <MultiDashboardAssetChart controls={false} assetType={assetType} symbol={symbol} />
@@ -585,23 +624,23 @@ const TradeTerminal: React.FC = () => {
               <div className="grid grid-cols-2 gap-3 bg-white/5 p-3 rounded">
                 <div>
                   <div className="text-white/70 text-xs">Balance</div>
-                  <div className="text-lg font-semibold">${balance.toFixed(2)} {walletAsset ? walletAsset : ''}</div>
+                  <div className="text-lg font-semibold">{formatMoney(Number(balance.toFixed(2)))} {walletAsset ? walletAsset : ''}</div>
                 </div>
                 <div>
                   <div className="text-white/70 text-xs">Equity</div>
-                  <div className="text-lg font-semibold">${equity.toFixed(2)}</div>
+                  <div className="text-lg font-semibold">{formatMoney(Number(equity.toFixed(2)))}</div>
                 </div>
                 <div>
                   <div className="text-white/70 text-xs">Unrealized PnL</div>
-                  <div className={`text-lg font-semibold ${unrealizedPnL>=0?"text-green-400":"text-red-400"}`}>${unrealizedPnL.toFixed(2)}</div>
+                  <div className={`text-lg font-semibold ${unrealizedPnL>=0?"text-green-400":"text-red-400"}`}>{formatMoney(Number(unrealizedPnL.toFixed(2)))}</div>
                 </div>
                 <div>
                   <div className="text-white/70 text-xs">Margin Used</div>
-                  <div className="text-lg font-semibold">${marginUsed.toFixed(2)}</div>
+                  <div className="text-lg font-semibold">{formatMoney(Number(marginUsed.toFixed(2)))}</div>
                 </div>
                 <div className="col-span-2">
                   <div className="text-white/70 text-xs">Free Margin</div>
-                  <div className="text-lg font-semibold">${freeMargin.toFixed(2)}</div>
+                  <div className="text-lg font-semibold">{formatMoney(Number(freeMargin.toFixed(2)))}</div>
                 </div>
               </div>
               <div className="flex flex-col gap-3">

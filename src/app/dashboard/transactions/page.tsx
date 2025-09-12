@@ -14,6 +14,7 @@ import {
   PaginationNext,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
+import { formatMoney } from "@/lib/utils";
 
 interface TxItem {
   _id: string;
@@ -143,7 +144,7 @@ export default function TransactionsPage() {
                   <div key={it._id} className="grid grid-cols-5 p-3 text-sm text-[#eaecef]">
                     <div>{it.createdAt ? new Date(it.createdAt).toLocaleString() : "—"}</div>
                     <div className="capitalize">{it.type}</div>
-                    <div>${it.amount?.toLocaleString()}</div>
+                    <div>{formatMoney(Number(it.amount || 0))}</div>
                     <div>{typeof it.asset === 'object' ? (it.asset?.symbol || it.asset?.name || '') : String(it.asset || '')}</div>
                     <div>
                       <span
@@ -225,7 +226,7 @@ export default function TransactionsPage() {
                   <div key={it._id} className="grid grid-cols-6 p-3 text-sm text-[#eaecef]">
                     <div>{it.createdAt ? new Date(it.createdAt).toLocaleString() : "—"}</div>
                     <div className="capitalize">{it.method}</div>
-                    <div>${it.amount?.toLocaleString()}</div>
+                    <div>{formatMoney(Number(it.amount || 0))}</div>
                     <div>{[it.asset || "USD", it.network].filter(Boolean).join(" / ")}</div>
                     <div>
                       <span
@@ -319,7 +320,7 @@ export default function TransactionsPage() {
                   <div key={it._id} className="grid grid-cols-5 p-3 text-sm text-[#eaecef]">
                     <div>{it.createdAt ? new Date(it.createdAt).toLocaleString() : "—"}</div>
                     <div className="capitalize">{it.method}</div>
-                    <div>${Number(it.amount || 0).toLocaleString()}</div>
+                    <div>{formatMoney(Number(it.amount || 0))}</div>
                     <div className="truncate" title={it.method === 'crypto' ? it.address : it.bankDetails}>
                       {it.method === 'crypto' ? (it.address || '—') : (it.bankDetails || '—')}
                     </div>
