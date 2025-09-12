@@ -487,9 +487,14 @@ const CryptoDashboard = ({ hideProfile }: DashboardProps) => {
     fetchData();
     fetchUserWalletBalance();
 
-    // Set up auto-refresh every 60 seconds
-    const interval = setInterval(fetchData, 60000);
-    return () => clearInterval(interval);
+    // Market data refresh every 60s
+    const marketInterval = setInterval(fetchData, 60000);
+    // Wallet balance refresh every 5s for near real-time updates
+    const walletInterval = setInterval(fetchUserWalletBalance, 5000);
+    return () => {
+      clearInterval(marketInterval);
+      clearInterval(walletInterval);
+    };
   }, []);
 
   const toggleWithdrawalModal = () => {

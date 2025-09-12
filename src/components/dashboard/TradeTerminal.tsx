@@ -286,6 +286,9 @@ const TradeTerminal: React.FC = () => {
       }
     };
     loadPortfolio();
+    // Poll portfolio + wallet every 5s to reflect autotrade changes
+    const t = setInterval(loadPortfolio, 5000);
+    return () => clearInterval(t);
   }, []);
 
   // No-op: server is source of truth for positions/history
