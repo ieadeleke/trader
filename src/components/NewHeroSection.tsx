@@ -113,28 +113,46 @@ export default function NewHeroSection(props: ComponentInterface) {
         className="new-hero-section relative px-5 md:px-20 pt-32 md:pt-44"
         id="home"
       >
-        <div className="mb-6">
-          {/* <div className="bg-[#34251F] border border-solid border-primary py-2 px-4 w-max mx-auto rounded-full mb-3">
-            <h4 className="uppercase font-bold text-primary text-xs md:text-sm font-ibm">
-              Trade Now
-            </h4>
-          </div> */}
-          <h3 className="text-4xl md:text-6xl text-center font-ubuntu font-bold text-primary leading-[1.4] md:leading-[1.2] mb-3 md:w-[55%] mx-auto">
-            Your Ultimate Daily Earnings Powered By AI
+        <div className="mb-6 pb-14">
+          <h3 className="text-4xl md:text-6xl text- font-ubuntu font-bold text-white leading-[1.4] md:leading-[1.2] mb-3 md:w-[55%]">
+            Turn Every Market Move Into Daily Earnings with CFDROCKET
           </h3>
-          {/* <div className="bg-[#34251F] border border-solid border-primary py-1 px-8 w-max mx-auto rounded- mb-4 relative">
-            <div className="size-[14px] bg-white absolute -top-[6px] -left-[6px] border border-solid border-primary"></div>
-            <div className="size-[14px] bg-white absolute -top-[6px] -right-[6px] border border-solid border-primary"></div>
-            <div className="size-[14px] bg-white absolute -bottom-[6px] -left-[6px] border border-solid border-primary"></div>
-            <div className="size-[14px] bg-white absolute -bottom-[6px] -right-[6px] border border-solid border-primary"></div>
-            <h4 className="text-3xl md:text-5xl text-center font-ubuntu font-bold leading-[1.4] text-primary">
-              Platform
-            </h4>
-          </div> */}
-          <p className="text-white opacity-80 leading-loose text-base md:text-lg text-center mb-4 block md:w-[45%] mx-auto">
-            Earn Daily Returns from Automated Forecast-Based & CFD Trading
+          <p className="text-white opacity-80 leading-loose text-base md:text-lg text-center md:text-left mb-4 block md:w-[45%]">
+            Powered by advanced AI, safeguarded by expert financial analysts,
+            and designed with built-in risk controls — CFDROCKET gives you the
+            edge to earn consistently, even in unpredictable markets.
           </p>
-          <p className="text-white opacity-60 leading-loose text-sm md:text-sm text-center mb-4 block md:w-[65%] mx-auto">
+          <button
+              onClick={() => {
+                props.authControl(true);
+              }}
+              className="rounded-lg w-full md:w-[14rem] text-white text-sm py-4 mb-10 px-8 bg-primary border border-solid border-primary cursor-pointer"
+            >
+              Create Account
+            </button>
+          <div className="md:w-max mx-auto">
+            <ul className="flex flex-col gap-5">
+              <li className="text-white text-sm text-center opacity-80">
+                ✅ Earn daily from global financial markets without needing
+                trading experience.
+              </li>
+              <li className="text-white text-sm text-center opacity-80">
+                ✅ AI + Human Forecasting: Smarter decisions where automation
+                alone can&apos;t.
+              </li>
+              <li className="text-white text-sm text-center opacity-80">
+                ✅ 24/7 Oversight: Your capital is watched around the clock.
+              </li>
+              <li className="text-white text-sm text-center opacity-80">
+                ✅ Tax-neutral global entity — borderless earnings, no limits.
+              </li>
+              <li className="text-white text-sm text-center opacity-80">
+                ✅ Autotrade safety tools (Stop-Loss / Take-Profit / Stop &
+                Sell) keep profits secured
+              </li>
+            </ul>
+          </div>
+          {/* <p className="text-white opacity-60 leading-loose text-sm md:text-sm text-center mb-4 block md:w-[65%] mx-auto">
             Moneday Automated Trader enables you to turn insights into income by
             trading on political, economic, and climate event predictions.
             Leverage powerful AI to participate in forecast markets and execute
@@ -145,8 +163,8 @@ export default function NewHeroSection(props: ComponentInterface) {
             reinvested for exponential growth. Enjoy fast, flexible withdrawals
             through credit/debit cards, bank transfers, and leading digital
             wallets — giving you full control over your capital at any time
-          </p>
-          <div className="flex items-center z-40 relative justify-center gap-3 mb-10">
+          </p> */}
+          {/* <div className="flex items-center z-40 relative justify-center gap-3 mb-10">
             <button
               onClick={() => {
                 props.authControl(true);
@@ -161,7 +179,7 @@ export default function NewHeroSection(props: ComponentInterface) {
             >
               Sign In
             </Link>
-          </div>
+          </div> */}
         </div>
         {/* <div className="z-40 relative">
           <Image

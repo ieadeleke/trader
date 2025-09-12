@@ -264,9 +264,10 @@ button[data-slot="popover-trigger"] {
 
 .new-hero-section {
   background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('/new-hero.jpeg');
-  background-position: center;
+  background-position: top;
   background-size: cover;
   background-position: no-repeat;
+  min-height: 700px;
 }
 
 .ant-select-selector {
