@@ -86,7 +86,7 @@ const TradeTerminal: React.FC = () => {
 
   const [positions, setPositions] = useState<Position[]>([]);
   const [history, setHistory] = useState<Position[]>([]);
-  const [balance, setBalance] = useState<number>(10000); // demo balance fallback
+  const [balance, setBalance] = useState<number>(0); // demo balance fallback
   const [loadingPortfolio, setLoadingPortfolio] = useState<boolean>(false);
   const [depositOpen, setDepositOpen] = useState<boolean>(false);
   const [withdrawOpen, setWithdrawOpen] = useState<boolean>(false);
