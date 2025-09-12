@@ -10,6 +10,7 @@ import { TbChartCandle, TbCurrencyDollar } from "react-icons/tb";
 import { useAuth } from "@/context/AuthContext";
 import FundWalletModal from "@/components/dashboard/FundWalletModal";
 import { useRouter } from "next/navigation";
+import NotificationBell from "@/components/notifications/NotificationBell";
 // import useUser from "@/hooks/useUser";
 
 interface DashboardInterface {
@@ -31,6 +32,9 @@ const DashboardLayout = (props: DashboardInterface) => {
           <h3 className="text-lg font-bold text-white">{props.pageTitle}</h3>
           <div>
             <ul className="flex items-center gap-5">
+              <li>
+                <NotificationBell />
+              </li>
               <li>
                 <Link
                   href="/dashboard/market"
