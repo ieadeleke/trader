@@ -47,7 +47,8 @@ export default function Verification() {
     load();
   }, []);
 
-  const handleUpload = async (id: string, file: File | undefined | null) => {
+  const handleUpload = async (id: string, file: File | undefined | null, status?: string) => {
+    if (status && status !== 'requested') return; // disallow uploads when not requested
     if (!file) return;
     setUploadingId(id);
     try {
@@ -86,7 +87,7 @@ export default function Verification() {
         <div className="text-sm opacity-70">No document requests at the moment.</div>
       ) : (
         <div className="space-y-4">
-          {items.map((it) => (
+          {items.filter((it) => it.status !== 'cancelled').map((it) => (
             <div key={it._id} className="border rounded-lg p-4">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -113,8 +114,8 @@ export default function Verification() {
                   <Input
                     type="file"
                     accept="image/*,application/pdf"
-                    disabled={uploadingId === it._id}
-                    onChange={(e) => handleUpload(it._id, e.target.files?.[0])}
+                    disabled={uploadingId === it._id || it.status !== 'requested'}
+                    onChange={(e) => handleUpload(it._id, e.target.files?.[0], it.status)}
                     className="h-[2.8rem]"
                   />
                   <div className="text-[11px] opacity-60 mt-2">Images or PDF. Max 10MB.</div>
@@ -127,4 +128,3 @@ export default function Verification() {
     </div>
   );
 }
-
