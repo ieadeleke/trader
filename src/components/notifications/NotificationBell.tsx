@@ -39,6 +39,7 @@ export default function NotificationBell() {
       const res = await apiFetch("/api/notifications?limit=20", { auth: true, method: "GET" });
       const data = await (res as Response).json();
       const list = data?.data?.items || [];
+      console.log(list)
       setItems(list);
     } catch (_) {
       // no-op
@@ -101,11 +102,11 @@ export default function NotificationBell() {
                 <DropdownMenuItem key={n._id} className="px-3 py-2 focus:bg-gray-100/30 cursor-default" onSelect={(e) => e.preventDefault()}>
                   <div className="flex flex-col gap-1 w-full" onClick={() => markAsRead(n._id)}>
                     <div className="flex items-start justify-between gap-2">
-                      <div className="font-medium text-sm text-white/90">{n.title}</div>
+                      <div className="font-medium text-[13px] text-black">{n.title}</div>
                       {!n.read && <Badge variant="secondary" className="h-5">New</Badge>}
                     </div>
-                    {n.message && <div className="text-xs text-white/70 leading-snug">{n.message}</div>}
-                    <div className="text-[10px] text-white/50 mt-1">
+                    {n.message && <div className="text-xs text-black leading-snug">{n.message}</div>}
+                    <div className="text-[10px] text-black mt-1">
                       {n.createdAt ? new Date(n.createdAt).toLocaleString() : ""}
                     </div>
                   </div>
