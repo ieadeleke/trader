@@ -52,7 +52,7 @@ export default function Numbers(props: ComponentInterface) {
             Join Thousands Earning Daily Profits
           </h3>
           <p className="text-white font-ibm opacity-80 text-base md:text-base leading-relaxed md:w-[90%] mb-7">
-            Be part of the Moneday community where traders turn the markets into
+            Be part of the Moneday community where earners turn the markets into
             real income — join thousands already sharing in over $50,000,000
             earned daily.
           </p>

@@ -32,7 +32,7 @@ interface MarketData {
 
 const ReadMore = ({
   text,
-  maxLength = 300,
+  maxLength = 250,
 }: {
   text: string;
   maxLength?: number;
@@ -100,7 +100,7 @@ export default function PoweredByAI() {
           </h4>
         </div>
         <h3 className="text-3xl md:text-4xl text-center font-ubuntu text-primary font-bold leading-[1.4]">
-          Powered by AI: Moneday Trading Solutions
+          Powered by AI: CFDRocket Earning Solutions
         </h3>
       </div>
       <div>
@@ -112,10 +112,13 @@ export default function PoweredByAI() {
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-base md:text-xl text-primary font-medium mb-2">
-                  AI-Driven Trading Signals Across All Financial Markets
+                  Hybrid Model: AI Precision + Human Expertise
                 </h4>
                 <ReadMore
-                  text={`At the heart of Moneday lies an advanced AI engine designed to analyze and generate daily trading signals across the full spectrum of global financial instruments. Whether clients are trading stocks, forex, cryptocurrencies, commodities, or more specialized markets like ETFs and bonds, the AI continuously scans price movements, technical patterns, economic indicators, and global sentiment to deliver high-probability trade opportunities. These insights aren't limited to a handful of popular assets — they extend across all tradable markets, including CFDs and less volatile instruments, ensuring that every client, regardless of their preferred asset class, receives actionable, data-backed signals each day.`}
+                  text={`CFDROCKET operates on a dual system that unites automation with human intelligence.
+• AI Precision: Advanced algorithms scan global markets in real time to identify profitable opportunities.
+• Human Expertise: Financial analysts oversee market conditions, intervening when AI predictions fall short.
+• Balanced Strategy: This combination reduces exposure to unpredictable events while maintaining steady earning potential.`}
                 />
               </div>
             </div>
@@ -125,10 +128,13 @@ export default function PoweredByAI() {
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-base md:text-xl text-primary font-medium mb-2">
-                  Automated & Semi-Automated Trading Execution
+                  24/7 Monitoring & Risk Protection
                 </h4>
                 <ReadMore
-                  text={`To simplify and streamline the trading experience, Moneday offers automated and semi-automated execution tools compatible with most major trading platforms and brokers. Clients can allow the AI to execute trades on their behalf or use signals manually while retaining full control. This automation covers all asset types — from equities and ETFs to commodities, bonds, and even niche derivatives — giving traders the power to operate across diversified portfolios without needing to monitor the markets 24/7. With dynamic capital allocation and real-time risk management baked in, the system intelligently adjusts trade exposure to suit market conditions and individual risk preferences.`}
+                  text={`CFDROCKET provides uninterrupted oversight to safeguard earnings.
+• Continuous Supervision: Automated systems and human analysts monitor market movements day and night.
+• Built-In Safety Tools: Stop-Loss, Take-Profit, and Stop & Sell mechanisms automatically secure profits and limit losses.
+• Proactive Risk Response: Sudden volatility or market shocks are identified early to protect user capital.`}
                 />
               </div>
             </div>
@@ -138,10 +144,13 @@ export default function PoweredByAI() {
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-base md:text-xl text-primary font-medium mb-2">
-                  Smart Earnings Tracker & Performance Analytics
+                  Global Access Without Borders
                 </h4>
                 <ReadMore
-                  text={`Daily earnings aren't just a goal — they're a measurable reality with Moneday. Every client has access to a personalized earnings dashboard that provides a clear picture of profits, trade history, risk exposure, and growth trends across all instruments they engage with. Whether trading volatile assets like crypto or more stable investments like government bonds or ETFs, clients can track performance in real time. The platform's AI goes a step further by offering predictive insights and optimization suggestions, helping traders make smarter decisions and scale their earnings consistently.`}
+                  text={`CFDROCKET is designed to be global, inclusive, and borderless.
+• Tax-Neutral Incorporation: Operates from a jurisdiction that supports worldwide financial participation without heavy taxation.
+• Worldwide Availability: Open to users across continents, subject only to local regulations.
+• Borderless Operations: No reliance on a single physical headquarters, enabling fluid access for a global user base.`}
                 />
               </div>
             </div>
@@ -151,10 +160,13 @@ export default function PoweredByAI() {
             <div className="flow-bg rounded-[12px]">
               <div className="pt-6 md:pt-10 pb-3 pl-4 md:pl-8 py-4 md:pr-8">
                 <h4 className="text-base md:text-xl text-primary font-medium mb-2">
-                  Education, Community & Trader Support Hub
+                  Transparent Metrics & Performance Reporting
                 </h4>
                 <ReadMore
-                  text={`Understanding that success comes from both smart technology and informed users, Moneday offers a rich support ecosystem. Clients gain access to a vibrant community of global traders, daily market recaps powered by AI, and educational resources covering every financial instrument available on the platform. Whether someone is new to ETF trading, exploring bond strategies, or optimizing a multi-asset portfolio, there's always guidance available. Live sessions, tutorials, and strategic insights are tailored not just for learning — but for growing daily earnings with confidence and clarity.`}
+                  text={`CFDROCKET builds trust through complete transparency.
+• Real-Time Metrics: Live data on growth, volatility, and earnings are accessible at all times.
+• Detailed Reporting: CAGR, drawdowns, Sharpe ratios, win/loss percentages, and benchmark comparisons against BTC and S&P 500 are available.
+• Clarity in Risk: Disclaimers highlight that past performance does not guarantee future results, ensuring users have a realistic outlook.`}
                 />
               </div>
             </div>

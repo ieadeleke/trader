@@ -5,6 +5,7 @@ import Flow from "@/components/Flow";
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
 import MarketSpread from "@/components/MarketSpreads";
+import NewEasySteps from "@/components/NewEasySteps";
 import NewHeroSection from "@/components/NewHeroSection";
 import Numbers from "@/components/Numbers";
 import PoweredByAI from "@/components/PoweredByAI";
@@ -25,7 +26,7 @@ export default function Home() {
         <PoweredByAI />
         {/* <WhatIsTrading authControl={setAuthControl} /> */}
         <HowItWorks />
-        <EasySteps />
+        <NewEasySteps />
         <Numbers authControl={setAuthControl} />
         <Testimonials />
       </DisplayLayout>
