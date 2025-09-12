@@ -5,6 +5,7 @@ import Flow from "@/components/Flow";
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
 import MarketSpread from "@/components/MarketSpreads";
+import NewHeroSection from "@/components/NewHeroSection";
 import Numbers from "@/components/Numbers";
 import PoweredByAI from "@/components/PoweredByAI";
 import Testimonials from "@/components/Testimonials";
@@ -17,7 +18,7 @@ export default function Home() {
   return (
     <div>
       <DisplayLayout authControl={authControl} authControlFunction={setAuthControl}>
-        <HeroSection authControl={setAuthControl} />
+        <NewHeroSection authControl={setAuthControl} />
         <Flow />
         <MarketSpread />
         <TradingPlatforms />

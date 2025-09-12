@@ -262,6 +262,13 @@ button[data-slot="popover-trigger"] {
   /* min-height: 100vh; */
 }
 
+.new-hero-section {
+  background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('/new-hero.jpeg');
+  background-position: center;
+  background-size: cover;
+  background-position: no-repeat;
+}
+
 .ant-select-selector {
   height: 3.5rem !important;
   font-family: var(--font-ibm-plex-sans), sans-serif !important;
