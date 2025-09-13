@@ -53,6 +53,11 @@ export default function NotificationBell() {
       loadedRef.current = true;
       fetchNotifications();
     }
+    // Background polling for new notifications
+    const t = setInterval(() => {
+      fetchNotifications();
+    }, 20000);
+    return () => clearInterval(t);
   }, []);
 
   const markAsRead = async (id: string) => {

@@ -8,9 +8,48 @@ import { TiDocumentText } from "react-icons/ti";
 import { HiRectangleGroup } from "react-icons/hi2";
 import { IoMdContacts } from "react-icons/io";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { apiFetch } from "@/utils/api";
 
 const SideBar = () => {
   const pathName = usePathname();
+  const [hasUnread, setHasUnread] = useState(false);
+
+  useEffect(() => {
+    let timer: any;
+
+    const checkUnread = async () => {
+      try {
+        const res = await apiFetch(`/api/chat?limit=1&_=${Date.now()}` as any, {
+          method: "GET",
+          auth: true,
+          // @ts-ignore
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache" },
+        });
+        const payload = await res.json();
+        const last = payload?.data?.items?.[0];
+        if (!last) return setHasUnread(false);
+        const lastReadAt = Number(localStorage.getItem("chatLastReadAt") || 0);
+        const lastTs = new Date(last.createdAt).getTime();
+        // Unread if last admin message is newer than last read
+        setHasUnread(last.sender === "admin" && lastTs > lastReadAt);
+      } catch (_) {}
+    };
+
+    checkUnread();
+    timer = setInterval(checkUnread, 4000);
+
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "chatLastReadAt") checkUnread();
+    };
+    window.addEventListener("storage", onStorage);
+
+    return () => {
+      timer && clearInterval(timer);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, []);
 
   return (
     <div className="relative h-full">
@@ -95,10 +134,18 @@ const SideBar = () => {
         <ul className="flex flex-col px-5 pt-10 gap-10">
           <li>
             <Link
-              href=""
-              className="flex gap-3 items-center text-white text-sm"
+              href="/dashboard/support"
+              className={`relative flex gap-3 items-center text-sm ${
+                pathName === "/dashboard/support"
+                  ? "border-l-4 px-4 text-main border-main border-solid"
+                  : "text-white px-5"
+              }`}
             >
-              <MdOutlineSupport className="text-xl text" /> Support
+              <MdOutlineSupport className="text-xl text" />
+              <span>Support</span>
+              {hasUnread && (
+                <span className="ml-2 inline-block w-2.5 h-2.5 rounded-full bg-red-500" />
+              )}
             </Link>
           </li>
           <li>

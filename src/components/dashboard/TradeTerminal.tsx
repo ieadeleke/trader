@@ -293,7 +293,7 @@ const TradeTerminal: React.FC = () => {
     return () => {};
   }, []);
 
-  // Background reload every 10s only when autotrade is running
+  // Background reload every 20s only when autotrade is running
   useEffect(() => {
     if (!autoRunning) return;
     const loadBackground = async () => {
@@ -326,7 +326,7 @@ const TradeTerminal: React.FC = () => {
         }
       } catch {}
     };
-    const t = setInterval(loadBackground, 10000);
+    const t = setInterval(loadBackground, 20000);
     return () => clearInterval(t);
   }, [autoRunning]);
 
