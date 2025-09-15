@@ -139,16 +139,14 @@ const TradeTerminal: React.FC = () => {
     setSymbol(symbols[0]);
   }, [symbols]);
 
-  // Price polling (uses CoinGecko for crypto, Alpha Vantage for stocks/commodities when possible)
+  // Price fetch (initial only; no background polling)
   useEffect(() => {
     let mounted = true;
-    const fetchPrice = async () => {
+    (async () => {
       try {
         if (assetType === "crypto") {
           const id = symbol;
-          const res = await fetch(
-            `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd`
-          );
+          const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd`);
           const j = await res.json();
           const p = j?.[id]?.usd ?? 0;
           if (mounted) setCurrentPrice(p);
@@ -161,7 +159,6 @@ const TradeTerminal: React.FC = () => {
           if (mounted && p) setCurrentPrice(p);
           if (mounted && !p) setCurrentPrice((prev) => prev || 100);
         } else if (assetType === "commodity") {
-          // commodity mapping via Alpha Vantage FX for metals
           const key = process.env.NEXT_PUBLIC_ALPHA_VANTAGE_KEY;
           let from = "";
           if (symbol === "GOLD") from = "XAU";
@@ -174,16 +171,14 @@ const TradeTerminal: React.FC = () => {
             if (mounted && p) setCurrentPrice(p);
             if (mounted && !p) setCurrentPrice((prev) => prev || 100);
           } else {
-            // fallback small random walk
             const base = 100;
             const noise = (Math.random() - 0.5) * 2;
             if (mounted) setCurrentPrice((prev) => (prev || base) + noise);
           }
         } else {
-          // forex
           const key = process.env.NEXT_PUBLIC_ALPHA_VANTAGE_KEY;
-          const from = symbol.slice(0,3);
-          const to = symbol.slice(3,6);
+          const from = symbol.slice(0, 3);
+          const to = symbol.slice(3, 6);
           const url = `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${to}&apikey=${key}`;
           const res = await fetch(url);
           const j = await res.json();
@@ -191,17 +186,10 @@ const TradeTerminal: React.FC = () => {
           if (mounted && p) setCurrentPrice(p);
           if (mounted && !p) setCurrentPrice((prev) => prev || 1);
         }
-      } catch (e) {
-        // ignore
-      }
-    };
-    fetchPrice();
-    const t = setInterval(fetchPrice, 5000);
-    return () => {
-      mounted = false;
-      clearInterval(t);
-    };
-  }, [assetType, symbol]);
+      } catch (_) {}
+    })();
+    return () => { mounted = false; };
+  }, []);
 
   // Load positions/history from backend and wallet balance (initial load only shows big loader)
   useEffect(() => {
@@ -297,22 +285,7 @@ const TradeTerminal: React.FC = () => {
   useEffect(() => {
     if (!autoRunning) return;
     const loadBackground = async () => {
-      // false ⇒ run without big loader for background updates
-      try {
-        // fetch positions, history, wallet silently
-        const pres = await apiFetch('/api/trade/positions', { method: 'GET', auth: true });
-        if (pres.ok) {
-          const pdata = await pres.json();
-          setPositions((pdata?.data ?? pdata ?? []) as Position[]);
-        }
-      } catch {}
-      try {
-        const hres = await apiFetch('/api/trade/history', { method: 'GET', auth: true });
-        if (hres.ok) {
-          const hdata = await hres.json();
-          setHistory((hdata?.data ?? hdata ?? []) as Position[]);
-        }
-      } catch {}
+      // Only refresh wallet balance and autotrade status in background
       try {
         const wres = await apiFetch('/api/wallets', { method: 'GET', auth: true });
         if (wres.ok) {
@@ -322,6 +295,19 @@ const TradeTerminal: React.FC = () => {
             setBalance(Number(first.balance));
             if (first.asset) setWalletAsset(String(first.asset));
             if (first.address) setWalletAddress(String(first.address));
+          }
+        }
+      } catch {}
+      try {
+        const tres = await apiFetch('/api/trade/autotrade/status', { method: 'GET', auth: true });
+        if (tres.ok) {
+          const tdata = await tres.json();
+          const st = tdata?.data ?? tdata ?? {};
+          setAutoRunning(!!st?.running);
+          setAutoNextRunSec(typeof st?.nextRunInSec === 'number' ? st.nextRunInSec : null);
+          if (st?.paused != null) {
+            setAutoPaused(!!st.paused);
+            setAutoResumeAt(st?.resumeAt ? new Date(st.resumeAt).toLocaleString() : null);
           }
         }
       } catch {}
@@ -744,10 +730,10 @@ const TradeTerminal: React.FC = () => {
                   <option value="forex">Forex</option>
                 </select>
               </div>
-              <div>
+              {/* <div>
                 <Label className="text-white/80 text-sm">Symbols (comma-separated)</Label>
                 <Input value={autoSymbolsText} onChange={(e) => setAutoSymbolsText(e.target.value)} placeholder="bitcoin,ethereum" />
-              </div>
+              </div> */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <Label className="text-white/80 text-sm">Leverage (x)</Label>
@@ -869,7 +855,7 @@ const TradeTerminal: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="bg-[#1e1e2d] text-white">
           <CardContent className="p-4">
             <h3 className="text-lg font-semibold mb-3">Open Positions</h3>
@@ -959,7 +945,7 @@ const TradeTerminal: React.FC = () => {
             </div>
           </CardContent>
         </Card>
-    </div>
+    </div> */}
 
       {/* Wallet-integrated modals */}
       <FundWalletModal open={depositOpen} onClose={() => setDepositOpen(false)} />

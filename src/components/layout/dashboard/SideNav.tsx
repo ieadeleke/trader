@@ -14,9 +14,34 @@ import { apiFetch } from "@/utils/api";
 const SideBar = () => {
   const pathName = usePathname();
   const [hasUnread, setHasUnread] = useState(false);
+  const [autoRunning, setAutoRunning] = useState(false);
 
+  // Poll autotrade status periodically; used to pause chat polling while running
   useEffect(() => {
-    let timer: any;
+    let statusTimer: any;
+
+    const checkAutoStatus = async () => {
+      try {
+        const res = await apiFetch('/api/trade/autotrade/status', { method: 'GET', auth: true });
+        if (!res.ok) return;
+        const payload = await res.json();
+        const st = payload?.data ?? payload ?? {};
+        setAutoRunning(!!st?.running);
+      } catch (_) {}
+    };
+
+    checkAutoStatus();
+    statusTimer = setInterval(checkAutoStatus, 20000);
+
+    return () => {
+      statusTimer && clearInterval(statusTimer);
+    };
+  }, []);
+
+  // Chat unread polling; paused while autotrade is running
+  useEffect(() => {
+    if (autoRunning) return; // pause while autotrade runs
+    let chatTimer: any;
 
     const checkUnread = async () => {
       try {
@@ -38,7 +63,7 @@ const SideBar = () => {
     };
 
     checkUnread();
-    timer = setInterval(checkUnread, 4000);
+    chatTimer = setInterval(checkUnread, 4000);
 
     const onStorage = (e: StorageEvent) => {
       if (e.key === "chatLastReadAt") checkUnread();
@@ -46,10 +71,10 @@ const SideBar = () => {
     window.addEventListener("storage", onStorage);
 
     return () => {
-      timer && clearInterval(timer);
+      chatTimer && clearInterval(chatTimer);
       window.removeEventListener("storage", onStorage);
     };
-  }, []);
+  }, [autoRunning]);
 
   return (
     <div className="relative h-full">
