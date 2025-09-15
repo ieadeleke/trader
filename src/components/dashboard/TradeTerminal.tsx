@@ -601,7 +601,7 @@ const TradeTerminal: React.FC = () => {
 
         <div>
           <Card className="bg-[#1e1e2d] text-white">
-            <CardContent className="p-4 space-y-4">
+            <CardContent className="px-4 space-y-4">
               {loadingPortfolio && (
                 <div className="w-full flex justify-center">
                   <Spinner />
@@ -610,7 +610,7 @@ const TradeTerminal: React.FC = () => {
               <div className="grid grid-cols-2 gap-3 bg-white/5 p-3 rounded">
                 <div>
                   <div className="text-white/70 text-xs">Balance</div>
-                  <div className="text-lg font-semibold">{formatMoney(Number(balance.toFixed(2)))} {walletAsset ? walletAsset : ''}</div>
+                  <div className="text-lg font-semibold">{formatMoney(Number(balance.toFixed(2)))}</div>
                 </div>
                 <div>
                   <div className="text-white/70 text-xs">Equity</div>
@@ -629,11 +629,11 @@ const TradeTerminal: React.FC = () => {
                   <div className="text-lg font-semibold">{formatMoney(Number(freeMargin.toFixed(2)))}</div>
                 </div>
               </div>
-              <div className="flex flex-col gap-3">
+              {/* <div className="flex flex-col gap-3">
                 <Button className="flex-1 bg-green-600 hover:bg-green-700" onClick={() => setDepositOpen(true)}>Fund Wallet</Button>
                 <Button className="flex-1 bg-red-600 hover:bg-red-700" onClick={() => setWithdrawOpen(true)}>Withdraw Wallet</Button>
-              </div>
-              <div className="flex gap-3">
+              </div> */}
+              {/* <div className="flex gap-3">
                 <Button
                   variant="default"
                   className={`flex-1 ${side === "buy" ? "bg-green-600 hover:bg-green-700" : "bg-[#334155]"}`}
@@ -648,9 +648,9 @@ const TradeTerminal: React.FC = () => {
                 >
                   Sell
                 </Button>
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <Label className="text-white/80 text-sm">Order Type</Label>
                 <select
                   className="bg-transparent border px-3 py-2 rounded w-full"
@@ -660,9 +660,9 @@ const TradeTerminal: React.FC = () => {
                   <option value="market">Market</option>
                   <option value="limit">Limit</option>
                 </select>
-              </div>
+              </div> */}
 
-              {orderType === "limit" && (
+              {/* {orderType === "limit" && (
                 <div>
                   <Label className="text-white/80 text-sm">Limit Price</Label>
                   <Input
@@ -681,9 +681,9 @@ const TradeTerminal: React.FC = () => {
               <div>
                 <Label className="text-white/80 text-sm">Leverage (x)</Label>
                 <Input value={leverage} onChange={(e) => setLeverage(e.target.value)} placeholder="1" />
-              </div>
+              </div> */}
 
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <input type="checkbox" checked={useSL} onChange={(e) => setUseSL(e.target.checked)} />
                 <Label className="text-white/80 text-sm">Stop Loss</Label>
               </div>
@@ -701,13 +701,13 @@ const TradeTerminal: React.FC = () => {
 
               <Button className="w-full py-6" onClick={placeOrder} disabled={placing}>
                 {placing ? <Spinner color="#fff" fontSize="20px" /> : `${side === "buy" ? "Buy" : "Sell"} ${symbol}`}
-              </Button>
+              </Button> */}
           </CardContent>
           </Card>
 
           {/* Autotrade */}
           <Card className="bg-[#1e1e2d] text-white mt-4">
-            <CardContent className="p-4 space-y-3">
+            <CardContent className="p-4 pt-0 space-y-3">
               <h3 className="text-lg font-semibold">Autotrade</h3>
               {autoPaused && (
                 <div className="bg-yellow-600/30 border border-yellow-500 text-yellow-200 text-sm p-2 rounded">
@@ -816,7 +816,7 @@ const TradeTerminal: React.FC = () => {
                   </div>
                 </div>
               )}
-              <div className="grid grid-cols-2 gap-3">
+              {/* <div className="grid grid-cols-2 gap-3">
                 <div>
                   <Label className="text-white/80 text-sm">Min Free Margin (%)</Label>
                   <Input value={autoMinFreeMarginPct} onChange={(e)=>setAutoMinFreeMarginPct(e.target.value)} placeholder="10" />
@@ -825,15 +825,15 @@ const TradeTerminal: React.FC = () => {
                   <Label className="text-white/80 text-sm">Daily Max Loss (%)</Label>
                   <Input value={autoDailyMaxLossPct} onChange={(e)=>setAutoDailyMaxLossPct(e.target.value)} placeholder="20" />
                 </div>
-              </div>
+              </div> */}
               <div className="flex items-center gap-2">
                 <input type="checkbox" checked={autoAvoidDup} onChange={(e)=>setAutoAvoidDup(e.target.checked)} />
                 <Label className="text-white/80 text-sm">Avoid opening same-side trade on same symbol</Label>
               </div>
-              <div>
+              {/* <div>
                 <Label className="text-white/80 text-sm">Per-Symbol Overrides (JSON array)</Label>
                 <textarea className="w-full bg-transparent border rounded p-2 text-sm" rows={5} value={autoOverridesText} onChange={(e)=>setAutoOverridesText(e.target.value)} placeholder='[{"symbol":"bitcoin","slPct":0.8,"tpPct":1.6}]' />
-              </div>
+              </div> */}
               <div className="flex gap-3">
                 <Button className="flex-1 bg-[#475569]" disabled={savingAuto} onClick={saveAutoSettings}>
                   {savingAuto ? <Spinner color="#fff" fontSize="18px" /> : 'Save Settings'}

@@ -78,9 +78,9 @@ const SideBar = () => {
 
   return (
     <div className="relative h-full">
-      <div className="px-5 pt-5">
+      {/* <div className="px-5 pt-5">
         <div className="px-5 bg-[#FBFBFB] rounded-lg h-[6rem]"></div>
-      </div>
+      </div> */}
       <ul className="flex flex-col gap-10 mt-10">
         <li>
           <Link
@@ -155,15 +155,15 @@ const SideBar = () => {
           </Link>
         </li>
       </ul>
-      <div className="absolute bottom-10 border-t-2 border-solid border-border w-full left-0">
+      <div className="absolute bottom-22 border-t-2 border-solid border-border w-full left-0">
         <ul className="flex flex-col px-5 pt-10 gap-10">
           <li>
             <Link
               href="/dashboard/support"
               className={`relative flex gap-3 items-center text-sm ${
                 pathName === "/dashboard/support"
-                  ? "border-l-4 px-4 text-main border-main border-solid"
-                  : "text-white px-5"
+                  ? ""
+                  : "text-white "
               }`}
             >
               <MdOutlineSupport className="text-xl text" />
@@ -179,6 +179,14 @@ const SideBar = () => {
               className="flex gap-3 items-center text-white text-sm"
             >
               <BiLogOut className="text-xl text" /> Log Out
+            </Link>
+          </li>
+          <li>
+            <Link
+              href=""
+              className="flex gap-3 items-center text-white text-sm opacity-30"
+            >
+              &copy; CFD Rocket 2023
             </Link>
           </li>
         </ul>
