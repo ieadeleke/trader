@@ -12,7 +12,7 @@ import { apiFetch } from "@/utils/api";
 import FundWalletModal from "./FundWalletModal";
 import WithdrawalModal from "./WithdrawFunds";
 
-type AssetType = "crypto" | "stock" | "commodity" | "forex";
+type AssetType = "all" | "crypto" | "stock" | "commodity" | "forex";
 
 const COINS = ["bitcoin", "ethereum", "stellar", "litecoin", "binancecoin", "solana", "ripple"] as const;
 const STOCKS = ["AAPL", "MSFT", "GOOGL", "TSLA", "AMZN", "NVDA"] as const;
@@ -96,7 +96,7 @@ const TradeTerminal: React.FC = () => {
   
   const [currentPrice, setCurrentPrice] = useState<number>(0);
   // Autotrade state
-  const [autoAssetType, setAutoAssetType] = useState<AssetType>("crypto");
+  const [autoAssetType, setAutoAssetType] = useState<AssetType>("all");
   const [autoSymbolsText, setAutoSymbolsText] = useState<string>("bitcoin");
   const [autoLeverage, setAutoLeverage] = useState<string>("1");
   const [autoRiskPct, setAutoRiskPct] = useState<string>("1");
@@ -589,10 +589,10 @@ const TradeTerminal: React.FC = () => {
                     ))}
                   </select>
                 </div>
-                <div>
+                {/* <div>
                   <Label className="text-white/80 text-sm">Last Price</Label>
                   <div className="text-xl font-semibold">{currentPrice ? formatMoney(Number(currentPrice.toFixed(2))) : "-"}</div>
-                </div>
+                </div> */}
               </div>
               <MultiDashboardAssetChart controls={false} assetType={assetType} symbol={symbol} />
             </CardContent>
@@ -708,7 +708,7 @@ const TradeTerminal: React.FC = () => {
           {/* Autotrade */}
           <Card className="bg-[#1e1e2d] text-white mt-4">
             <CardContent className="p-4 pt-0 space-y-3">
-              <h3 className="text-lg font-semibold">Autotrade</h3>
+              <h3 className="text-lg font-semibold">Auto Earn</h3>
               {autoPaused && (
                 <div className="bg-yellow-600/30 border border-yellow-500 text-yellow-200 text-sm p-2 rounded">
                   Autotrade paused due to risk controls. Resumes {autoResumeAt || 'later'}.
@@ -718,12 +718,13 @@ const TradeTerminal: React.FC = () => {
                 <div className="w-full flex justify-center"><Spinner /></div>
               )}
               <div>
-                <Label className="text-white/80 text-sm">Asset Type</Label>
+                <Label className="text-white/80 text-sm">Instrument</Label>
                 <select
                   className="bg-transparent border px-3 py-2 rounded w-full"
                   value={autoAssetType}
                   onChange={(e) => setAutoAssetType(e.target.value as AssetType)}
                 >
+                  <option value="all">All</option>
                   <option value="crypto">Crypto</option>
                   <option value="stock">Stock</option>
                   <option value="commodity">Commodity</option>

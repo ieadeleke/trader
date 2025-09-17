@@ -6,6 +6,8 @@ import { Modal } from "antd";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import Link from "next/link";
 import {
   Select,
   SelectTrigger,
@@ -32,6 +34,8 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
   const { successToast, errorToast } = useToast();
   const [bankDetails, setBankDetails] = useState<any>(null);
   const [cryptoAddress, setCryptoAddress] = useState<string>("");
+  const [sentConfirmed, setSentConfirmed] = useState(false);
+  const [txid, setTxid] = useState("");
   const NETWORK_OPTIONS: Record<string, string[]> = {
     BTC: ["Bitcoin"],
     ETH: ["ERC20"],
@@ -90,28 +94,26 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
     if (method === "card") {
       setLoading(true);
       try {
-        const res = await fetch("/api/create-checkout-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount: Number(amount) }),
+        const res = await apiFetch('/api/payments/stripe/checkout', {
+          method: 'POST',
+          auth: true,
+          json: { amount: Number(amount) },
         });
-
         const data = await res.json();
-
-        if (data.url) {
-          // Redirect to Stripe Checkout
-          window.location.href = data.url;
+        const payload = data?.data || data;
+        if (payload?.url) {
+          window.location.href = String(payload.url);
         } else {
-          alert("Failed to create payment session.");
+          errorToast('Failed to create payment session');
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
-        alert("Payment failed. Please try again.");
+        errorToast(err?.message || 'Payment failed. Please try again.');
       } finally {
         setLoading(false);
       }
     } else {
-      // Non-card: create a funding request (pending verification)
+      // Crypto: create a funding request (pending verification)
       try {
         setLoading(true);
         const res = await apiFetch('/api/funding/request', {
@@ -122,32 +124,12 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
             amount: Number(amount),
             asset: formData.asset || undefined,
             network: formData.network || undefined,
-            meta: formData,
+            meta: { ...(formData || {}), sentConfirmed: sentConfirmed === true, txid: txid.trim() || undefined },
           },
         });
         const data = await res.json().catch(() => ({}));
         if (!res.ok) {
           throw new Error(data?.message || 'Funding request failed');
-        }
-        // If bank and proof file provided, upload proof
-        const created = data?.data || data;
-        if (method === 'bank' && formData?.proofFile && created?._id) {
-          const fd = new FormData();
-          fd.append('file', formData.proofFile);
-          try {
-            const up = await apiFetch(`/api/funding/${created._id}/proof`, {
-              method: 'POST',
-              auth: true,
-              // @ts-ignore
-              body: fd,
-            });
-            if (!up.ok) {
-              const uj = await up.json().catch(() => ({}));
-              console.warn('Proof upload failed', uj);
-            }
-          } catch (e) {
-            console.warn('Proof upload error', e);
-          }
         }
         successToast('Funding request submitted');
         setSubmitted(true);
@@ -166,6 +148,8 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
     setSubmitted(false);
     setMethod("card");
     setFormData({});
+    setSentConfirmed(false);
+    setTxid("");
     onClose();
   };
 
@@ -203,6 +187,8 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
                 onValueChange={(val) => {
                   setMethod(val);
                   setFormData({});
+                  setSentConfirmed(false);
+                  setTxid("");
                 }}
                 value={method}
               >
@@ -212,7 +198,6 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
                 <SelectContent>
                   <SelectItem value="card">Card (Stripe)</SelectItem>
                   <SelectItem value="crypto">Crypto Deposit</SelectItem>
-                  <SelectItem value="bank">Bank Transfer</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -283,48 +268,39 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
                     </p>
                   </div>
                 )}
+
+                {formData.asset && formData.network && cryptoAddress && (
+                  <div className="space-y-3 pt-2">
+                    <div className="flex items-start gap-2">
+                      <Checkbox id="sentConfirmed" checked={sentConfirmed} onCheckedChange={(v) => setSentConfirmed(Boolean(v))} />
+                      <Label htmlFor="sentConfirmed" className="text-white cursor-pointer">I confirm I have sent the payment</Label>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-white" htmlFor="txid">Transaction ID (TxID)</Label>
+                      <Input id="txid" placeholder="Paste your TxID / Hash" value={txid} onChange={(e) => setTxid(e.target.value)} />
+                      <p className="text-xs text-gray-400">Provide the blockchain transaction hash so our team can verify.</p>
+                    </div>
+                    <div className="text-sm">
+                      <Link href="/dashboard/support" className="text-primary underline">Having issues? Contact Support</Link>
+                    </div>
+                  </div>
+                )}
               </>
             )}
 
-            {method === "bank" && (
-              <>
-                <div className="space-y-2">
-                  <Label className="text-white">Reference/Note</Label>
-                  <Input
-                    placeholder="Add a note/reference for your transfer"
-                    value={formData.reference || ""}
-                    onChange={(e) => handleChange("reference", e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-white">Payment Proof (optional)</Label>
-                  <input
-                    type="file"
-                    accept="image/*,application/pdf"
-                    onChange={(e) => {
-                      const f = e.target.files?.[0];
-                      setFormData((prev: any) => ({ ...prev, proofFile: f }));
-                    }}
-                    className="block w-full text-sm text-[#eaecef] file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
-                  />
-                  <p className="text-xs text-gray-400">Upload a screenshot or PDF of your bank transfer.</p>
-                </div>
-              </>
-            )}
-
-            {/* PayPal option removed */}
+            {/* Bank transfer option removed */}
 
             {/* Submit Button */}
             <Button
               onClick={handleSubmit}
-              disabled={loading}
+              disabled={loading || (method === 'crypto' && (!formData.asset || !formData.network || !cryptoAddress || !sentConfirmed || !/^\w{6,}$/.test(txid.trim())))}
               className="w-full py-7 text-sm bg-primary text-white rounded-lg"
             >
               {method === "card"
                 ? loading
                   ? "Processing..."
                   : "Pay with Card"
-                : loading ? "Submitting..." : "Submit Funding Request"}
+                : loading ? "Submitting..." : "Submit Deposit"}
             </Button>
           </>
         ) : (
@@ -333,7 +309,7 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
               Request Received 🎉
             </h2>
             <p className="text-gray-300">
-              Your funding request has been submitted. An admin will reach out to you to complete the process.
+              Your deposit has been recorded. Our team will verify your transaction on-chain and notify you once credited.
             </p>
             <Button
               onClick={handleClose}

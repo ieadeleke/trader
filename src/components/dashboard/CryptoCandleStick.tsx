@@ -31,7 +31,7 @@ const COMMODITIES = ["GOLD", "WTI", "SILVER"] as const;
 const BONDS = ["US10Y"] as const;
 const FOREX = ["EURUSD", "GBPUSD", "USDJPY", "USDCHF", "AUDUSD"] as const;
 
-type AssetType = "crypto" | "stock" | "commodity" | "bond" | "forex";
+type AssetType = "all" | "crypto" | "stock" | "commodity" | "bond" | "forex";
 type ChartType = "candlestick" | "line" | "area" | "bar";
 
 interface Props {
