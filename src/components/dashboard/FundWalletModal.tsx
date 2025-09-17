@@ -220,8 +220,8 @@ export default function FundWalletModal({ open, onClose, onSuccess }: FundWallet
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="USDT">USDT</SelectItem>
-                      <SelectItem value="BTC">BTC</SelectItem>
-                      <SelectItem value="ETH">ETH</SelectItem>
+                      {/* <SelectItem value="BTC">BTC</SelectItem> */}
+                      {/* <SelectItem value="ETH">ETH</SelectItem> */}
                       <SelectItem value="TRX">TRX</SelectItem>
                     </SelectContent>
                   </Select>

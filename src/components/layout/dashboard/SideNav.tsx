@@ -7,12 +7,15 @@ import { TbSmartHome } from "react-icons/tb";
 import { TiDocumentText } from "react-icons/ti";
 import { HiRectangleGroup } from "react-icons/hi2";
 import { IoMdContacts } from "react-icons/io";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { apiFetch } from "@/utils/api";
+import { useAuth } from "@/context/AuthContext";
 
 const SideBar = () => {
   const pathName = usePathname();
+  const router = useRouter();
+  const { logout } = useAuth();
   const [hasUnread, setHasUnread] = useState(false);
   const [autoRunning, setAutoRunning] = useState(false);
 
@@ -174,12 +177,16 @@ const SideBar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              href=""
+            <button
+              type="button"
+              onClick={() => {
+                try { logout(); } catch (_) {}
+                try { router.push("/auth/signin"); } catch (_) {}
+              }}
               className="flex gap-3 items-center text-white text-sm"
             >
               <BiLogOut className="text-xl text" /> Log Out
-            </Link>
+            </button>
           </li>
           <li>
             <Link
