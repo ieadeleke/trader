@@ -65,7 +65,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const logout = () => {
     const newState = { user: null, loggedIn: false };
     setUser(newState);
+    // Clear persisted auth state and token
     localStorage.removeItem("auth");
+    localStorage.removeItem("token");
   };
 
   const updateProfile = (response: UserTypes) => {
